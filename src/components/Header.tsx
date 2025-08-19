@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, User } from 'lucide-react';
+import { ShoppingCart, Search, Menu, User, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/cartStore';
+import { categories } from '@/data/products';
 
 const Header = () => {
   const totalItems = useCartStore((state) => state.getTotalItems());
@@ -26,9 +27,29 @@ const Header = () => {
             <Link to="/products" className="text-foreground hover:text-accent transition-fast">
               Products
             </Link>
-            <Link to="/categories" className="text-foreground hover:text-accent transition-fast">
-              Categories
-            </Link>
+            
+            {/* Categories dropdown */}
+            <div className="relative group">
+              <button className="text-foreground hover:text-accent transition-fast flex items-center space-x-1">
+                <span>Categories</span>
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {/* Dropdown menu */}
+              <div className="absolute top-full left-0 mt-1 bg-background border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-48">
+                <div className="py-2">
+                  {categories.map((category) => (
+                    <Link
+                      key={category.id}
+                      to={`/shop/${category.id}`}
+                      className="block px-4 py-2 text-sm text-foreground hover:bg-accent/10 hover:text-accent transition-colors"
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
 
           {/* Right side actions */}

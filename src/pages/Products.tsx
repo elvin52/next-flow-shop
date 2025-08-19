@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Filter, Search, Grid3X3, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +12,19 @@ import ProductCard from '@/components/ProductCard';
 import { sampleProducts, categories } from '@/data/products';
 import { Product } from '@/types/product';
 
+// Helper functions
+const getCategoryById = (id: string) => categories.find(cat => cat.id === id);
+
+const getSubcategoryLabel = (category: string, subcategory: string) => {
+  const cat = getCategoryById(category);
+  return cat?.subcategories?.includes(subcategory) ? subcategory : null;
+};
+
+const titleCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 const Products = () => {
+  const { category: urlCategory, subcategory: urlSubcategory } = useParams();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<'all' | 'under50' | '50to100' | 'over100'>('all');
@@ -18,26 +32,73 @@ const Products = () => {
   const [showInStock, setShowInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
+  // Get current category/subcategory info
+  const currentCategory = urlCategory ? getCategoryById(urlCategory) : null;
+  const currentSubcategory = urlSubcategory && currentCategory ? 
+    getSubcategoryLabel(urlCategory, urlSubcategory) : null;
+
+  // Generate SEO metadata
+  const getPageTitle = () => {
+    if (currentSubcategory && currentCategory) {
+      return `${titleCase(currentSubcategory)} ${titleCase(currentCategory.name)} | Shop Online`;
+    }
+    if (currentCategory) {
+      return `${titleCase(currentCategory.name)} | Shop Online`;
+    }
+    return 'All Products | Shop Online';
+  };
+
+  const getPageDescription = () => {
+    if (currentSubcategory && currentCategory) {
+      return `Shop the best ${currentSubcategory} ${currentCategory.name.toLowerCase()} online. Fast shipping, secure checkout, premium quality products.`;
+    }
+    if (currentCategory) {
+      return `Discover our premium ${currentCategory.name.toLowerCase()} collection. Fast shipping, secure checkout, top-rated products.`;
+    }
+    return 'Discover our complete collection of premium products for modern living. Fast shipping, secure checkout.';
+  };
+
+  const getCanonicalUrl = () => {
+    const baseUrl = window.location.origin;
+    if (currentSubcategory && currentCategory) {
+      return `${baseUrl}/shop/${urlCategory}/${urlSubcategory}`;
+    }
+    if (currentCategory) {
+      return `${baseUrl}/shop/${urlCategory}`;
+    }
+    return `${baseUrl}/products`;
+  };
+
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = sampleProducts.filter((product: Product) => {
-      // Search filter
+      // URL-based category filter (primary filter - not client-side)
+      if (urlCategory && product.category !== urlCategory) {
+        return false;
+      }
+      
+      // URL-based subcategory filter (primary filter - not client-side)
+      if (urlSubcategory && product.subcategory !== urlSubcategory) {
+        return false;
+      }
+
+      // Search filter (client-side)
       if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
           !product.description.toLowerCase().includes(searchTerm.toLowerCase())) {
         return false;
       }
 
-      // Category filter
-      if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
+      // Additional category filter for client-side filtering (only when no URL category)
+      if (!urlCategory && selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
         return false;
       }
 
-      // Price range filter
+      // Price range filter (client-side)
       const price = product.salePrice || product.price;
       if (priceRange === 'under50' && price >= 50) return false;
       if (priceRange === '50to100' && (price < 50 || price > 100)) return false;
       if (priceRange === 'over100' && price <= 100) return false;
 
-      // Stock filter
+      // Stock filter (client-side)
       if (showInStock && !product.inStock) return false;
 
       return true;
@@ -59,7 +120,7 @@ const Products = () => {
     });
 
     return filtered;
-  }, [searchTerm, selectedCategories, priceRange, sortBy, showInStock]);
+  }, [searchTerm, selectedCategories, priceRange, sortBy, showInStock, urlCategory, urlSubcategory]);
 
   const handleCategoryChange = (categoryId: string, checked: boolean) => {
     if (checked) {
@@ -77,14 +138,54 @@ const Products = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">All Products</h1>
-        <p className="text-muted-foreground">
-          Discover our complete collection of premium products for modern living.
-        </p>
-      </div>
+    <>
+      <Helmet>
+        <title>{getPageTitle()}</title>
+        <meta name="description" content={getPageDescription()} />
+        <link rel="canonical" href={getCanonicalUrl()} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": window.location.origin
+              },
+              currentCategory && {
+                "@type": "ListItem", 
+                "position": 2,
+                "name": titleCase(currentCategory.name),
+                "item": `${window.location.origin}/shop/${urlCategory}`
+              },
+              currentSubcategory && {
+                "@type": "ListItem",
+                "position": 3, 
+                "name": titleCase(currentSubcategory),
+                "item": `${window.location.origin}/shop/${urlCategory}/${urlSubcategory}`
+              }
+            ].filter(Boolean)
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-4">
+            {currentSubcategory && currentCategory 
+              ? `${titleCase(currentSubcategory)} ${titleCase(currentCategory.name)}`
+              : currentCategory 
+                ? titleCase(currentCategory.name)
+                : 'All Products'
+            }
+          </h1>
+          <p className="text-muted-foreground">
+            {getPageDescription()}
+          </p>
+        </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Filters Sidebar */}
@@ -117,21 +218,49 @@ const Products = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Categories</label>
                 <div className="space-y-3">
-                  {categories.map((category) => (
-                    <div key={category.id} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={category.id}
-                        checked={selectedCategories.includes(category.id)}
-                        onCheckedChange={(checked) => handleCategoryChange(category.id, !!checked)}
-                      />
-                      <label
-                        htmlFor={category.id}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {category.name}
-                      </label>
-                    </div>
-                  ))}
+                  {!urlCategory ? (
+                    // Show crawlable category links when not on a category page
+                    categories.map((category) => (
+                      <div key={category.id}>
+                        <Link 
+                          to={`/shop/${category.id}`}
+                          className="block text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+                        >
+                          {category.name}
+                        </Link>
+                        {category.subcategories && category.subcategories.length > 0 && (
+                          <div className="ml-4 mt-1 space-y-1">
+                            {category.subcategories.map((subcategory) => (
+                              <Link
+                                key={subcategory}
+                                to={`/shop/${category.id}/${subcategory}`}
+                                className="block text-xs text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                {titleCase(subcategory)}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    // Show checkboxes for additional filtering when already on a category page
+                    categories.map((category) => (
+                      <div key={category.id} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={category.id}
+                          checked={selectedCategories.includes(category.id)}
+                          onCheckedChange={(checked) => handleCategoryChange(category.id, !!checked)}
+                        />
+                        <label
+                          htmlFor={category.id}
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {category.name}
+                        </label>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
 
@@ -253,6 +382,7 @@ const Products = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
