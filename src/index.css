@@ -56,9 +56,9 @@
     --rating: 38 92% 50%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, 240 5.9% 10%, 240 5.9% 15%);
-    --gradient-cta: linear-gradient(135deg, 142 76% 36%, 142 76% 30%);
-    --gradient-card: linear-gradient(145deg, 0 0% 100%, 240 4.8% 98%);
+    --gradient-hero: linear-gradient(135deg, hsl(240 5.9% 10%), hsl(240 5.9% 15%));
+    --gradient-cta: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 30%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(240 4.8% 98%));
 
     /* Shadows */
     --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -139,9 +139,9 @@
     --rating: 38 92% 55%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, 240 10% 3.9%, 240 3.7% 15.9%);
-    --gradient-cta: linear-gradient(135deg, 142 76% 40%, 142 76% 35%);
-    --gradient-card: linear-gradient(145deg, 240 10% 3.9%, 240 3.7% 15.9%);
+    --gradient-hero: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 3.7% 15.9%));
+    --gradient-cta: linear-gradient(135deg, hsl(142 76% 40%), hsl(142 76% 35%));
+    --gradient-card: linear-gradient(145deg, hsl(240 10% 3.9%), hsl(240 3.7% 15.9%));
   }
 }
 
