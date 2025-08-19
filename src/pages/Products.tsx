@@ -53,51 +53,12 @@ const getSubcategoryLabel = (category: string, subcategory: string) => {
 
 const titleCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-// Get all unique colors, sizes, and brands from products
-const getAllColors = () => {
-  const colors = sampleProducts
-    .map(p => p.color)
-    .filter(Boolean) as string[];
-  return [...new Set(colors)].sort();
-};
-
-const getAllSizes = () => {
-  const sizes = sampleProducts
-    .flatMap(p => p.size || []);
-  return [...new Set(sizes)].sort();
-};
-
-const getAllBrands = () => {
-  const brands = sampleProducts
-    .map(p => p.brand)
-    .filter(Boolean) as string[];
-  return [...new Set(brands)].sort();
-};
-
-// Validate color from URL
-const getValidColor = (colorSlug: string): string | null => {
-  const allColors = getAllColors();
-  // Convert slug back to color name (e.g., "navy-blue" -> "Navy Blue")
-  const colorName = colorSlug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-  
-  return allColors.find(color => 
-    slugify(color) === colorSlug || 
-    color.toLowerCase() === colorName.toLowerCase()
-  ) || null;
-};
-
 const Products = () => {
-  const { category: urlCategory, subcategory: urlSubcategory, color: urlColor } = useParams();
+  const { category: urlCategory, subcategory: urlSubcategory } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<'all' | 'under50' | '50to100' | 'over100'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'price-low' | 'price-high' | 'rating'>('name');
   const [showInStock, setShowInStock] = useState(false);
@@ -106,18 +67,14 @@ const Products = () => {
   
   const ITEMS_PER_PAGE = 12;
 
-  // Get current category/subcategory/color info - with validation
+  // Get current category/subcategory info - with validation
   const validatedUrlCategory = urlCategory ? getCategoryLabelById(urlCategory) : null;
   const currentCategory = validatedUrlCategory ? getCategoryById(validatedUrlCategory) : null;
   const currentSubcategoryLabel = urlSubcategory && currentCategory ? 
     getSubcategoryLabelBySlug(validatedUrlCategory, urlSubcategory) : null;
-  const validatedUrlColor = urlColor ? getValidColor(urlColor) : null;
 
   // Generate SEO metadata
   const getPageTitle = () => {
-    if (validatedUrlColor && currentSubcategoryLabel && currentCategory) {
-      return `${titleCase(validatedUrlColor)} ${titleCase(currentSubcategoryLabel)} ${titleCase(currentCategory.name)} | Shop Online`;
-    }
     if (currentSubcategoryLabel && currentCategory) {
       return `${titleCase(currentSubcategoryLabel)} ${titleCase(currentCategory.name)} | Shop Online`;
     }
@@ -128,11 +85,8 @@ const Products = () => {
   };
 
   const getPageDescription = () => {
-    if (validatedUrlColor && currentSubcategoryLabel && currentCategory) {
-      return `Shop the best ${validatedUrlColor.toLowerCase()} ${currentSubcategoryLabel.toLowerCase()} ${currentCategory.name.toLowerCase()} online. Fast shipping, secure checkout, premium quality products.`;
-    }
     if (currentSubcategoryLabel && currentCategory) {
-      return `Shop the best ${currentSubcategoryLabel.toLowerCase()} ${currentCategory.name.toLowerCase()} online. Fast shipping, secure checkout, premium quality products.`;
+      return `Shop the best ${currentSubcategoryLabel} ${currentCategory.name.toLowerCase()} online. Fast shipping, secure checkout, premium quality products.`;
     }
     if (currentCategory) {
       return `Discover our premium ${currentCategory.name.toLowerCase()} collection. Fast shipping, secure checkout, top-rated products.`;
@@ -142,9 +96,6 @@ const Products = () => {
 
   const getCanonicalUrl = () => {
     const baseUrl = window.location.origin;
-    if (validatedUrlColor && currentSubcategoryLabel && currentCategory) {
-      return `${baseUrl}/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}/${slugify(validatedUrlColor)}`;
-    }
     if (currentSubcategoryLabel && currentCategory) {
       return `${baseUrl}/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}`;
     }
@@ -202,11 +153,6 @@ const Products = () => {
         return false;
       }
 
-      // URL-based color filter (primary filter - not client-side)
-      if (validatedUrlColor && product.color !== validatedUrlColor) {
-        return false;
-      }
-
       // Search filter (client-side)
       if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
           !product.description.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -215,21 +161,6 @@ const Products = () => {
 
       // Additional category filter for client-side filtering (only when no URL category)
       if (!validatedUrlCategory && selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
-        return false;
-      }
-
-      // Client-side color filter (only when no URL color is set)
-      if (!validatedUrlColor && selectedColors.length > 0 && !selectedColors.includes(product.color || '')) {
-        return false;
-      }
-
-      // Client-side size filter (always client-side)
-      if (selectedSizes.length > 0 && !product.size?.some(s => selectedSizes.includes(s))) {
-        return false;
-      }
-
-      // Client-side brand filter (always client-side)
-      if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand || '')) {
         return false;
       }
 
@@ -261,7 +192,7 @@ const Products = () => {
     });
 
     return filtered;
-  }, [searchTerm, selectedCategories, selectedColors, selectedSizes, selectedBrands, priceRange, sortBy, showInStock, validatedUrlCategory, currentSubcategoryLabel, validatedUrlColor]);
+  }, [searchTerm, selectedCategories, priceRange, sortBy, showInStock, validatedUrlCategory, currentSubcategoryLabel]);
 
   const handleCategoryChange = (categoryId: string, checked: boolean) => {
     if (checked) {
@@ -274,9 +205,6 @@ const Products = () => {
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedCategories([]);
-    setSelectedColors([]);
-    setSelectedSizes([]);
-    setSelectedBrands([]);
     setPriceRange('all');
     setShowInStock(false);
     setCurrentPage(1); // Reset to first page when clearing filters
@@ -298,21 +226,6 @@ const Products = () => {
     resetToFirstPage();
   };
 
-  const handleRemoveColor = (color: string) => {
-    setSelectedColors(selectedColors.filter(c => c !== color));
-    resetToFirstPage();
-  };
-
-  const handleRemoveSize = (size: string) => {
-    setSelectedSizes(selectedSizes.filter(s => s !== size));
-    resetToFirstPage();
-  };
-
-  const handleRemoveBrand = (brand: string) => {
-    setSelectedBrands(selectedBrands.filter(b => b !== brand));
-    resetToFirstPage();
-  };
-
   const handleRemovePriceRange = () => {
     setPriceRange('all');
     resetToFirstPage();
@@ -321,31 +234,6 @@ const Products = () => {
   const handleRemoveInStock = () => {
     setShowInStock(false);
     resetToFirstPage();
-  };
-
-  // Multi-select handlers
-  const handleColorChange = (color: string, checked: boolean) => {
-    if (checked) {
-      setSelectedColors([...selectedColors, color]);
-    } else {
-      setSelectedColors(selectedColors.filter(c => c !== color));
-    }
-  };
-
-  const handleSizeChange = (size: string, checked: boolean) => {
-    if (checked) {
-      setSelectedSizes([...selectedSizes, size]);
-    } else {
-      setSelectedSizes(selectedSizes.filter(s => s !== size));
-    }
-  };
-
-  const handleBrandChange = (brand: string, checked: boolean) => {
-    if (checked) {
-      setSelectedBrands([...selectedBrands, brand]);
-    } else {
-      setSelectedBrands(selectedBrands.filter(b => b !== brand));
-    }
   };
 
   // Pagination logic
@@ -390,12 +278,6 @@ const Products = () => {
                 "position": 3, 
                 "name": titleCase(currentSubcategoryLabel),
                 "item": `${window.location.origin}/shop/${validatedUrlCategory}/${slugify(currentSubcategoryLabel)}`
-              },
-              validatedUrlColor && {
-                "@type": "ListItem",
-                "position": 4,
-                "name": titleCase(validatedUrlColor),
-                "item": `${window.location.origin}/shop/${validatedUrlCategory}/${slugify(currentSubcategoryLabel)}/${slugify(validatedUrlColor)}`
               }
             ].filter(Boolean)
           })}
@@ -418,13 +300,11 @@ const Products = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-4">
-            {validatedUrlColor && currentSubcategoryLabel && currentCategory 
-              ? `${titleCase(validatedUrlColor)} ${titleCase(currentSubcategoryLabel)} ${titleCase(currentCategory.name)}`
-              : currentSubcategoryLabel && currentCategory 
-                ? `${titleCase(currentSubcategoryLabel)} ${titleCase(currentCategory.name)}`
-                : currentCategory 
-                  ? titleCase(currentCategory.name)
-                  : 'All Products'
+            {currentSubcategoryLabel && currentCategory 
+              ? `${titleCase(currentSubcategoryLabel)} ${titleCase(currentCategory.name)}`
+              : currentCategory 
+                ? titleCase(currentCategory.name)
+                : 'All Products'
             }
           </h1>
           <p className="text-muted-foreground">
@@ -545,109 +425,6 @@ const Products = () => {
                 </div>
               </div>
 
-              {/* Colors */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Colors</label>
-                <div className="space-y-3">
-                  {!validatedUrlColor ? (
-                    /* No URL color: Show checkboxes and crawlable links */
-                    <>
-                      {getAllColors().map((color) => (
-                        <div key={color} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`color-${color}`}
-                            checked={selectedColors.includes(color)}
-                            onCheckedChange={(checked) => handleColorChange(color, checked === true)}
-                          />
-                          <label
-                            htmlFor={`color-${color}`}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            {color}
-                          </label>
-                        </div>
-                      ))}
-                      {validatedUrlCategory && currentSubcategoryLabel && (
-                        <div className="mt-3 pt-3 border-t">
-                          <p className="text-xs text-muted-foreground mb-2">Browse by color:</p>
-                          {getAllColors().map((color) => (
-                            <Link
-                              key={`color-link-${color}`}
-                              to={`/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}/${slugify(color)}`}
-                              className="block text-sm text-primary hover:text-primary-hover transition-colors mb-1"
-                            >
-                              {color}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    /* URL color set: Show only crawlable color links */
-                    getAllColors().map((color) => (
-                      <Link
-                        key={color}
-                        to={currentSubcategoryLabel ? 
-                          `/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}/${slugify(color)}` :
-                          `/shop/${urlCategory}`
-                        }
-                        className={`block text-sm font-medium transition-colors ${
-                          color === validatedUrlColor 
-                            ? 'text-primary' 
-                            : 'text-muted-foreground hover:text-primary'
-                        }`}
-                      >
-                        {color}
-                      </Link>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Sizes */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Sizes</label>
-                <div className="space-y-3">
-                  {getAllSizes().map((size) => (
-                    <div key={size} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={`size-${size}`}
-                        checked={selectedSizes.includes(size)}
-                        onCheckedChange={(checked) => handleSizeChange(size, checked === true)}
-                      />
-                      <label
-                        htmlFor={`size-${size}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {size}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Brands */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Brands</label>
-                <div className="space-y-3">
-                  {getAllBrands().map((brand) => (
-                    <div key={brand} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={`brand-${brand}`}
-                        checked={selectedBrands.includes(brand)}
-                        onCheckedChange={(checked) => handleBrandChange(brand, checked === true)}
-                      />
-                      <label
-                        htmlFor={`brand-${brand}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {brand}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Price Range */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Price Range</label>
@@ -688,16 +465,10 @@ const Products = () => {
           <FilterChips
             searchTerm={searchTerm}
             selectedCategories={selectedCategories}
-            selectedColors={selectedColors}
-            selectedSizes={selectedSizes}
-            selectedBrands={selectedBrands}
             priceRange={priceRange}
             showInStock={showInStock}
             onRemoveSearch={handleRemoveSearch}
             onRemoveCategory={handleRemoveCategory}
-            onRemoveColor={handleRemoveColor}
-            onRemoveSize={handleRemoveSize}
-            onRemoveBrand={handleRemoveBrand}
             onRemovePriceRange={handleRemovePriceRange}
             onRemoveInStock={handleRemoveInStock}
             onClearAll={clearFilters}
