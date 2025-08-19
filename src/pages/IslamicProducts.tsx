@@ -1,5 +1,5 @@
-import { useState, useMemo, useEffect } from 'react';
-import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useState, useMemo } from 'react';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Filter, Search, Grid3X3, List, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ProductCard from '@/components/ProductCard';
-import { FilterChips } from '@/components/FilterChips';
 import { islamicProducts } from '@/data/islamic-products';
 import { 
   genders, 
@@ -19,53 +18,31 @@ import {
   getTypeById,
   type GenderId 
 } from '@/data/islamic-taxonomy';
-import { getSEORules, getFilterConfig } from '@/data/filter-config';
 import { 
   buildBreadcrumbs, 
   generatePageTitle, 
   generateMetaDescription,
-  generateFilteredPageTitle,
-  generateCanonicalUrl,
-  buildFilterUrl,
-  buildProductUrl,
-  decodeFilters,
-  encodeFilters,
   createSlug,
-  parseSlug,
-  type ActiveFilter
+  parseSlug 
 } from '@/lib/slug';
 import { Product } from '@/types/product';
 import { usePagination } from '@/hooks/usePagination';
 
 const IslamicProducts = () => {
-  const { gender: urlGender, category: urlCategory, style: urlStyle, filters: urlFilters, page: urlPage } = useParams();
+  const { gender: urlGender, category: urlCategory, style: urlStyle } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   
-  // Parse URL parameters
-  const currentPage = urlPage ? parseInt(urlPage) : 1;
-  const activeFilters = decodeFilters(urlFilters || '');
-  
-  // Client-side filters (UX refinement) - initialize from URL filters
+  // Client-side filters (UX refinement)
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedColors, setSelectedColors] = useState<string[]>(
-    activeFilters.filter(f => f.type === 'color').map(f => f.value)
-  );
-  const [selectedSizes, setSelectedSizes] = useState<string[]>(
-    activeFilters.filter(f => f.type === 'size').map(f => f.value)
-  );
-  const [selectedFabrics, setSelectedFabrics] = useState<string[]>(
-    activeFilters.filter(f => f.type === 'fabric').map(f => f.value)
-  );
-  const [selectedOccasions, setSelectedOccasions] = useState<string[]>(
-    activeFilters.filter(f => f.type === 'occasion').map(f => f.value)
-  );
-  const [priceRange, setPriceRange] = useState<string>(
-    activeFilters.find(f => f.type === 'price')?.value || 'all'
-  );
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedFabrics, setSelectedFabrics] = useState<string[]>([]);
+  const [selectedOccasions, setSelectedOccasions] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'name' | 'price-low' | 'price-high' | 'rating'>('name');
   const [showInStock, setShowInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentPage, setCurrentPage] = useState(1);
   
   const ITEMS_PER_PAGE = 12;
 
@@ -76,34 +53,11 @@ const IslamicProducts = () => {
     urlStyle
   );
 
-  // SEO metadata with filters
-  const currentFilters: ActiveFilter[] = [
-    ...selectedColors.map(color => ({ type: 'color', value: color })),
-    ...selectedSizes.map(size => ({ type: 'size', value: size })),
-    ...selectedFabrics.map(fabric => ({ type: 'fabric', value: fabric })),
-    ...selectedOccasions.map(occasion => ({ type: 'occasion', value: occasion })),
-    ...(priceRange !== 'all' ? [{ type: 'price', value: priceRange }] : [])
-  ];
-
-  const basePath = buildProductUrl(validGender || '', validType?.id, validStyle || '');
   const breadcrumbs = buildBreadcrumbs(validGender || '', validType?.id, validStyle || '');
-  const seoRules = getSEORules(currentFilters.length, currentPage > 1);
   
-  const pageTitle = generateFilteredPageTitle(validGender || '', validType?.id, validStyle || '', currentFilters);
+  // SEO metadata
+  const pageTitle = generatePageTitle(validGender || '', validType?.id, validStyle || '');
   const pageDescription = generateMetaDescription(validGender || '', validType?.id, validStyle || '');
-  const canonicalUrl = generateCanonicalUrl(basePath, currentFilters, currentPage > 1 ? currentPage : undefined, seoRules);
-  
-  // Navigation functions
-  const navigateToPage = (page: number) => {
-    const url = buildFilterUrl(basePath, currentFilters, page > 1 ? page : undefined);
-    navigate(url);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const updateFilters = (newFilters: ActiveFilter[]) => {
-    const url = buildFilterUrl(basePath, newFilters);
-    navigate(url);
-  };
 
   // Get available types for current gender
   const availableTypes = validGender ? typesByGender[validGender] : [];
@@ -193,69 +147,22 @@ const IslamicProducts = () => {
   const paginatedProducts = filteredAndSortedProducts.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
-    navigateToPage(page);
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Filter handlers
-  const handleColorChange = (color: string) => {
-    const newColors = selectedColors.includes(color) 
-      ? selectedColors.filter(c => c !== color)
-      : [...selectedColors, color];
-    setSelectedColors(newColors);
-    
-    const newFilters = [
-      ...newColors.map(c => ({ type: 'color', value: c })),
-      ...selectedSizes.map(s => ({ type: 'size', value: s })),
-      ...selectedFabrics.map(f => ({ type: 'fabric', value: f })),
-      ...selectedOccasions.map(o => ({ type: 'occasion', value: o })),
-      ...(priceRange !== 'all' ? [{ type: 'price', value: priceRange }] : [])
-    ];
-    updateFilters(newFilters);
-  };
-
-  const handleSizeChange = (size: string) => {
-    const newSizes = selectedSizes.includes(size)
-      ? selectedSizes.filter(s => s !== size)  
-      : [...selectedSizes, size];
-    setSelectedSizes(newSizes);
-    
-    const newFilters = [
-      ...selectedColors.map(c => ({ type: 'color', value: c })),
-      ...newSizes.map(s => ({ type: 'size', value: s })),
-      ...selectedFabrics.map(f => ({ type: 'fabric', value: f })),
-      ...selectedOccasions.map(o => ({ type: 'occasion', value: o })),
-      ...(priceRange !== 'all' ? [{ type: 'price', value: priceRange }] : [])
-    ];
-    updateFilters(newFilters);
-  };
-
-  const handleFabricChange = (fabric: string) => {
-    const newFabrics = selectedFabrics.includes(fabric)
-      ? selectedFabrics.filter(f => f !== fabric)
-      : [...selectedFabrics, fabric];
-    setSelectedFabrics(newFabrics);
-    
-    const newFilters = [
-      ...selectedColors.map(c => ({ type: 'color', value: c })),
-      ...selectedSizes.map(s => ({ type: 'size', value: s })),
-      ...newFabrics.map(f => ({ type: 'fabric', value: f })),
-      ...selectedOccasions.map(o => ({ type: 'occasion', value: o })),
-      ...(priceRange !== 'all' ? [{ type: 'price', value: priceRange }] : [])
-    ];
-    updateFilters(newFilters);
-  };
-
-  const handlePriceChange = (price: string) => {
-    setPriceRange(price);
-    
-    const newFilters = [
-      ...selectedColors.map(c => ({ type: 'color', value: c })),
-      ...selectedSizes.map(s => ({ type: 'size', value: s })),
-      ...selectedFabrics.map(f => ({ type: 'fabric', value: f })),
-      ...selectedOccasions.map(o => ({ type: 'occasion', value: o })),
-      ...(price !== 'all' ? [{ type: 'price', value: price }] : [])
-    ];
-    updateFilters(newFilters);
+  const handleFilterChange = <T extends string>(
+    value: T, 
+    currentList: T[], 
+    setList: (list: T[]) => void
+  ) => {
+    if (currentList.includes(value)) {
+      setList(currentList.filter(item => item !== value));
+    } else {
+      setList([...currentList, value]);
+    }
+    setCurrentPage(1);
   };
 
   const clearAllFilters = () => {
@@ -266,7 +173,7 @@ const IslamicProducts = () => {
     setSelectedOccasions([]);
     setPriceRange('all');
     setShowInStock(false);
-    navigate(basePath);
+    setCurrentPage(1);
   };
 
   // Page header content
@@ -299,8 +206,7 @@ const IslamicProducts = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta name="robots" content={seoRules.robots} />
-        <link rel="canonical" href={`${window.location.origin}${canonicalUrl}`} />
+        <link rel="canonical" href={window.location.href} />
         
         {/* Breadcrumb Schema */}
         <script type="application/ld+json">
@@ -447,22 +353,18 @@ const IslamicProducts = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Colors</label>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
-                     {filterOptions.colors.map(color => (
-                       <div key={color} className="flex items-center space-x-2">
-                         <Checkbox
-                           id={`color-${color}`}
-                           checked={selectedColors.includes(color)}
-                           onCheckedChange={() => handleColorChange(color)}
-                         />
-                         <label 
-                           htmlFor={`color-${color}`} 
-                           className="text-sm"
-                           {...(currentFilters.length > 0 && !selectedColors.includes(color) ? { rel: "nofollow" } : {})}
-                         >
-                           {color}
-                         </label>
-                       </div>
-                     ))}
+                    {filterOptions.colors.map(color => (
+                      <div key={color} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`color-${color}`}
+                          checked={selectedColors.includes(color)}
+                          onCheckedChange={() => handleFilterChange(color, selectedColors, setSelectedColors)}
+                        />
+                        <label htmlFor={`color-${color}`} className="text-sm">
+                          {color}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -470,22 +372,18 @@ const IslamicProducts = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Sizes</label>
                   <div className="grid grid-cols-3 gap-2">
-                     {filterOptions.sizes.map(size => (
-                       <div key={size} className="flex items-center space-x-1">
-                         <Checkbox
-                           id={`size-${size}`}
-                           checked={selectedSizes.includes(size)}
-                           onCheckedChange={() => handleSizeChange(size)}
-                         />
-                         <label 
-                           htmlFor={`size-${size}`} 
-                           className="text-xs"
-                           {...(currentFilters.length > 0 && !selectedSizes.includes(size) ? { rel: "nofollow" } : {})}
-                         >
-                           {size}
-                         </label>
-                       </div>
-                     ))}
+                    {filterOptions.sizes.map(size => (
+                      <div key={size} className="flex items-center space-x-1">
+                        <Checkbox
+                          id={`size-${size}`}
+                          checked={selectedSizes.includes(size)}
+                          onCheckedChange={() => handleFilterChange(size, selectedSizes, setSelectedSizes)}
+                        />
+                        <label htmlFor={`size-${size}`} className="text-xs">
+                          {size}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -493,29 +391,25 @@ const IslamicProducts = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Fabrics</label>
                   <div className="space-y-2 max-h-32 overflow-y-auto">
-                     {filterOptions.fabrics.map(fabric => (
-                       <div key={fabric} className="flex items-center space-x-2">
-                         <Checkbox
-                           id={`fabric-${fabric}`}
-                           checked={selectedFabrics.includes(fabric)}
-                           onCheckedChange={() => handleFabricChange(fabric)}
-                         />
-                         <label 
-                           htmlFor={`fabric-${fabric}`} 
-                           className="text-sm"
-                           {...(currentFilters.length > 0 && !selectedFabrics.includes(fabric) ? { rel: "nofollow" } : {})}
-                         >
-                           {fabric}
-                         </label>
-                       </div>
-                     ))}
+                    {filterOptions.fabrics.map(fabric => (
+                      <div key={fabric} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`fabric-${fabric}`}
+                          checked={selectedFabrics.includes(fabric)}
+                          onCheckedChange={() => handleFilterChange(fabric, selectedFabrics, setSelectedFabrics)}
+                        />
+                        <label htmlFor={`fabric-${fabric}`} className="text-sm">
+                          {fabric}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 {/* Price Range */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Price Range</label>
-                  <Select value={priceRange} onValueChange={handlePriceChange}>
+                  <Select value={priceRange} onValueChange={setPriceRange}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -559,13 +453,13 @@ const IslamicProducts = () => {
                 {selectedColors.map(color => (
                   <Badge key={color} variant="secondary" className="flex items-center gap-1">
                     {color}
-                    <button onClick={() => handleColorChange(color)} className="ml-1 hover:text-destructive">×</button>
+                    <button onClick={() => handleFilterChange(color, selectedColors, setSelectedColors)} className="ml-1 hover:text-destructive">×</button>
                   </Badge>
                 ))}
                 {priceRange !== 'all' && (
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {filterOptions.priceRanges.find(r => r.id === priceRange)?.label}
-                    <button onClick={() => handlePriceChange('all')} className="ml-1 hover:text-destructive">×</button>
+                    <button onClick={() => setPriceRange('all')} className="ml-1 hover:text-destructive">×</button>
                   </Badge>
                 )}
                 {showInStock && (
