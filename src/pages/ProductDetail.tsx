@@ -94,9 +94,10 @@ const ProductDetail = () => {
           {/* Header */}
           <div>
             <div className="flex items-center gap-2 mb-2">
+              <Badge variant="secondary">{product.gender}</Badge>
               <Badge variant="secondary">{product.category}</Badge>
-              {product.subcategory && (
-                <Badge variant="outline">{product.subcategory}</Badge>
+              {product.style && (
+                <Badge variant="outline">{product.style}</Badge>
               )}
               {!product.inStock && (
                 <Badge variant="destructive">Out of Stock</Badge>

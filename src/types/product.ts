@@ -5,8 +5,15 @@ export interface Product {
   price: number;
   salePrice?: number;
   images: string[];
-  category: string;
-  subcategory?: string;
+  // Islamic wear taxonomy
+  gender: 'men' | 'women';
+  category: string; // thobe, abaya, hijab, etc.
+  style?: string; // Palestinian, Butterfly, Khimar, etc.
+  // Filter attributes
+  color: string;
+  size: string[];
+  fabric: string;
+  occasion: string[];
   tags: string[];
   inStock: boolean;
   rating: number;
@@ -26,8 +33,12 @@ export interface Category {
 }
 
 export interface Filter {
-  priceRange: [number, number];
-  categories: string[];
-  tags: string[];
+  // Client-side filters (query parameters)
+  colors: string[];
+  sizes: string[];
+  fabrics: string[];
+  occasions: string[];
+  priceRange: string; // 'all' | 'under50' | '50to100' | etc.
   inStock: boolean;
+  tags: string[];
 }

@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
+import IslamicProducts from "./pages/IslamicProducts";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -25,9 +25,12 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="products" element={<Products />} />
-              <Route path="shop/:category" element={<Products />} />
-              <Route path="shop/:category/:subcategory" element={<Products />} />
+              {/* Islamic wear gender-based routing */}
+              <Route path=":gender" element={<IslamicProducts />} />
+              <Route path=":gender/:category" element={<IslamicProducts />} />
+              <Route path=":gender/:category/:style" element={<IslamicProducts />} />
+              {/* Legacy/alternative routes */}
+              <Route path="products" element={<IslamicProducts />} />
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="cart" element={<Cart />} />
               <Route path="checkout" element={<Checkout />} />

@@ -148,8 +148,8 @@ const Products = () => {
         return false;
       }
       
-      // URL-based subcategory filter (primary filter - not client-side)
-      if (currentSubcategoryLabel && product.subcategory !== currentSubcategoryLabel) {
+      // URL-based style filter (primary filter - not client-side)
+      if (currentSubcategoryLabel && product.style !== currentSubcategoryLabel) {
         return false;
       }
 

@@ -80,8 +80,8 @@ const Cart = () => {
                             {item.product.name}
                           </Link>
                           <p className="text-sm text-muted-foreground">
-                            {item.product.category}
-                            {item.product.subcategory && ` • ${item.product.subcategory}`}
+                            {item.product.gender} • {item.product.category}
+                            {item.product.style && ` • ${item.product.style}`}
                           </p>
                         </div>
                         <Button
