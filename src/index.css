@@ -142,6 +142,7 @@
     --gradient-hero: linear-gradient(135deg, 240 10% 3.9%, 240 3.7% 15.9%);
     --gradient-cta: linear-gradient(135deg, 142 76% 40%, 142 76% 35%);
     --gradient-card: linear-gradient(145deg, 240 10% 3.9%, 240 3.7% 15.9%);
+  }
 }
 
 @layer base {
