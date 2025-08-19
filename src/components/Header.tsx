@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Search, Menu, User, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/cartStore';
 import { categories } from '@/data/products';
+import { SearchModal } from '@/components/SearchModal';
 
 const Header = () => {
   const totalItems = useCartStore((state) => state.getTotalItems());
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -55,7 +58,12 @@ const Header = () => {
           {/* Right side actions */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hidden sm:flex"
+              onClick={() => setSearchModalOpen(true)}
+            >
               <Search className="h-5 w-5" />
             </Button>
 
@@ -85,6 +93,11 @@ const Header = () => {
           </div>
         </div>
       </div>
+      
+      <SearchModal 
+        open={searchModalOpen} 
+        onOpenChange={setSearchModalOpen} 
+      />
     </header>
   );
 };

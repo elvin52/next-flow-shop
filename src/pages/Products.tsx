@@ -1,16 +1,27 @@
 import { useState, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Filter, Search, Grid3X3, List } from 'lucide-react';
+import { Filter, Search, Grid3X3, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { 
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationEllipsis
+} from '@/components/ui/pagination';
 import ProductCard from '@/components/ProductCard';
+import { FilterChips } from '@/components/FilterChips';
 import { sampleProducts, categories } from '@/data/products';
 import { Product } from '@/types/product';
+import { usePagination } from '@/hooks/usePagination';
 
 // Helper functions
 const getCategoryById = (id: string) => categories.find(cat => cat.id === id);
@@ -44,6 +55,7 @@ const titleCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const Products = () => {
   const { category: urlCategory, subcategory: urlSubcategory } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -51,6 +63,9 @@ const Products = () => {
   const [sortBy, setSortBy] = useState<'name' | 'price-low' | 'price-high' | 'rating'>('name');
   const [showInStock, setShowInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const ITEMS_PER_PAGE = 12;
 
   // Get current category/subcategory info - with validation
   const validatedUrlCategory = urlCategory ? getCategoryLabelById(urlCategory) : null;
@@ -192,6 +207,47 @@ const Products = () => {
     setSelectedCategories([]);
     setPriceRange('all');
     setShowInStock(false);
+    setCurrentPage(1); // Reset to first page when clearing filters
+  };
+
+  // Reset to page 1 when filters change
+  const resetToFirstPage = () => {
+    setCurrentPage(1);
+  };
+
+  // Filter chip handlers
+  const handleRemoveSearch = () => {
+    setSearchTerm('');
+    resetToFirstPage();
+  };
+
+  const handleRemoveCategory = (categoryId: string) => {
+    setSelectedCategories(selectedCategories.filter(id => id !== categoryId));
+    resetToFirstPage();
+  };
+
+  const handleRemovePriceRange = () => {
+    setPriceRange('all');
+    resetToFirstPage();
+  };
+
+  const handleRemoveInStock = () => {
+    setShowInStock(false);
+    resetToFirstPage();
+  };
+
+  // Pagination logic
+  const { totalPages, hasPreviousPage, hasNextPage, startIndex, endIndex } = usePagination({
+    totalItems: filteredAndSortedProducts.length,
+    itemsPerPage: ITEMS_PER_PAGE,
+    currentPage,
+  });
+
+  const paginatedProducts = filteredAndSortedProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -405,24 +461,30 @@ const Products = () => {
 
         {/* Products Grid */}
         <div className="flex-1">
+          {/* Filter Chips */}
+          <FilterChips
+            searchTerm={searchTerm}
+            selectedCategories={selectedCategories}
+            priceRange={priceRange}
+            showInStock={showInStock}
+            onRemoveSearch={handleRemoveSearch}
+            onRemoveCategory={handleRemoveCategory}
+            onRemovePriceRange={handleRemovePriceRange}
+            onRemoveInStock={handleRemoveInStock}
+            onClearAll={clearFilters}
+          />
+
           {/* Toolbar */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">
                 {filteredAndSortedProducts.length} products found
+                {totalPages > 1 && (
+                  <span className="ml-2">
+                    (Page {currentPage} of {totalPages})
+                  </span>
+                )}
               </span>
-              {selectedCategories.length > 0 && (
-                <div className="flex gap-1">
-                  {selectedCategories.map((categoryId) => {
-                    const category = categories.find(c => c.id === categoryId);
-                    return (
-                      <Badge key={categoryId} variant="secondary" className="text-xs">
-                        {category?.name}
-                      </Badge>
-                    );
-                  })}
-                </div>
-              )}
             </div>
 
             <div className="flex items-center gap-4">
@@ -474,15 +536,82 @@ const Products = () => {
               </Button>
             </div>
           ) : (
-            <div className={`grid gap-6 ${
-              viewMode === 'grid' 
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
-                : 'grid-cols-1'
-            }`}>
-              {filteredAndSortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <>
+              <div className={`grid gap-6 mb-8 ${
+                viewMode === 'grid' 
+                  ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
+                  : 'grid-cols-1'
+              }`}>
+                {paginatedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          onClick={() => hasPreviousPage && handlePageChange(currentPage - 1)}
+                          className={!hasPreviousPage ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                      
+                      {/* Page numbers */}
+                      {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                        let pageNum;
+                        if (totalPages <= 5) {
+                          pageNum = i + 1;
+                        } else if (currentPage <= 3) {
+                          pageNum = i + 1;
+                        } else if (currentPage >= totalPages - 2) {
+                          pageNum = totalPages - 4 + i;
+                        } else {
+                          pageNum = currentPage - 2 + i;
+                        }
+                        
+                        return (
+                          <PaginationItem key={pageNum}>
+                            <PaginationLink
+                              onClick={() => handlePageChange(pageNum)}
+                              isActive={currentPage === pageNum}
+                              className="cursor-pointer"
+                            >
+                              {pageNum}
+                            </PaginationLink>
+                          </PaginationItem>
+                        );
+                      })}
+
+                      {totalPages > 5 && currentPage < totalPages - 2 && (
+                        <>
+                          <PaginationItem>
+                            <PaginationEllipsis />
+                          </PaginationItem>
+                          <PaginationItem>
+                            <PaginationLink
+                              onClick={() => handlePageChange(totalPages)}
+                              className="cursor-pointer"
+                            >
+                              {totalPages}
+                            </PaginationLink>
+                          </PaginationItem>
+                        </>
+                      )}
+
+                      <PaginationItem>
+                        <PaginationNext
+                          onClick={() => hasNextPage && handlePageChange(currentPage + 1)}
+                          className={!hasNextPage ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
