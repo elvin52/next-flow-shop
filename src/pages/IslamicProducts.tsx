@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useState, useMemo, useEffect } from 'react';
+import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Filter, Search, Grid3X3, List, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ProductCard from '@/components/ProductCard';
+import { FilterChips } from '@/components/FilterChips';
 import { islamicProducts } from '@/data/islamic-products';
 import { 
   genders, 
@@ -25,26 +26,57 @@ import {
   createSlug,
   parseSlug 
 } from '@/lib/slug';
+import { 
+  parseFilterString,
+  buildFilterUrl,
+  generateSEOPageInfo,
+  isLegacyFilterUrl,
+  convertLegacyParams,
+  type ParsedFilters
+} from '@/lib/seo-utils';
 import { Product } from '@/types/product';
 import { usePagination } from '@/hooks/usePagination';
 
 const IslamicProducts = () => {
-  const { gender: urlGender, category: urlCategory, style: urlStyle } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { 
+    gender: urlGender, 
+    category: urlCategory, 
+    style: urlStyle,
+    filters: urlFilters,
+    page: urlPage
+  } = useParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  
+  // Parse URL parameters
+  const currentPage = parseInt(urlPage || '1', 10);
+  const parsedFilters = parseFilterString(urlFilters || '');
   
   // Client-side filters (UX refinement)
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedFabrics, setSelectedFabrics] = useState<string[]>([]);
-  const [selectedOccasions, setSelectedOccasions] = useState<string[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({
+    colors: [],
+    sizes: [],
+    fabrics: [],
+    occasions: []
+  });
   const [priceRange, setPriceRange] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'name' | 'price-low' | 'price-high' | 'rating'>('name');
   const [showInStock, setShowInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [currentPage, setCurrentPage] = useState(1);
   
   const ITEMS_PER_PAGE = 12;
+
+  // Handle legacy URLs with query parameters
+  useEffect(() => {
+    if (isLegacyFilterUrl(searchParams)) {
+      const legacyFilters = convertLegacyParams(searchParams);
+      if (urlGender && urlCategory && Object.keys(legacyFilters).length > 0) {
+        const newUrl = buildFilterUrl(urlGender, urlCategory, legacyFilters);
+        navigate(newUrl, { replace: true });
+      }
+    }
+  }, [searchParams, urlGender, urlCategory, navigate]);
 
   // URL validation and context
   const { validGender, validType, validStyle } = validateGenderTypeStyle(
@@ -53,15 +85,50 @@ const IslamicProducts = () => {
     urlStyle
   );
 
+  // SEO page info generation
+  const seoInfo = generateSEOPageInfo(
+    validGender || '',
+    validType?.id || '',
+    parsedFilters,
+    currentPage,
+    window.location.origin
+  );
+
   const breadcrumbs = buildBreadcrumbs(validGender || '', validType?.id, validStyle || '');
   
-  // SEO metadata
-  const pageTitle = generatePageTitle(validGender || '', validType?.id, validStyle || '');
-  const pageDescription = generateMetaDescription(validGender || '', validType?.id, validStyle || '');
-
   // Get available types for current gender
   const availableTypes = validGender ? typesByGender[validGender] : [];
   const availableStyles = validType ? validType.styles : [];
+
+  // Filter navigation handlers
+  const handleFilterNavigation = (attribute: string, value: string) => {
+    const newFilters = { ...parsedFilters };
+    
+    if (newFilters[attribute] === value) {
+      delete newFilters[attribute];
+    } else {
+      newFilters[attribute] = value;
+    }
+    
+    const newUrl = buildFilterUrl(
+      validGender || '',
+      validType?.id || '',
+      newFilters
+    );
+    navigate(newUrl);
+  };
+
+  // Pagination handler
+  const handlePageChange = (page: number) => {
+    const newUrl = buildFilterUrl(
+      validGender || '',
+      validType?.id || '',
+      parsedFilters,
+      page > 1 ? page : undefined
+    );
+    navigate(newUrl);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Filtering logic
   const filteredAndSortedProducts = useMemo(() => {
@@ -79,25 +146,42 @@ const IslamicProducts = () => {
         return false;
       }
 
-      // Client-side filters (UX refinement)
+      // URL filter parameters
+      if (parsedFilters.color && product.color !== parsedFilters.color) {
+        return false;
+      }
+      
+      if (parsedFilters.fabric && product.fabric !== parsedFilters.fabric) {
+        return false;
+      }
+      
+      if (parsedFilters.size && (!product.size || !product.size.includes(parsedFilters.size))) {
+        return false;
+      }
+      
+      if (parsedFilters.occasion && (!product.occasion || !product.occasion.includes(parsedFilters.occasion))) {
+        return false;
+      }
+
+      // Client-side filters (UX refinement) 
       if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
           !product.description.toLowerCase().includes(searchTerm.toLowerCase())) {
         return false;
       }
 
-      if (selectedColors.length > 0 && !selectedColors.includes(product.color)) {
+      if (selectedFilters.colors.length > 0 && !selectedFilters.colors.includes(product.color)) {
         return false;
       }
 
-      if (selectedSizes.length > 0 && !product.size?.some(s => selectedSizes.includes(s))) {
+      if (selectedFilters.sizes.length > 0 && !product.size?.some(s => selectedFilters.sizes.includes(s))) {
         return false;
       }
 
-      if (selectedFabrics.length > 0 && !selectedFabrics.includes(product.fabric)) {
+      if (selectedFilters.fabrics.length > 0 && !selectedFilters.fabrics.includes(product.fabric)) {
         return false;
       }
 
-      if (selectedOccasions.length > 0 && !product.occasion?.some(o => selectedOccasions.includes(o))) {
+      if (selectedFilters.occasions.length > 0 && !product.occasion?.some(o => selectedFilters.occasions.includes(o))) {
         return false;
       }
 
@@ -132,9 +216,8 @@ const IslamicProducts = () => {
 
     return filtered;
   }, [
-    validGender, validType, validStyle, searchTerm, selectedColors, 
-    selectedSizes, selectedFabrics, selectedOccasions, priceRange, 
-    sortBy, showInStock
+    validGender, validType, validStyle, parsedFilters, searchTerm, selectedFilters, 
+    priceRange, sortBy, showInStock
   ]);
 
   // Pagination
@@ -146,12 +229,7 @@ const IslamicProducts = () => {
 
   const paginatedProducts = filteredAndSortedProducts.slice(startIndex, endIndex);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // Filter handlers
+  // Filter handlers for client-side filters
   const handleFilterChange = <T extends string>(
     value: T, 
     currentList: T[], 
@@ -162,51 +240,42 @@ const IslamicProducts = () => {
     } else {
       setList([...currentList, value]);
     }
-    setCurrentPage(1);
   };
 
   const clearAllFilters = () => {
     setSearchTerm('');
-    setSelectedColors([]);
-    setSelectedSizes([]);
-    setSelectedFabrics([]);
-    setSelectedOccasions([]);
+    setSelectedFilters({
+      colors: [],
+      sizes: [],
+      fabrics: [],
+      occasions: []
+    });
     setPriceRange('all');
     setShowInStock(false);
-    setCurrentPage(1);
+    
+    // Navigate to base category without filters
+    if (validGender && validType) {
+      navigate(`/${validGender}/${validType.id}`);
+    }
   };
 
-  // Page header content
-  const getPageHeader = () => {
-    if (validStyle && validType && validGender) {
-      return `${validStyle} ${validType.name} for ${validGender.charAt(0).toUpperCase() + validGender.slice(1)}`;
-    }
-    if (validType && validGender) {
-      return `${validGender.charAt(0).toUpperCase() + validGender.slice(1)}'s ${validType.name}`;
-    }
-    if (validGender) {
-      return `${validGender.charAt(0).toUpperCase() + validGender.slice(1)}'s Islamic Wear`;
-    }
-    return 'Islamic Clothing & Modest Wear';
-  };
-
-  const getIntroText = () => {
-    if (validType && validGender) {
-      return validType.description;
-    }
-    if (validGender) {
-      const genderInfo = genders.find(g => g.id === validGender);
-      return genderInfo?.description || '';
-    }
-    return 'Discover our premium collection of authentic Islamic clothing for men and women. From traditional thobes and abayas to modern modest wear.';
+  // Filter chip handlers
+  const handleRemoveFilter = (attribute: string, value: string) => {
+    const currentList = selectedFilters[`${attribute}s` as keyof typeof selectedFilters] || [];
+    const newList = currentList.filter(item => item !== value);
+    setSelectedFilters(prev => ({
+      ...prev,
+      [`${attribute}s`]: newList
+    }));
   };
 
   return (
     <>
       <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <link rel="canonical" href={window.location.href} />
+        <title>{seoInfo.title}</title>
+        <meta name="description" content={generateMetaDescription(validGender || '', validType?.id, validStyle || '')} />
+        <meta name="robots" content={seoInfo.robots} />
+        <link rel="canonical" href={seoInfo.canonical} />
         
         {/* Breadcrumb Schema */}
         <script type="application/ld+json">
@@ -259,9 +328,9 @@ const IslamicProducts = () => {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4">{getPageHeader()}</h1>
+          <h1 className="text-3xl font-bold mb-4">{seoInfo.h1}</h1>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            {getIntroText()}
+            {validType?.description || 'Discover our premium collection of authentic Islamic clothing.'}
           </p>
         </div>
 
@@ -291,6 +360,51 @@ const IslamicProducts = () => {
                     />
                   </div>
                 </div>
+
+                {/* SEO Filter Links */}
+                {validGender && validType && (
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-sm font-medium mb-2">Shop by Color</h3>
+                      <div className="space-y-2">
+                        {filterOptions.colors.slice(0, 6).map(color => (
+                          <button
+                            key={color}
+                            onClick={() => handleFilterNavigation('color', color)}
+                            className={`block text-sm transition-colors ${
+                              parsedFilters.color === color 
+                                ? 'text-primary font-medium' 
+                                : 'text-muted-foreground hover:text-primary'
+                            }`}
+                            rel={Object.keys(parsedFilters).length > 0 ? 'nofollow' : undefined}
+                          >
+                            {color} {validType.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-sm font-medium mb-2">Shop by Fabric</h3>
+                      <div className="space-y-2">
+                        {filterOptions.fabrics.slice(0, 4).map(fabric => (
+                          <button
+                            key={fabric}
+                            onClick={() => handleFilterNavigation('fabric', fabric)}
+                            className={`block text-sm transition-colors ${
+                              parsedFilters.fabric === fabric 
+                                ? 'text-primary font-medium' 
+                                : 'text-muted-foreground hover:text-primary'
+                            }`}
+                            rel={Object.keys(parsedFilters).length > 0 ? 'nofollow' : undefined}
+                          >
+                            {validType.name} in {fabric}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Navigation Links */}
                 <div className="space-y-4">
@@ -349,91 +463,77 @@ const IslamicProducts = () => {
                   )}
                 </div>
 
-                {/* Color Filter */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Colors</label>
-                  <div className="space-y-2 max-h-40 overflow-y-auto">
-                    {filterOptions.colors.map(color => (
-                      <div key={color} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`color-${color}`}
-                          checked={selectedColors.includes(color)}
-                          onCheckedChange={() => handleFilterChange(color, selectedColors, setSelectedColors)}
-                        />
-                        <label htmlFor={`color-${color}`} className="text-sm">
-                          {color}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Size Filter */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Sizes</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {filterOptions.sizes.map(size => (
-                      <div key={size} className="flex items-center space-x-1">
-                        <Checkbox
-                          id={`size-${size}`}
-                          checked={selectedSizes.includes(size)}
-                          onCheckedChange={() => handleFilterChange(size, selectedSizes, setSelectedSizes)}
-                        />
-                        <label htmlFor={`size-${size}`} className="text-xs">
-                          {size}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Fabric Filter */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Fabrics</label>
-                  <div className="space-y-2 max-h-32 overflow-y-auto">
-                    {filterOptions.fabrics.map(fabric => (
-                      <div key={fabric} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`fabric-${fabric}`}
-                          checked={selectedFabrics.includes(fabric)}
-                          onCheckedChange={() => handleFilterChange(fabric, selectedFabrics, setSelectedFabrics)}
-                        />
-                        <label htmlFor={`fabric-${fabric}`} className="text-sm">
-                          {fabric}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Price Range */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Price Range</label>
-                  <Select value={priceRange} onValueChange={setPriceRange}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Prices</SelectItem>
-                      {filterOptions.priceRanges.map(range => (
-                        <SelectItem key={range.id} value={range.id}>
-                          {range.label}
-                        </SelectItem>
+                {/* Client-side UX Filters */}
+                <div className="border-t pt-4 space-y-4">
+                  <h3 className="text-sm font-medium text-muted-foreground">Refine Results</h3>
+                  
+                  {/* Color Filter */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Colors</label>
+                    <div className="space-y-2 max-h-40 overflow-y-auto">
+                      {filterOptions.colors.map(color => (
+                        <div key={color} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`color-${color}`}
+                            checked={selectedFilters.colors.includes(color)}
+                            onCheckedChange={() => handleFilterChange(color, selectedFilters.colors, (colors) => setSelectedFilters(prev => ({ ...prev, colors })))}
+                          />
+                          <label htmlFor={`color-${color}`} className="text-sm">
+                            {color}
+                          </label>
+                        </div>
                       ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                    </div>
+                  </div>
 
-                {/* Stock Status */}
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="inStock"
-                    checked={showInStock}
-                    onCheckedChange={(checked) => setShowInStock(checked === true)}
-                  />
-                  <label htmlFor="inStock" className="text-sm font-medium">
-                    In Stock Only
-                  </label>
+                  {/* Size Filter */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Sizes</label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {filterOptions.sizes.map(size => (
+                        <div key={size} className="flex items-center space-x-1">
+                          <Checkbox
+                            id={`size-${size}`}
+                            checked={selectedFilters.sizes.includes(size)}
+                            onCheckedChange={() => handleFilterChange(size, selectedFilters.sizes, (sizes) => setSelectedFilters(prev => ({ ...prev, sizes })))}
+                          />
+                          <label htmlFor={`size-${size}`} className="text-xs">
+                            {size}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Price Range */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Price Range</label>
+                    <Select value={priceRange} onValueChange={setPriceRange}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Prices</SelectItem>
+                        {filterOptions.priceRanges.map(range => (
+                          <SelectItem key={range.id} value={range.id}>
+                            {range.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Stock Status */}
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="inStock"
+                      checked={showInStock}
+                      onCheckedChange={(checked) => setShowInStock(checked === true)}
+                    />
+                    <label htmlFor="inStock" className="text-sm font-medium">
+                      In Stock Only
+                    </label>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -442,23 +542,36 @@ const IslamicProducts = () => {
           {/* Products Grid */}
           <div className="flex-1">
             {/* Active Filters Display */}
-            {(searchTerm || selectedColors.length > 0 || priceRange !== 'all' || showInStock) && (
+            {(searchTerm || Object.values(selectedFilters).some(arr => arr.length > 0) || priceRange !== 'all' || showInStock) && (
               <div className="flex flex-wrap gap-2 mb-6">
                 {searchTerm && (
                   <Badge variant="secondary" className="flex items-center gap-1">
                     Search: {searchTerm}
-                    <button onClick={() => setSearchTerm('')} className="ml-1 hover:text-destructive">×</button>
+                    <button 
+                      onClick={() => setSearchTerm('')}
+                      className="ml-1 hover:text-destructive"
+                      aria-label="Remove search filter"
+                    >
+                      ×
+                    </button>
                   </Badge>
                 )}
-                {selectedColors.map(color => (
-                  <Badge key={color} variant="secondary" className="flex items-center gap-1">
-                    {color}
-                    <button onClick={() => handleFilterChange(color, selectedColors, setSelectedColors)} className="ml-1 hover:text-destructive">×</button>
-                  </Badge>
-                ))}
+                {Object.entries(selectedFilters).map(([attribute, values]) => 
+                  values.map(value => (
+                    <Badge key={`${attribute}-${value}`} variant="secondary" className="flex items-center gap-1">
+                      {value}
+                      <button 
+                        onClick={() => handleRemoveFilter(attribute.slice(0, -1), value)}
+                        className="ml-1 hover:text-destructive"
+                      >
+                        ×
+                      </button>
+                    </Badge>
+                  ))
+                )}
                 {priceRange !== 'all' && (
                   <Badge variant="secondary" className="flex items-center gap-1">
-                    {filterOptions.priceRanges.find(r => r.id === priceRange)?.label}
+                    Price: {priceRange}
                     <button onClick={() => setPriceRange('all')} className="ml-1 hover:text-destructive">×</button>
                   </Badge>
                 )}
@@ -468,42 +581,35 @@ const IslamicProducts = () => {
                     <button onClick={() => setShowInStock(false)} className="ml-1 hover:text-destructive">×</button>
                   </Badge>
                 )}
-                <Button variant="outline" size="sm" onClick={clearAllFilters}>Clear All</Button>
+                <Button variant="ghost" size="sm" onClick={clearAllFilters} className="h-6 px-2 text-xs">
+                  Clear All
+                </Button>
               </div>
             )}
 
             {/* Toolbar */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  {filteredAndSortedProducts.length} products found
-                  {totalPages > 1 && (
-                    <span className="ml-2">
-                      (Page {currentPage} of {totalPages})
-                    </span>
-                  )}
-                </span>
-              </div>
-
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <p className="text-sm text-muted-foreground">
+                Showing {startIndex + 1}-{Math.min(endIndex, filteredAndSortedProducts.length)} of {filteredAndSortedProducts.length} products
+              </p>
+              
               <div className="flex items-center gap-4">
-                {/* Sort */}
-                <Select value={sortBy} onValueChange={(value: any) => setSortBy(value)}>
-                  <SelectTrigger className="w-40">
+                <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
+                  <SelectTrigger className="w-[180px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="name">Name A-Z</SelectItem>
+                    <SelectItem value="name">Sort by Name</SelectItem>
                     <SelectItem value="price-low">Price: Low to High</SelectItem>
                     <SelectItem value="price-high">Price: High to Low</SelectItem>
                     <SelectItem value="rating">Highest Rated</SelectItem>
                   </SelectContent>
                 </Select>
-
-                {/* View Mode */}
-                <div className="flex border rounded-md">
+                
+                <div className="flex rounded-lg border">
                   <Button
                     variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                    size="icon"
+                    size="sm"
                     onClick={() => setViewMode('grid')}
                     className="rounded-r-none"
                   >
@@ -511,7 +617,7 @@ const IslamicProducts = () => {
                   </Button>
                   <Button
                     variant={viewMode === 'list' ? 'default' : 'ghost'}
-                    size="icon"
+                    size="sm"
                     onClick={() => setViewMode('list')}
                     className="rounded-l-none"
                   >
@@ -522,15 +628,11 @@ const IslamicProducts = () => {
             </div>
 
             {/* Products Display */}
-            {filteredAndSortedProducts.length === 0 ? (
+            {paginatedProducts.length === 0 ? (
               <div className="text-center py-12">
-                <div className="text-muted-foreground mb-4">
-                  <Filter className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">No products found</p>
-                  <p className="text-sm">Try adjusting your filters or search terms.</p>
-                </div>
+                <p className="text-lg text-muted-foreground mb-4">No products found</p>
                 <Button onClick={clearAllFilters} variant="outline">
-                  Clear All Filters
+                  Clear all filters
                 </Button>
               </div>
             ) : (
@@ -540,37 +642,48 @@ const IslamicProducts = () => {
                     ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
                     : 'grid-cols-1'
                 }`}>
-                  {paginatedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                  {paginatedProducts.map(product => (
+                    <ProductCard 
+                      key={product.id} 
+                      product={product}
+                    />
                   ))}
                 </div>
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center">
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={!hasPreviousPage}
-                      >
-                        Previous
-                      </Button>
-                      
-                      <span className="text-sm text-muted-foreground">
-                        Page {currentPage} of {totalPages}
-                      </span>
-                      
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={!hasNextPage}
-                      >
-                        Next
-                      </Button>
+                  <div className="flex justify-center items-center space-x-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={!hasPreviousPage}
+                    >
+                      Previous
+                    </Button>
+                    
+                    <div className="flex space-x-1">
+                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                        const page = i + 1;
+                        return (
+                          <Button
+                            key={page}
+                            variant={currentPage === page ? 'default' : 'outline'}
+                            size="sm"
+                            onClick={() => handlePageChange(page)}
+                          >
+                            {page}
+                          </Button>
+                        );
+                      })}
                     </div>
+                    
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={!hasNextPage}
+                    >
+                      Next
+                    </Button>
                   </div>
                 )}
               </>

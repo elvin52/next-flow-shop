@@ -25,10 +25,19 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              {/* Islamic wear gender-based routing */}
+              {/* Islamic wear gender-based routing with advanced SEO */}
               <Route path=":gender" element={<IslamicProducts />} />
               <Route path=":gender/:category" element={<IslamicProducts />} />
               <Route path=":gender/:category/:style" element={<IslamicProducts />} />
+              
+              {/* Filter-based SEO URLs */}
+              <Route path=":gender/:category/f/:filters" element={<IslamicProducts />} />
+              <Route path=":gender/:category/f/:filters/page/:page" element={<IslamicProducts />} />
+              
+              {/* Pagination URLs */}
+              <Route path=":gender/:category/page/:page" element={<IslamicProducts />} />
+              <Route path=":gender/:category/:style/page/:page" element={<IslamicProducts />} />
+              
               {/* Legacy/alternative routes */}
               <Route path="products" element={<IslamicProducts />} />
               <Route path="product/:id" element={<ProductDetail />} />
