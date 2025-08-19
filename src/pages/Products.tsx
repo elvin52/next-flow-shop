@@ -15,6 +15,11 @@ import { Product } from '@/types/product';
 // Helper functions
 const getCategoryById = (id: string) => categories.find(cat => cat.id === id);
 
+const getCategoryLabelById = (categoryId: string) => {
+  const category = getCategoryById(categoryId);
+  return category ? category.id : null;
+};
+
 const slugify = (str: string) => {
   return str
     .toLowerCase()
@@ -47,10 +52,11 @@ const Products = () => {
   const [showInStock, setShowInStock] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  // Get current category/subcategory info
-  const currentCategory = urlCategory ? getCategoryById(urlCategory) : null;
+  // Get current category/subcategory info - with validation
+  const validatedUrlCategory = urlCategory ? getCategoryLabelById(urlCategory) : null;
+  const currentCategory = validatedUrlCategory ? getCategoryById(validatedUrlCategory) : null;
   const currentSubcategoryLabel = urlSubcategory && currentCategory ? 
-    getSubcategoryLabelBySlug(urlCategory, urlSubcategory) : null;
+    getSubcategoryLabelBySlug(validatedUrlCategory, urlSubcategory) : null;
 
   // Generate SEO metadata
   const getPageTitle = () => {
@@ -79,7 +85,7 @@ const Products = () => {
       return `${baseUrl}/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}`;
     }
     if (currentCategory) {
-      return `${baseUrl}/shop/${urlCategory}`;
+      return `${baseUrl}/shop/${validatedUrlCategory}`;
     }
     return `${baseUrl}/products`;
   };
@@ -87,11 +93,24 @@ const Products = () => {
   const getEmptyStateMessage = () => {
     const filters = [];
     if (searchTerm) filters.push(`'${searchTerm}'`);
+    
+    // Show URL-based category/subcategory context
     if (currentSubcategoryLabel && currentCategory) {
       filters.push(`in ${currentCategory.name} › ${currentSubcategoryLabel}`);
     } else if (currentCategory) {
       filters.push(`in ${currentCategory.name}`);
     }
+    
+    // Show selected categories (only when on /products page)
+    if (!validatedUrlCategory && selectedCategories.length > 0) {
+      const categoryNames = selectedCategories
+        .map(id => getCategoryById(id)?.name)
+        .filter(Boolean);
+      if (categoryNames.length > 0) {
+        filters.push(`in ${categoryNames.join(', ')}`);
+      }
+    }
+    
     if (priceRange !== 'all') {
       const ranges = {
         'under50': 'under $50',
@@ -110,7 +129,7 @@ const Products = () => {
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = sampleProducts.filter((product: Product) => {
       // URL-based category filter (primary filter - not client-side)
-      if (urlCategory && product.category !== urlCategory) {
+      if (validatedUrlCategory && product.category !== validatedUrlCategory) {
         return false;
       }
       
@@ -126,7 +145,7 @@ const Products = () => {
       }
 
       // Additional category filter for client-side filtering (only when no URL category)
-      if (!urlCategory && selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
+      if (!validatedUrlCategory && selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
         return false;
       }
 
@@ -158,7 +177,7 @@ const Products = () => {
     });
 
     return filtered;
-  }, [searchTerm, selectedCategories, priceRange, sortBy, showInStock, urlCategory, currentSubcategoryLabel]);
+  }, [searchTerm, selectedCategories, priceRange, sortBy, showInStock, validatedUrlCategory, currentSubcategoryLabel]);
 
   const handleCategoryChange = (categoryId: string, checked: boolean) => {
     if (checked) {
@@ -196,13 +215,13 @@ const Products = () => {
                 "@type": "ListItem", 
                 "position": 2,
                 "name": titleCase(currentCategory.name),
-                "item": `${window.location.origin}/shop/${urlCategory}`
+                "item": `${window.location.origin}/shop/${validatedUrlCategory}`
               },
               currentSubcategoryLabel && {
                 "@type": "ListItem",
                 "position": 3, 
                 "name": titleCase(currentSubcategoryLabel),
-                "item": `${window.location.origin}/shop/${urlCategory}/${slugify(currentSubcategoryLabel)}`
+                "item": `${window.location.origin}/shop/${validatedUrlCategory}/${slugify(currentSubcategoryLabel)}`
               }
             ].filter(Boolean)
           })}
@@ -268,30 +287,85 @@ const Products = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Categories</label>
                 <div className="space-y-3">
-                  {/* Always show crawlable category links for SEO */}
-                  {categories.map((category) => (
-                    <div key={category.id}>
-                      <Link 
-                        to={`/shop/${category.id}`}
-                        className="block text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-                      >
-                        {category.name}
-                      </Link>
-                      {category.subcategories && category.subcategories.length > 0 && (
-                        <div className="ml-4 mt-1 space-y-1">
-                          {category.subcategories.map((subcategory) => (
-                            <Link
-                              key={subcategory}
-                              to={`/shop/${category.id}/${slugify(subcategory)}`}
-                              className="block text-xs text-muted-foreground hover:text-primary transition-colors"
-                            >
-                              {titleCase(subcategory)}
-                            </Link>
-                          ))}
+                  {!validatedUrlCategory ? (
+                    /* On /products page: Show checkboxes for multi-category filtering */
+                    <>
+                      {categories.map((category) => (
+                        <div key={category.id} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`category-${category.id}`}
+                            checked={selectedCategories.includes(category.id)}
+                            onCheckedChange={(checked) => handleCategoryChange(category.id, checked === true)}
+                          />
+                          <label
+                            htmlFor={`category-${category.id}`}
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            {category.name}
+                          </label>
                         </div>
-                      )}
-                    </div>
-                  ))}
+                      ))}
+                      <div className="mt-3 pt-3 border-t">
+                        <p className="text-xs text-muted-foreground mb-2">Browse by category:</p>
+                        {categories.map((category) => (
+                          <div key={`link-${category.id}`}>
+                            <Link 
+                              to={`/shop/${category.id}`}
+                              className="block text-sm text-primary hover:text-primary-hover transition-colors mb-1"
+                            >
+                              {category.name}
+                            </Link>
+                            {category.subcategories && category.subcategories.length > 0 && (
+                              <div className="ml-4 mb-2 space-y-1">
+                                {category.subcategories.map((subcategory) => (
+                                  <Link
+                                    key={subcategory}
+                                    to={`/shop/${category.id}/${slugify(subcategory)}`}
+                                    className="block text-xs text-muted-foreground hover:text-primary transition-colors"
+                                  >
+                                    {titleCase(subcategory)}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    /* On category pages: Show only crawlable links for SEO */
+                    categories.map((category) => (
+                      <div key={category.id}>
+                        <Link 
+                          to={`/shop/${category.id}`}
+                          className={`block text-sm font-medium transition-colors ${
+                            category.id === validatedUrlCategory 
+                              ? 'text-primary' 
+                              : 'text-muted-foreground hover:text-primary'
+                          }`}
+                        >
+                          {category.name}
+                        </Link>
+                        {category.subcategories && category.subcategories.length > 0 && (
+                          <div className="ml-4 mt-1 space-y-1">
+                            {category.subcategories.map((subcategory) => (
+                              <Link
+                                key={subcategory}
+                                to={`/shop/${category.id}/${slugify(subcategory)}`}
+                                className={`block text-xs transition-colors ${
+                                  slugify(subcategory) === urlSubcategory
+                                    ? 'text-primary font-medium'
+                                    : 'text-muted-foreground hover:text-primary'
+                                }`}
+                              >
+                                {titleCase(subcategory)}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
 
@@ -302,7 +376,7 @@ const Products = () => {
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-background border shadow-md z-50">
                     <SelectItem value="all">All Prices</SelectItem>
                     <SelectItem value="under50">Under $50</SelectItem>
                     <SelectItem value="50to100">$50 - $100</SelectItem>
@@ -357,7 +431,7 @@ const Products = () => {
                 <SelectTrigger className="w-40">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-background border shadow-md z-50">
                   <SelectItem value="name">Name A-Z</SelectItem>
                   <SelectItem value="price-low">Price: Low to High</SelectItem>
                   <SelectItem value="price-high">Price: High to Low</SelectItem>
