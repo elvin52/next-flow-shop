@@ -76,26 +76,53 @@ const IslamicProducts = () => {
     urlStyle
   );
 
-  // SEO metadata with filters
-  const currentFilters: ActiveFilter[] = [
-    ...selectedColors.map(color => ({ type: 'color', value: color })),
-    ...selectedSizes.map(size => ({ type: 'size', value: size })),
-    ...selectedFabrics.map(fabric => ({ type: 'fabric', value: fabric })),
-    ...selectedOccasions.map(occasion => ({ type: 'occasion', value: occasion })),
-    ...(priceRange !== 'all' ? [{ type: 'price', value: priceRange }] : [])
-  ];
+  // CRITICAL: Analyze URL filters for SEO decisions
+  // Group filters by type to detect multiple values for same filter
+  const activePathFilters = activeFilters.reduce((acc, filter) => {
+    if (!acc[filter.type]) acc[filter.type] = [];
+    acc[filter.type].push(filter.value);
+    return acc;
+  }, {} as Record<string, string[]>);
+  
+  // Determine SEO settings based on filter count and values
+  const activeFilterEntries = Object.entries(activePathFilters);
+  const totalActiveFiltersCount = activeFilterEntries.length;
+  
+  // CRITICAL: A true "single filter" page has exactly one filter key with exactly one value
+  const isStrictSingleFilter = totalActiveFiltersCount === 1 && activeFilterEntries[0][1].length === 1;
+  const isMultiValueOrMultiFilter = !isStrictSingleFilter && totalActiveFiltersCount > 0;
+  const hasPagination = currentPage > 1;
 
   const basePath = buildProductUrl(validGender || '', validType?.id, validStyle || '');
-  const breadcrumbs = buildBreadcrumbs(validGender || '', validType?.id, validStyle || '');
-  const seoRules = getSEORules(currentFilters.length, currentPage > 1);
+
+  let robots = 'index,follow';
+  let canonicalUrl = basePath;
+
+  if (isMultiValueOrMultiFilter) {
+    // Multiple filters OR multiple values for same filter: noindex,nofollow, canonical to parent
+    robots = 'noindex,nofollow';
+    canonicalUrl = basePath;
+  } else if (isStrictSingleFilter && hasPagination) {
+    // Single filter with pagination: noindex,follow, canonical to first page of filter
+    robots = 'noindex,follow';
+    canonicalUrl = buildFilterUrl(basePath, activeFilters);
+  } else if (hasPagination) {
+    // Main category pagination: noindex,follow, canonical to first page
+    robots = 'noindex,follow';
+    canonicalUrl = basePath;
+  } else if (isStrictSingleFilter) {
+    // Single filter, no pagination: index,follow, canonical to self
+    canonicalUrl = buildFilterUrl(basePath, activeFilters);
+  }
   
-  const pageTitle = generateFilteredPageTitle(validGender || '', validType?.id, validStyle || '', currentFilters);
+  // SEO metadata with filters - use URL filters for title generation
+  const pageTitle = generateFilteredPageTitle(validGender || '', validType?.id, validStyle || '', activeFilters);
   const pageDescription = generateMetaDescription(validGender || '', validType?.id, validStyle || '');
-  const canonicalUrl = generateCanonicalUrl(basePath, currentFilters, currentPage > 1 ? currentPage : undefined, seoRules);
-  
+  const breadcrumbs = buildBreadcrumbs(validGender || '', validType?.id, validStyle || '');
+
   // Navigation functions
   const navigateToPage = (page: number) => {
-    const url = buildFilterUrl(basePath, currentFilters, page > 1 ? page : undefined);
+    const url = buildFilterUrl(basePath, activeFilters, page > 1 ? page : undefined);
     navigate(url);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -299,7 +326,7 @@ const IslamicProducts = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta name="robots" content={seoRules.robots} />
+        <meta name="robots" content={robots} />
         <link rel="canonical" href={`${window.location.origin}${canonicalUrl}`} />
         
         {/* Breadcrumb Schema */}
@@ -457,7 +484,7 @@ const IslamicProducts = () => {
                          <label 
                            htmlFor={`color-${color}`} 
                            className="text-sm"
-                           {...(currentFilters.length > 0 && !selectedColors.includes(color) ? { rel: "nofollow" } : {})}
+                           {...(isMultiValueOrMultiFilter && !selectedColors.includes(color) ? { rel: "nofollow" } : {})}
                          >
                            {color}
                          </label>
@@ -480,7 +507,7 @@ const IslamicProducts = () => {
                          <label 
                            htmlFor={`size-${size}`} 
                            className="text-xs"
-                           {...(currentFilters.length > 0 && !selectedSizes.includes(size) ? { rel: "nofollow" } : {})}
+                           {...(isMultiValueOrMultiFilter && !selectedSizes.includes(size) ? { rel: "nofollow" } : {})}
                          >
                            {size}
                          </label>
@@ -503,7 +530,7 @@ const IslamicProducts = () => {
                          <label 
                            htmlFor={`fabric-${fabric}`} 
                            className="text-sm"
-                           {...(currentFilters.length > 0 && !selectedFabrics.includes(fabric) ? { rel: "nofollow" } : {})}
+                           {...(isMultiValueOrMultiFilter && !selectedFabrics.includes(fabric) ? { rel: "nofollow" } : {})}
                          >
                            {fabric}
                          </label>
