@@ -35,6 +35,7 @@ import {
   type ParsedFilters
 } from '@/lib/seo-utils';
 import { Product } from '@/types/product';
+import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 import { usePagination } from '@/hooks/usePagination';
 
 const IslamicProducts = () => {
@@ -314,22 +315,13 @@ const IslamicProducts = () => {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumbs */}
-        <nav className="mb-6">
-          <ol className="flex items-center space-x-2 text-sm text-muted-foreground">
-            {breadcrumbs.map((crumb, index) => (
-              <li key={crumb.url} className="flex items-center">
-                {index > 0 && <span className="mx-2">/</span>}
-                {index === breadcrumbs.length - 1 ? (
-                  <span className="text-foreground font-medium">{crumb.label}</span>
-                ) : (
-                  <Link to={crumb.url} className="hover:text-primary transition-colors">
-                    {crumb.label}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
+        <StructuredBreadcrumbs
+          items={breadcrumbs.map(crumb => ({
+            name: crumb.label,
+            href: crumb.url
+          }))}
+          className="mb-6"
+        />
 
         {/* Page Header */}
         <div className="mb-8">

@@ -1,14 +1,17 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Block parameter-based legacy URLs to prevent crawling
+Disallow: /*?color=*
+Disallow: /*?fabric=*
+Disallow: /*?size=*
+Disallow: /*?occasion=*
+Disallow: /*?brand=*
+Disallow: /*?price=*
+Disallow: /*?legacy=*
+
+# Allow clean /f/ filter URLs
+Allow: /*/f/*
+
+# Sitemap location
+Sitemap: https://your-domain.com/sitemap.xml

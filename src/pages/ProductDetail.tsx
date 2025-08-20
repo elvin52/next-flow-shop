@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, ShoppingCart, Heart, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -46,16 +47,86 @@ const ProductDetail = () => {
   const isOnSale = !!product.salePrice;
   const savings = isOnSale ? product.price - product.salePrice! : 0;
 
+  // Generate breadcrumb data for JSON-LD
+  const breadcrumbList = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": window.location.origin
+      },
+      {
+        "@type": "ListItem", 
+        "position": 2,
+        "name": `${product.gender}'s ${product.category}`,
+        "item": `${window.location.origin}/${product.gender}/${product.category.toLowerCase()}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": window.location.href
+      }
+    ]
+  };
+
+  // Generate product structured data
+  const productStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "image": product.images,
+    "brand": {
+      "@type": "Brand",
+      "name": "Islamic Clothing Store"
+    },
+    "category": `${product.gender}'s ${product.category}`,
+    "offers": {
+      "@type": "Offer",
+      "price": product.salePrice || product.price,
+      "priceCurrency": "USD",
+      "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "url": window.location.href
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": product.rating,
+      "reviewCount": product.reviewCount
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-        <Link to="/" className="hover:text-foreground transition-fast">Home</Link>
-        <span>/</span>
-        <Link to="/products" className="hover:text-foreground transition-fast">Products</Link>
-        <span>/</span>
-        <span className="text-foreground">{product.name}</span>
-      </div>
+    <>
+      <Helmet>
+        <title>{product.name} | Islamic Clothing Store</title>
+        <meta name="description" content={`${product.description.substring(0, 160)}...`} />
+        <link rel="canonical" href={window.location.href} />
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbList)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(productStructuredData)}
+        </script>
+      </Helmet>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Enhanced Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+          <Link to="/" className="hover:text-foreground transition-fast">Home</Link>
+          <span>/</span>
+          <Link 
+            to={`/${product.gender}/${product.category.toLowerCase()}`} 
+            className="hover:text-foreground transition-fast"
+          >
+            {product.gender}'s {product.category}
+          </Link>
+          <span>/</span>
+          <span className="text-foreground">{product.name}</span>
+        </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Product Images */}
@@ -237,7 +308,8 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
