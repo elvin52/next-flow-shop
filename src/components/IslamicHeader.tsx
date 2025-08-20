@@ -48,8 +48,8 @@ const IslamicHeader = () => {
               </DropdownMenu>
             ))}
             
-            <Link to="/hijab-style-guide" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Style Guide
+            <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Blog
             </Link>
           </nav>
         </div>

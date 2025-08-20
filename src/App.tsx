@@ -13,6 +13,7 @@ import Checkout from "./pages/Checkout";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 import HijabStyleGuide from "./pages/HijabStyleGuide";
+import Blog from "./pages/Blog";
 
 const queryClient = new QueryClient();
 
@@ -45,7 +46,8 @@ const App = () => (
               <Route path="cart" element={<Cart />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="account" element={<Account />} />
-              <Route path="hijab-style-guide" element={<HijabStyleGuide />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/hijab-styles-guide" element={<HijabStyleGuide />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
