@@ -12,13 +12,23 @@ import accessoriesImage from '@/assets/hijab-accessories.jpg';
 const Blog = () => {
   const featuredArticles = [
     {
+      title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
+      description: "Comprehensive guide about abayas, their cultural significance, and whether non-Muslims can respectfully wear this traditional Islamic garment.",
+      image: modernTurbanImage,
+      readTime: "12 min read",
+      views: "1.2K views",
+      category: "Cultural Guide",
+      featured: true,
+      link: "/blog/what-is-an-abaya"
+    },
+    {
       title: "The Ultimate Guide to Hijab Styles",
       description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
       image: classicWrapImage,
       readTime: "15 min read",
       views: "2.4K views",
       category: "Style Guide",
-      featured: true,
+      featured: false,
       link: "/blog/hijab-styles-guide"
     },
     {

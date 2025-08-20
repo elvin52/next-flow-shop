@@ -14,6 +14,7 @@ import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 import HijabStyleGuide from "./pages/HijabStyleGuide";
 import Blog from "./pages/Blog";
+import AbayaArticle from "./pages/AbayaArticle";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="account" element={<Account />} />
               <Route path="blog" element={<Blog />} />
               <Route path="blog/hijab-styles-guide" element={<HijabStyleGuide />} />
+              <Route path="blog/what-is-an-abaya" element={<AbayaArticle />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
