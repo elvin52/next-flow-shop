@@ -2,6 +2,7 @@
 
 import { FILTER_SEO_CONFIG, isFilterIndexable } from '@/data/filter-seo-config';
 import { validateGenderTypeStyle } from '@/data/islamic-taxonomy';
+import { findFacetOverride } from '@/data/seo-keywords';
 
 export interface ParsedFilters {
   [attribute: string]: string[];
@@ -12,6 +13,7 @@ export interface SEOPageInfo {
   canonical: string;
   title: string;
   h1: string;
+  description: string;
 }
 
 // Parse filter string like "color-black+fabric-cotton" into object
@@ -149,8 +151,14 @@ export function buildFilteredTitle(
     return `${genderText}${categoryName} | ${siteName}`;
   }
   
-  // Single filter: use configured title format
+  // Single filter: check for high-value override first
   const [attribute, values] = Object.entries(filters)[0];
+  const facetOverride = findFacetOverride(categoryName.toLowerCase(), attribute, values[0]);
+  if (facetOverride) {
+    return `${facetOverride.title} | ${siteName}`;
+  }
+  
+  // Use configured title format
   const config = FILTER_SEO_CONFIG[attribute];
   
   if (!config) {
@@ -189,8 +197,14 @@ export function buildFilteredH1(
     return `${genderText}${categoryName}`;
   }
   
-  // Single filter: use configured format
+  // Single filter: check for high-value override first
   const [attribute, values] = Object.entries(filters)[0];
+  const facetOverride = findFacetOverride(categoryName.toLowerCase(), attribute, values[0]);
+  if (facetOverride) {
+    return facetOverride.h1;
+  }
+  
+  // Use configured format
   const config = FILTER_SEO_CONFIG[attribute];
   
   if (!config) {
@@ -205,6 +219,46 @@ export function buildFilteredH1(
   } else {
     const preposition = config.preposition || 'with';
     return `${categoryName} ${preposition} ${formattedValue}`;
+  }
+}
+
+// Build filtered meta description
+export function buildFilteredMetaDescription(
+  categoryName: string,
+  filters: ParsedFilters,
+  gender?: string
+): string {
+  const totalFilterValues = Object.values(filters).reduce((sum, values) => sum + values.length, 0);
+  
+  // No filters: use base category description
+  if (totalFilterValues === 0) {
+    const genderText = gender ? `${gender.toLowerCase()}'s ` : '';
+    return `Shop ${genderText}${categoryName.toLowerCase()} - premium Islamic clothing for modest wear. High-quality Muslim fashion with traditional and modern styles.`;
+  }
+  
+  // Multiple values or attributes: use base category
+  if (totalFilterValues > 1) {
+    const genderText = gender ? `${gender.toLowerCase()}'s ` : '';
+    return `Shop ${genderText}${categoryName.toLowerCase()} - premium Islamic clothing for modest wear. High-quality Muslim fashion with traditional and modern styles.`;
+  }
+  
+  // Single filter: check for high-value override first
+  const [attribute, values] = Object.entries(filters)[0];
+  const facetOverride = findFacetOverride(categoryName.toLowerCase(), attribute, values[0]);
+  if (facetOverride) {
+    return facetOverride.metaDescription;
+  }
+  
+  // Generate description based on filter
+  const formattedValue = values[0].toLowerCase();
+  const genderText = gender ? `${gender.toLowerCase()}'s ` : '';
+  
+  if (attribute === 'fabric') {
+    return `Shop ${genderText}${categoryName.toLowerCase()} in ${formattedValue} - premium ${formattedValue} Islamic clothing for modest wear. High-quality Muslim fashion.`;
+  } else if (attribute === 'color') {
+    return `Shop ${formattedValue} ${genderText}${categoryName.toLowerCase()} - elegant ${formattedValue} Islamic clothing for modest wear. Premium Muslim fashion collection.`;
+  } else {
+    return `Shop ${genderText}${categoryName.toLowerCase()} with ${formattedValue} - premium Islamic clothing for modest wear. High-quality Muslim fashion.`;
   }
 }
 
@@ -223,7 +277,8 @@ export function generateSEOPageInfo(
     robots: generateRobotsTag(filters, page),
     canonical: generateCanonicalUrl(gender, category, filters, page, baseUrl),
     title: buildFilteredTitle(categoryName, filters, validGender || undefined),
-    h1: buildFilteredH1(categoryName, filters, validGender || undefined)
+    h1: buildFilteredH1(categoryName, filters, validGender || undefined),
+    description: buildFilteredMetaDescription(categoryName, filters, validGender || undefined)
   };
 }
 

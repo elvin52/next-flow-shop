@@ -34,6 +34,7 @@ import {
   convertLegacyParams,
   type ParsedFilters
 } from '@/lib/seo-utils';
+import { findFacetOverride } from '@/data/seo-keywords';
 import { Product } from '@/types/product';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 import { usePagination } from '@/hooks/usePagination';
@@ -279,7 +280,7 @@ const IslamicProducts = () => {
     <>
       <Helmet>
         <title>{seoInfo.title}</title>
-        <meta name="description" content={generateMetaDescription(validGender || '', validType?.id, validStyle || '')} />
+        <meta name="description" content={seoInfo.description} />
         <meta name="robots" content={seoInfo.robots} />
         <link rel="canonical" href={seoInfo.canonical} />
         
@@ -327,7 +328,18 @@ const IslamicProducts = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-4">{seoInfo.h1}</h1>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            {validType?.description || 'Discover our premium collection of authentic Islamic clothing.'}
+            {(() => {
+              // Check for single filter with high-value override
+              const totalFilterValues = Object.values(parsedFilters).reduce((sum, values) => sum + values.length, 0);
+              if (totalFilterValues === 1 && validType) {
+                const [attribute, values] = Object.entries(parsedFilters)[0];
+                const facetOverride = findFacetOverride(validType.id, attribute, values[0]);
+                if (facetOverride) {
+                  return facetOverride.introText;
+                }
+              }
+              return validType?.description || 'Discover our premium collection of authentic Islamic clothing.';
+            })()}
           </p>
         </div>
 

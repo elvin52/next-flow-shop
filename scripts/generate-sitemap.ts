@@ -11,6 +11,7 @@ import { join } from 'path';
 import { genders, typesByGender, filterOptions } from '../src/data/islamic-taxonomy';
 import { sampleProducts } from '../src/data/products';
 import { FILTER_SEO_CONFIG } from '../src/data/filter-seo-config';
+import { getHighValueFilterUrls } from '../src/data/seo-keywords';
 
 const BASE_URL = process.env.BASE_URL || 'https://localhost:3000';
 const PUBLIC_DIR = join(process.cwd(), 'public');
@@ -19,9 +20,10 @@ const PUBLIC_DIR = join(process.cwd(), 'public');
 const PRIORITIES = {
   homepage: '1.0',
   mainCategories: '1.0',
-  popularFilters: '0.7',
+  highValueFilters: '0.7',
   stylePages: '0.6',
   products: '0.6',
+  popularFilters: '0.5',
   paginatedPages: '0.4'
 };
 
@@ -78,16 +80,21 @@ function generateFilterSitemap(): SitemapUrl[] {
   const today = new Date().toISOString().split('T')[0];
   const urls: SitemapUrl[] = [];
 
-  // High-value filter combinations (strategic prioritization)
-  const popularFilters = [
-    { attribute: 'color', values: ['Black', 'White', 'Navy', 'Beige'] },
-    { attribute: 'fabric', values: ['Modal', 'Silk', 'Jersey', 'Satin', 'Linen'] },
-    { attribute: 'occasion', values: ['Everyday', 'Formal', 'Prayer'] }
-  ];
+  // Add high-value filter URLs from SEO keywords mapping (highest priority)
+  const highValueUrls = getHighValueFilterUrls();
+  highValueUrls.forEach(urlData => {
+    const filterSlug = `${urlData.filterAttribute}-${urlData.filterValue}`;
+    urls.push({
+      loc: `${BASE_URL}/${urlData.gender}/${urlData.category}/f/${filterSlug}`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: PRIORITIES.highValueFilters
+    });
+  });
 
+  // Style pages (medium-high priority)
   genders.forEach(gender => {
     typesByGender[gender.id].forEach(type => {
-      // Style pages (medium-high priority)
       type.styles.forEach(style => {
         const styleSlug = style.toLowerCase().replace(/\s+/g, '-');
         urls.push({
@@ -97,9 +104,19 @@ function generateFilterSitemap(): SitemapUrl[] {
           priority: PRIORITIES.stylePages
         });
       });
+    });
+  });
 
-      // Single high-value filters only (prevent filter explosion)
-      popularFilters.forEach(({ attribute, values }) => {
+  // Additional valuable filter combinations for broader coverage
+  const additionalFilters = [
+    { attribute: 'color', values: ['White', 'Navy', 'Beige'] },
+    { attribute: 'fabric', values: ['Cotton', 'Chiffon'] },
+    { attribute: 'occasion', values: ['Everyday', 'Formal'] }
+  ];
+
+  genders.forEach(gender => {
+    typesByGender[gender.id].forEach(type => {
+      additionalFilters.forEach(({ attribute, values }) => {
         if (FILTER_SEO_CONFIG[attribute]?.indexable) {
           values.forEach(value => {
             const filterSlug = `${attribute}-${value.toLowerCase().replace(/\s+/g, '-')}`;
