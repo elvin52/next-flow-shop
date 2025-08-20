@@ -4,7 +4,7 @@ import { FILTER_SEO_CONFIG, isFilterIndexable } from '@/data/filter-seo-config';
 import { validateGenderTypeStyle } from '@/data/islamic-taxonomy';
 
 export interface ParsedFilters {
-  [attribute: string]: string;
+  [attribute: string]: string[];
 }
 
 export interface SEOPageInfo {
@@ -24,7 +24,14 @@ export function parseFilterString(filterString: string): ParsedFilters {
   for (const pair of filterPairs) {
     const [attribute, value] = pair.split('-');
     if (attribute && value && FILTER_SEO_CONFIG[attribute]) {
-      filters[attribute] = decodeURIComponent(value.replace(/\+/g, ' '));
+      const decodedValue = decodeURIComponent(value.replace(/\+/g, ' '));
+      if (!filters[attribute]) {
+        filters[attribute] = [];
+      }
+      // Avoid duplicates
+      if (!filters[attribute].includes(decodedValue)) {
+        filters[attribute].push(decodedValue);
+      }
     }
   }
   
@@ -34,8 +41,10 @@ export function parseFilterString(filterString: string): ParsedFilters {
 // Encode filter object back to URL string
 export function encodeFiltersToString(filters: ParsedFilters): string {
   const filterPairs = Object.entries(filters)
-    .filter(([attr, value]) => attr && value && FILTER_SEO_CONFIG[attr])
-    .map(([attr, value]) => `${attr}-${encodeURIComponent(value.replace(/ /g, '+'))}`)
+    .filter(([attr, values]) => attr && values.length > 0 && FILTER_SEO_CONFIG[attr])
+    .flatMap(([attr, values]) => 
+      values.map(value => `${attr}-${encodeURIComponent(value.replace(/ /g, '+'))}`)
+    )
     .sort(); // Sort for consistent URLs
   
   return filterPairs.join('+');
@@ -70,15 +79,16 @@ export function generateCanonicalUrl(
   page: number,
   baseUrl: string = ''
 ): string {
-  const filterCount = Object.keys(filters).length;
+  const totalFilterValues = Object.values(filters).reduce((sum, values) => sum + values.length, 0);
+  const filterAttributeCount = Object.keys(filters).length;
   
-  // Multi-filter pages: canonical points to base category
-  if (filterCount > 1) {
+  // Multi-value or multi-filter pages: canonical points to base category
+  if (totalFilterValues > 1) {
     return `${baseUrl}/${gender}/${category}`;
   }
   
   // Single filter pages: canonical points to filter page 1
-  if (filterCount === 1) {
+  if (filterAttributeCount === 1 && totalFilterValues === 1) {
     const filterString = encodeFiltersToString(filters);
     return `${baseUrl}/${gender}/${category}/f/${filterString}`;
   }
@@ -92,10 +102,11 @@ export function generateRobotsTag(
   filters: ParsedFilters,
   page: number
 ): string {
-  const filterCount = Object.keys(filters).length;
+  const totalFilterValues = Object.values(filters).reduce((sum, values) => sum + values.length, 0);
+  const filterAttributeCount = Object.keys(filters).length;
   
-  // Multi-filter pages: noindex, nofollow
-  if (filterCount > 1) {
+  // Multi-value pages (same or different attributes): noindex, nofollow
+  if (totalFilterValues > 1) {
     return 'noindex, nofollow';
   }
   
@@ -105,7 +116,7 @@ export function generateRobotsTag(
   }
   
   // Single non-indexable filter: noindex, follow
-  if (filterCount === 1) {
+  if (filterAttributeCount === 1 && totalFilterValues === 1) {
     const [attribute] = Object.keys(filters);
     if (!isFilterIndexable(attribute)) {
       return 'noindex, follow';
@@ -123,22 +134,23 @@ export function buildFilteredTitle(
   gender?: string,
   siteName: string = 'Islamic Wear Store'
 ): string {
-  const filterCount = Object.keys(filters).length;
+  const totalFilterValues = Object.values(filters).reduce((sum, values) => sum + values.length, 0);
+  const filterAttributeCount = Object.keys(filters).length;
   
   // No filters: use base category title
-  if (filterCount === 0) {
+  if (totalFilterValues === 0) {
     const genderText = gender ? `${gender.charAt(0).toUpperCase() + gender.slice(1)}'s ` : '';
     return `${genderText}${categoryName} | ${siteName}`;
   }
   
-  // Multiple filters: use base category (these pages shouldn't be indexed anyway)
-  if (filterCount > 1) {
+  // Multiple values or attributes: use base category (these pages shouldn't be indexed anyway)
+  if (totalFilterValues > 1) {
     const genderText = gender ? `${gender.charAt(0).toUpperCase() + gender.slice(1)}'s ` : '';
     return `${genderText}${categoryName} | ${siteName}`;
   }
   
   // Single filter: use configured title format
-  const [attribute, value] = Object.entries(filters)[0];
+  const [attribute, values] = Object.entries(filters)[0];
   const config = FILTER_SEO_CONFIG[attribute];
   
   if (!config) {
@@ -146,7 +158,7 @@ export function buildFilteredTitle(
     return `${genderText}${categoryName} | ${siteName}`;
   }
   
-  const formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+  const formattedValue = values[0].charAt(0).toUpperCase() + values[0].slice(1);
   
   if (config.titleFormat === 'PREFIX') {
     return `${formattedValue} ${categoryName} | ${siteName}`;
@@ -162,22 +174,23 @@ export function buildFilteredH1(
   filters: ParsedFilters,
   gender?: string
 ): string {
-  const filterCount = Object.keys(filters).length;
+  const totalFilterValues = Object.values(filters).reduce((sum, values) => sum + values.length, 0);
+  const filterAttributeCount = Object.keys(filters).length;
   
   // No filters: use base category H1
-  if (filterCount === 0) {
+  if (totalFilterValues === 0) {
     const genderText = gender ? `${gender.charAt(0).toUpperCase() + gender.slice(1)}'s ` : '';
     return `${genderText}${categoryName}`;
   }
   
-  // Multiple filters: use base category
-  if (filterCount > 1) {
+  // Multiple values or attributes: use base category
+  if (totalFilterValues > 1) {
     const genderText = gender ? `${gender.charAt(0).toUpperCase() + gender.slice(1)}'s ` : '';
     return `${genderText}${categoryName}`;
   }
   
   // Single filter: use configured format
-  const [attribute, value] = Object.entries(filters)[0];
+  const [attribute, values] = Object.entries(filters)[0];
   const config = FILTER_SEO_CONFIG[attribute];
   
   if (!config) {
@@ -185,7 +198,7 @@ export function buildFilteredH1(
     return `${genderText}${categoryName}`;
   }
   
-  const formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+  const formattedValue = values[0].charAt(0).toUpperCase() + values[0].slice(1);
   
   if (config.titleFormat === 'PREFIX') {
     return `${formattedValue} ${categoryName}`;
@@ -226,7 +239,7 @@ export function convertLegacyParams(searchParams: URLSearchParams): ParsedFilter
   
   for (const [key, value] of searchParams.entries()) {
     if (FILTER_SEO_CONFIG[key] && value) {
-      filters[key] = value;
+      filters[key] = [value];
     }
   }
   

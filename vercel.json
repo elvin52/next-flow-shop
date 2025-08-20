@@ -1,0 +1,158 @@
+{
+  "redirects": [
+    {
+      "source": "/men",
+      "has": [
+        {
+          "type": "query",
+          "key": "color"
+        }
+      ],
+      "destination": "/men?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women",
+      "has": [
+        {
+          "type": "query",
+          "key": "color"
+        }
+      ],
+      "destination": "/women?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "color"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "color"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "fabric"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "fabric"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "size"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "size"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "occasion"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "occasion"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "brand"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "brand"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/men/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "price"
+        }
+      ],
+      "destination": "/men/:category?legacy=1",
+      "statusCode": 301
+    },
+    {
+      "source": "/women/:category",
+      "has": [
+        {
+          "type": "query",
+          "key": "price"
+        }
+      ],
+      "destination": "/women/:category?legacy=1",
+      "statusCode": 301
+    }
+  ]
+}

@@ -104,10 +104,15 @@ const IslamicProducts = () => {
   const handleFilterNavigation = (attribute: string, value: string) => {
     const newFilters = { ...parsedFilters };
     
-    if (newFilters[attribute] === value) {
-      delete newFilters[attribute];
+    if (newFilters[attribute]?.includes(value)) {
+      // Remove the value
+      newFilters[attribute] = newFilters[attribute].filter(v => v !== value);
+      if (newFilters[attribute].length === 0) {
+        delete newFilters[attribute];
+      }
     } else {
-      newFilters[attribute] = value;
+      // Replace with single value (replacement semantics for SEO)
+      newFilters[attribute] = [value];
     }
     
     const newUrl = buildFilterUrl(
@@ -147,19 +152,19 @@ const IslamicProducts = () => {
       }
 
       // URL filter parameters
-      if (parsedFilters.color && product.color !== parsedFilters.color) {
+      if (parsedFilters.color && !parsedFilters.color.includes(product.color)) {
         return false;
       }
       
-      if (parsedFilters.fabric && product.fabric !== parsedFilters.fabric) {
+      if (parsedFilters.fabric && !parsedFilters.fabric.includes(product.fabric)) {
         return false;
       }
       
-      if (parsedFilters.size && (!product.size || !product.size.includes(parsedFilters.size))) {
+      if (parsedFilters.size && (!product.size || !parsedFilters.size.some(s => product.size?.includes(s)))) {
         return false;
       }
       
-      if (parsedFilters.occasion && (!product.occasion || !product.occasion.includes(parsedFilters.occasion))) {
+      if (parsedFilters.occasion && (!product.occasion || !parsedFilters.occasion.some(o => product.occasion?.includes(o)))) {
         return false;
       }
 
@@ -367,40 +372,62 @@ const IslamicProducts = () => {
                     <div>
                       <h3 className="text-sm font-medium mb-2">Shop by Color</h3>
                       <div className="space-y-2">
-                        {filterOptions.colors.slice(0, 6).map(color => (
-                          <button
-                            key={color}
-                            onClick={() => handleFilterNavigation('color', color)}
-                            className={`block text-sm transition-colors ${
-                              parsedFilters.color === color 
-                                ? 'text-primary font-medium' 
-                                : 'text-muted-foreground hover:text-primary'
-                            }`}
-                            rel={Object.keys(parsedFilters).length > 0 ? 'nofollow' : undefined}
-                          >
-                            {color} {validType.name}
-                          </button>
-                        ))}
+                        {filterOptions.colors.slice(0, 6).map(color => {
+                          const isActive = parsedFilters.color?.includes(color);
+                          const hasExistingFilters = Object.values(parsedFilters).reduce((sum, values) => sum + values.length, 0) > 0;
+                          const wouldCreateMultiFilter = hasExistingFilters && !isActive;
+                          
+                          return (
+                            <Link
+                              key={color}
+                              to={buildFilterUrl(validGender || '', validType?.id || '', {
+                                ...parsedFilters,
+                                color: isActive 
+                                  ? parsedFilters.color?.filter(c => c !== color) || []
+                                  : [color]
+                              })}
+                              className={`block text-sm transition-colors ${
+                                isActive
+                                  ? 'text-primary font-medium' 
+                                  : 'text-muted-foreground hover:text-primary'
+                              }`}
+                              rel={wouldCreateMultiFilter ? 'nofollow' : undefined}
+                            >
+                              {color} {validType.name}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </div>
 
                     <div>
                       <h3 className="text-sm font-medium mb-2">Shop by Fabric</h3>
                       <div className="space-y-2">
-                        {filterOptions.fabrics.slice(0, 4).map(fabric => (
-                          <button
-                            key={fabric}
-                            onClick={() => handleFilterNavigation('fabric', fabric)}
-                            className={`block text-sm transition-colors ${
-                              parsedFilters.fabric === fabric 
-                                ? 'text-primary font-medium' 
-                                : 'text-muted-foreground hover:text-primary'
-                            }`}
-                            rel={Object.keys(parsedFilters).length > 0 ? 'nofollow' : undefined}
-                          >
-                            {validType.name} in {fabric}
-                          </button>
-                        ))}
+                        {filterOptions.fabrics.slice(0, 4).map(fabric => {
+                          const isActive = parsedFilters.fabric?.includes(fabric);
+                          const hasExistingFilters = Object.values(parsedFilters).reduce((sum, values) => sum + values.length, 0) > 0;
+                          const wouldCreateMultiFilter = hasExistingFilters && !isActive;
+                          
+                          return (
+                            <Link
+                              key={fabric}
+                              to={buildFilterUrl(validGender || '', validType?.id || '', {
+                                ...parsedFilters,
+                                fabric: isActive 
+                                  ? parsedFilters.fabric?.filter(f => f !== fabric) || []
+                                  : [fabric]
+                              })}
+                              className={`block text-sm transition-colors ${
+                                isActive
+                                  ? 'text-primary font-medium' 
+                                  : 'text-muted-foreground hover:text-primary'
+                              }`}
+                              rel={wouldCreateMultiFilter ? 'nofollow' : undefined}
+                            >
+                              {validType.name} in {fabric}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
