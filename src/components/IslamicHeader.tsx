@@ -32,8 +32,11 @@ const IslamicHeader = () => {
             {/* Gender-based navigation */}
             {genders.map(gender => (
               <DropdownMenu key={gender.id}>
-                <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
                   {gender.name}
+                  {import.meta.env.VITE_BLOG_FIRST === 'true' && (
+                    <span className="text-xs text-muted-foreground">(Coming Soon)</span>
+                  )}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
@@ -56,7 +59,7 @@ const IslamicHeader = () => {
 
         <div className="flex items-center space-x-4">
           <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" title={import.meta.env.VITE_BLOG_FIRST === 'true' ? 'Coming Soon' : 'Shopping Cart'}>
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center">
@@ -67,7 +70,7 @@ const IslamicHeader = () => {
           </Link>
 
           <Link to="/account">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" title={import.meta.env.VITE_BLOG_FIRST === 'true' ? 'Coming Soon' : 'Account'}>
               <User className="h-5 w-5" />
             </Button>
           </Link>

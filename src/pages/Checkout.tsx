@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Shield, Lock } from 'lucide-react';
+import ComingSoon from '@/components/ComingSoon';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,6 +12,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useCartStore } from '@/store/cartStore';
 
 const Checkout = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="checkout" />;
+  }
+
   const { items, getTotalPrice, getTotalItems, clearCart } = useCartStore();
   const [isProcessing, setIsProcessing] = useState(false);
   

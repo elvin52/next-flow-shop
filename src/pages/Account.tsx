@@ -1,9 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import ComingSoon from '@/components/ComingSoon';
 import { User, Package, CreditCard, Settings, Bell, MapPin } from 'lucide-react';
 
 const Account = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="account" />;
+  }
+
   // Mock user data - in a real app, this would come from authentication
   const user = {
     name: 'John Doe',

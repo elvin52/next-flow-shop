@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import ComingSoon from '@/components/ComingSoon';
 import { ArrowLeft, ShoppingCart, Heart, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +12,11 @@ import { useToast } from '@/hooks/use-toast';
 import { sampleProducts } from '@/data/products';
 
 const ProductDetail = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="products" />;
+  }
+
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);

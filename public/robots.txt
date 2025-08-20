@@ -10,6 +10,15 @@ Disallow: /*?brand=*
 Disallow: /*?price=*
 Disallow: /*?legacy=*
 
+# Block shop endpoints during blog-first launch
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /men/
+Disallow: /women/
+Disallow: /product/
+Disallow: /products
+
 # Allow clean /f/ filter URLs
 Allow: /*/f/*
 

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import ComingSoon from '@/components/ComingSoon';
 import { Filter, Search, Grid3X3, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -54,6 +55,11 @@ const getSubcategoryLabel = (category: string, subcategory: string) => {
 const titleCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const Products = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="products" />;
+  }
+
   const { category: urlCategory, subcategory: urlSubcategory } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   

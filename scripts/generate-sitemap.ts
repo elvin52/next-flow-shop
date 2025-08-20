@@ -61,17 +61,41 @@ function generateMainSitemap(): SitemapUrl[] {
     priority: PRIORITIES.homepage
   });
 
-  // Main category pages (highest priority)
-  genders.forEach(gender => {
-    typesByGender[gender.id].forEach(type => {
-      urls.push({
-        loc: `${BASE_URL}/${gender.id}/${type.id}`,
-        lastmod: today,
-        changefreq: 'weekly',
-        priority: PRIORITIES.mainCategories
+  // Blog pages
+  urls.push({
+    loc: `${BASE_URL}/blog`,
+    lastmod: today,
+    changefreq: 'weekly',
+    priority: PRIORITIES.mainCategories
+  });
+
+  urls.push({
+    loc: `${BASE_URL}/blog/hijab-style-guide`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: PRIORITIES.stylePages
+  });
+
+  urls.push({
+    loc: `${BASE_URL}/blog/what-is-an-abaya`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: PRIORITIES.stylePages
+  });
+
+  // Skip product category pages if blog-first mode
+  if (process.env.VITE_BLOG_FIRST !== 'true') {
+    genders.forEach(gender => {
+      typesByGender[gender.id].forEach(type => {
+        urls.push({
+          loc: `${BASE_URL}/${gender.id}/${type.id}`,
+          lastmod: today,
+          changefreq: 'weekly',
+          priority: PRIORITIES.mainCategories
+        });
       });
     });
-  });
+  }
 
   return urls;
 }
@@ -79,6 +103,11 @@ function generateMainSitemap(): SitemapUrl[] {
 function generateFilterSitemap(): SitemapUrl[] {
   const today = new Date().toISOString().split('T')[0];
   const urls: SitemapUrl[] = [];
+
+  // Skip filter pages if blog-first mode
+  if (process.env.VITE_BLOG_FIRST === 'true') {
+    return urls;
+  }
 
   // Add high-value filter URLs from SEO keywords mapping (highest priority)
   const highValueUrls = getHighValueFilterUrls();
@@ -138,6 +167,11 @@ function generateFilterSitemap(): SitemapUrl[] {
 function generateProductSitemap(): SitemapUrl[] {
   const today = new Date().toISOString().split('T')[0];
   
+  // Skip product pages if blog-first mode
+  if (process.env.VITE_BLOG_FIRST === 'true') {
+    return [];
+  }
+  
   return sampleProducts.map(product => ({
     loc: `${BASE_URL}/product/${product.id}`,
     lastmod: today,
@@ -148,6 +182,16 @@ function generateProductSitemap(): SitemapUrl[] {
 
 function generateSitemapIndex(): string {
   const today = new Date().toISOString().split('T')[0];
+  
+  if (process.env.VITE_BLOG_FIRST === 'true') {
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>${BASE_URL}/sitemap-main.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+</sitemapindex>`;
+  }
   
   return `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

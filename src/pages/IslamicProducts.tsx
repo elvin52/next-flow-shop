@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import ComingSoon from '@/components/ComingSoon';
 import { Filter, Search, Grid3X3, List, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -40,6 +41,11 @@ import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 import { usePagination } from '@/hooks/usePagination';
 
 const IslamicProducts = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="shop" />;
+  }
+
   const { 
     gender: urlGender, 
     category: urlCategory, 

@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ComingSoon from '@/components/ComingSoon';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCartStore } from '@/store/cartStore';
 
 const Cart = () => {
+  // Check if blog-first mode is enabled
+  if (import.meta.env.VITE_BLOG_FIRST === 'true') {
+    return <ComingSoon feature="cart" />;
+  }
+
   const { items, updateQuantity, removeItem, getTotalPrice, getTotalItems } = useCartStore();
 
   const subtotal = getTotalPrice();
