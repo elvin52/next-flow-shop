@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import Header from '@/components/Header';
+import IslamicHeader from '@/components/IslamicHeader';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -205,7 +205,7 @@ const HijabStyleGuide = () => {
         <link rel="canonical" href="/hijab-style-guide" />
       </Helmet>
 
-      <Header />
+      <IslamicHeader />
       
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
