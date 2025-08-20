@@ -23,7 +23,7 @@ const ComingSoon = ({ feature }: ComingSoonProps) => {
         <title>Coming Soon - {featureNames[feature]} | Hidayya</title>
         <meta name="description" content={`Our ${featureNames[feature].toLowerCase()} is launching soon. Explore our blog for Islamic fashion insights while you wait.`} />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="canonical" content={`${window.location.origin}${window.location.pathname}`} />
+        <link rel="canonical" href={`${window.location.origin}${window.location.pathname}`} />
       </Helmet>
 
       <main className="container mx-auto px-4 py-16">

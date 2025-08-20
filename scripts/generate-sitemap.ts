@@ -216,39 +216,59 @@ async function main() {
   // Ensure public directory exists
   mkdirSync(PUBLIC_DIR, { recursive: true });
 
-  // Generate individual sitemaps
   const mainUrls = generateMainSitemap();
-  const filterUrls = generateFilterSitemap();
-  const productUrls = generateProductSitemap();
-
-  // Write sitemap files
-  writeFileSync(
-    join(PUBLIC_DIR, 'sitemap-main.xml'),
-    generateSitemapXML(mainUrls)
-  );
   
-  writeFileSync(
-    join(PUBLIC_DIR, 'sitemap-filters.xml'),
-    generateSitemapXML(filterUrls)
-  );
-  
-  writeFileSync(
-    join(PUBLIC_DIR, 'sitemap-products.xml'),
-    generateSitemapXML(productUrls)
-  );
+  if (process.env.VITE_BLOG_FIRST === 'true') {
+    console.log('📝 Blog-first mode: generating blog-only sitemap');
+    
+    // In blog-first mode, only include blog URLs
+    const blogOnlyUrls = mainUrls.filter(url => 
+      url.loc.includes('/blog') || 
+      url.loc === BASE_URL || 
+      url.loc === `${BASE_URL}/`
+    );
 
-  // Generate sitemap index
-  writeFileSync(
-    join(PUBLIC_DIR, 'sitemap.xml'),
-    generateSitemapIndex()
-  );
+    writeFileSync(
+      join(PUBLIC_DIR, 'sitemap.xml'),
+      generateSitemapXML(blogOnlyUrls)
+    );
 
-  console.log(`✅ Generated sitemaps:`);
-  console.log(`   📋 Main categories: ${mainUrls.length} URLs`);
-  console.log(`   🎯 Strategic filters: ${filterUrls.length} URLs`);
-  console.log(`   📦 Products: ${productUrls.length} URLs`);
-  console.log(`   📊 Total: ${mainUrls.length + filterUrls.length + productUrls.length} URLs`);
-  console.log(`\n🎯 Strategy: Prioritized high-value pages, limited filter combinations to prevent SEO dilution`);
+    console.log(`✅ Generated blog-only sitemap: ${blogOnlyUrls.length} URLs`);
+  } else {
+    console.log('🛍️  Full mode: generating complete sitemaps');
+    
+    const filterUrls = generateFilterSitemap();
+    const productUrls = generateProductSitemap();
+
+    // Write individual sitemaps
+    writeFileSync(
+      join(PUBLIC_DIR, 'sitemap-main.xml'),
+      generateSitemapXML(mainUrls)
+    );
+    
+    writeFileSync(
+      join(PUBLIC_DIR, 'sitemap-filters.xml'),
+      generateSitemapXML(filterUrls)
+    );
+    
+    writeFileSync(
+      join(PUBLIC_DIR, 'sitemap-products.xml'),
+      generateSitemapXML(productUrls)
+    );
+
+    // Generate sitemap index
+    writeFileSync(
+      join(PUBLIC_DIR, 'sitemap.xml'),
+      generateSitemapIndex()
+    );
+
+    console.log(`✅ Generated sitemaps:`);
+    console.log(`   📋 Main categories: ${mainUrls.length} URLs`);
+    console.log(`   🎯 Strategic filters: ${filterUrls.length} URLs`);
+    console.log(`   📦 Products: ${productUrls.length} URLs`);
+    console.log(`   📊 Total: ${mainUrls.length + filterUrls.length + productUrls.length} URLs`);
+    console.log(`\n🎯 Strategy: Prioritized high-value pages, limited filter combinations to prevent SEO dilution`);
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

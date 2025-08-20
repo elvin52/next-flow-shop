@@ -10,14 +10,11 @@ Disallow: /*?brand=*
 Disallow: /*?price=*
 Disallow: /*?legacy=*
 
-# Block shop endpoints during blog-first launch
+# Allow crawling of shop pages to read noindex headers
+# but block core transactional endpoints
 Disallow: /cart
 Disallow: /checkout
 Disallow: /account
-Disallow: /men/
-Disallow: /women/
-Disallow: /product/
-Disallow: /products
 
 # Allow clean /f/ filter URLs
 Allow: /*/f/*
