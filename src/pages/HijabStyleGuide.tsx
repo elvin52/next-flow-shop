@@ -1,6 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import IslamicHeader from '@/components/IslamicHeader';
-import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -205,7 +203,7 @@ const HijabStyleGuide = () => {
         <link rel="canonical" href="/hijab-style-guide" />
       </Helmet>
 
-      <IslamicHeader />
+      
       
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
@@ -769,7 +767,7 @@ const HijabStyleGuide = () => {
         </div>
       </article>
 
-      <Footer />
+      
     </div>
   );
 };
