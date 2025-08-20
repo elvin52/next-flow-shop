@@ -291,18 +291,18 @@ const HijabStyleGuide = () => {
                 return (
                   <Card key={index} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="grid grid-cols-1 gap-0">
-                        {/* Image */}
-                        <div className="relative h-80 lg:h-96">
-                          <img 
-                            src={style.image} 
-                            alt={style.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        
-                        {/* Content */}
-                        <div className="p-8 lg:p-12">
+                       <div className="flex flex-col">
+                         {/* Image */}
+                         <div className="relative h-80">
+                           <img 
+                             src={style.image} 
+                             alt={style.title}
+                             className="w-full h-full object-cover"
+                           />
+                         </div>
+                         
+                         {/* Content */}
+                         <div className="p-8">
                           <h3 className="text-2xl font-playfair font-bold mb-4">
                             {index + 1}. {style.title}
                           </h3>
