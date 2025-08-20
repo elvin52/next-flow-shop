@@ -291,7 +291,7 @@ const HijabStyleGuide = () => {
                 return (
                   <Card key={index} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                      <div className="grid grid-cols-1 gap-0">
                         {/* Image */}
                         <div className="relative h-80 lg:h-96">
                           <img 
