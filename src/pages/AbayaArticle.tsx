@@ -316,7 +316,7 @@ const AbayaArticle = () => {
                   <h2 className="text-2xl font-playfair font-bold mb-4 text-foreground">Final Thoughts</h2>
                   <div className="space-y-4 text-muted-foreground">
                     <p>
-                      The abaya represents much more than clothing. It stands as a symbol of modesty, tradition, and cultural identity. People of all backgrounds can appreciate this garment as a beautiful form of modest fashion when they wear it with respect and understanding.
+                      The abaya represents not only attire but also embodies modesty, heritage, and cultural significance. People of all backgrounds can appreciate this garment as a beautiful form of modest fashion when they wear it with respect and understanding.
                     </p>
                     <p>
                       Whether you're Muslim or non-Muslim, approach the abaya with respect. Learn its meaning and wear it with care. This creates cultural appreciation rather than cultural misuse. The abaya continues to evolve while keeping its core values of modesty and respect.
