@@ -18,9 +18,9 @@ const PUBLIC_DIR = join(process.cwd(), 'public');
 // Priority mapping for SEO importance
 const PRIORITIES = {
   homepage: '1.0',
-  mainCategories: '0.9',
-  popularFilters: '0.8',
-  stylePages: '0.7',
+  mainCategories: '1.0',
+  popularFilters: '0.7',
+  stylePages: '0.6',
   products: '0.6',
   paginatedPages: '0.4'
 };
@@ -81,7 +81,7 @@ function generateFilterSitemap(): SitemapUrl[] {
   // High-value filter combinations (strategic prioritization)
   const popularFilters = [
     { attribute: 'color', values: ['Black', 'White', 'Navy', 'Beige'] },
-    { attribute: 'fabric', values: ['Cotton', 'Linen', 'Crepe', 'Modal'] },
+    { attribute: 'fabric', values: ['Modal', 'Silk', 'Jersey', 'Satin', 'Linen'] },
     { attribute: 'occasion', values: ['Everyday', 'Formal', 'Prayer'] }
   ];
 

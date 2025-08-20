@@ -34,14 +34,14 @@ export const typesByGender: Record<GenderId, TypeConfig[]> = {
   men: [
     {
       id: 'thobe',
-      name: 'Thobe',
+      name: 'Thobes',
       description: 'Traditional and modern thobes for prayer, daily wear, and special occasions',
       styles: ['Moroccan', 'Palestinian', 'Saudi', 'Emirati', 'Jubba', 'Pakistani', 'Omani'],
       seoKeywords: ['mens thobe', 'islamic dress', 'jubba', 'dishdasha']
     },
     {
       id: 'kurta',
-      name: 'Kurta', 
+      name: 'Kurtas', 
       description: 'Comfortable kurtas for casual and formal occasions',
       styles: ['Pakistani', 'Indian', 'Modern', 'Embroidered'],
       seoKeywords: ['mens kurta', 'pakistani kurta', 'islamic shirt']
@@ -57,21 +57,21 @@ export const typesByGender: Record<GenderId, TypeConfig[]> = {
   women: [
     {
       id: 'abaya',
-      name: 'Abaya',
+      name: 'Abayas',
       description: 'Elegant abayas in various styles for modest and fashionable wear',
       styles: ['Butterfly', 'Open', 'Closed', 'Turkish', 'Saudi', 'Emirati', 'Dubai', 'Umbrella'],
       seoKeywords: ['womens abaya', 'butterfly abaya', 'modest dress', 'islamic clothing']
     },
     {
       id: 'hijab',
-      name: 'Hijab',
+      name: 'Hijabs',
       description: 'High-quality hijabs in various fabrics and styles for everyday wear',
       styles: ['Khimar', 'Square', 'Rectangle', 'Instant', 'Under-cap', 'Jilbab', 'Shayla'],
       seoKeywords: ['hijab scarf', 'khimar', 'modest hijab', 'islamic headscarf', 'modal hijab']
     },
     {
       id: 'dress',
-      name: 'Modest Dress',
+      name: 'Modest Dresses',
       description: 'Modest dresses perfect for various occasions while maintaining Islamic values',
       styles: ['Casual', 'Formal', 'Party', 'Prayer', 'Maxi', 'A-line'],
       seoKeywords: ['modest dress', 'islamic dress', 'long sleeve dress', 'maxi dress']
@@ -95,7 +95,7 @@ export const filterOptions = {
   sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'],
   fabrics: [
     'Cotton', 'Linen', 'Polyester', 'Viscose', 'Modal', 
-    'Crepe', 'Chiffon', 'Jersey', 'Silk', 'Blend'
+    'Crepe', 'Chiffon', 'Jersey', 'Silk', 'Satin', 'Blend'
   ],
   occasions: [
     'Everyday', 'Prayer', 'Formal', 'Wedding', 'Eid', 
