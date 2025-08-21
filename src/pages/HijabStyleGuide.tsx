@@ -234,7 +234,7 @@ const HijabStyleGuide = () => {
         <title>Complete Hijab Style Guide 2025 - Modern & Classic | Hidayya</title>
         <meta name="description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
         <meta name="keywords" content="hijab styles, hijab tutorial, Islamic fashion, modest fashion, hijab accessories, Muslim women clothing" />
-        <link rel="canonical" href="/hijab-style-guide" />
+        <link rel="canonical" href="https://hidayyah.com/blog/hijab-styles-guide" />
         <meta property="og:title" content="Complete Hijab Style Guide 2025 - Modern & Classic" />
         <meta property="og:description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
         <meta property="og:image" content={`${window.location.origin}${heroImage}`} />
@@ -302,7 +302,10 @@ const HijabStyleGuide = () => {
                 <Star className="h-4 w-4 mr-2" />
                 <span>Updated January 2025</span>
               </div>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" onClick={() => navigator.share?.({
+                title: "Complete Hijab Style Guide 2025 - Modern & Classic",
+                url: window.location.href
+              }) || navigator.clipboard?.writeText(window.location.href)}>
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
               </Button>

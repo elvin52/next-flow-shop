@@ -6,8 +6,12 @@
  * Run via: npm run build:sitemap
  */
 
+import { config } from 'dotenv';
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
+
+// Load environment variables
+config();
 import { genders, typesByGender, filterOptions } from '../src/data/islamic-taxonomy';
 import { sampleProducts } from '../src/data/products';
 import { FILTER_SEO_CONFIG } from '../src/data/filter-seo-config';

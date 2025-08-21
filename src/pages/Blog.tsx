@@ -102,7 +102,7 @@ const Blog = () => {
         <title>Modest Fashion Blog | Hijab Styles & Islamic Wear Guides</title>
         <meta name="description" content="Discover elegant hijab styles, modest outfit inspiration, and fashion tips. Expert guides on hijab techniques, fabric selection, and Islamic fashion trends." />
         <meta name="keywords" content="modest fashion blog, hijab styles, Islamic fashion, hijab guide, modest outfit ideas, hijab tutorials" />
-        <link rel="canonical" href="/blog" />
+        <link rel="canonical" href="https://hidayyah.com/blog" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -267,9 +267,11 @@ const Blog = () => {
                           </span>
                         </div>
                         
-                        <Button variant="ghost" size="sm" className="group-hover:text-primary">
-                          Read More
-                          <ArrowRight className="ml-1 h-3 w-3" />
+                        <Button variant="ghost" size="sm" className="group-hover:text-primary" asChild>
+                          <Link to={article.link}>
+                            Read More
+                            <ArrowRight className="ml-1 h-3 w-3" />
+                          </Link>
                         </Button>
                       </div>
                     </div>

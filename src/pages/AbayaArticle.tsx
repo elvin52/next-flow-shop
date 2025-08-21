@@ -54,7 +54,7 @@ const AbayaArticle = () => {
         <title>What is an Abaya? Can Non-Muslims Wear an Abaya? | Islamic Wear Store</title>
         <meta name="description" content="Discover what is an abaya, its cultural significance in Islamic modest fashion, different styles, and whether non-Muslims can wear this religious wear respectfully." />
         <meta name="keywords" content="what is an abaya, Islamic modest fashion, modest wear, religious wear, modern abaya, cultural appreciation, daily wear, can a non-muslim wear an abaya, modest clothing, muslim women wear, cultural identity, Saudi Arabia" />
-        <link rel="canonical" href={`${window.location.origin}/blog/what-is-an-abaya`} />
+        <link rel="canonical" href="https://hidayyah.com/blog/what-is-an-abaya" />
         <script type="application/ld+json">
           {JSON.stringify(jsonLd)}
         </script>
@@ -93,7 +93,10 @@ const AbayaArticle = () => {
                   {article.views}
                 </div>
                 <div>Published {article.publishDate}</div>
-                <Button variant="ghost" size="sm" className="ml-auto">
+                <Button variant="ghost" size="sm" className="ml-auto" onClick={() => navigator.share?.({
+                  title: article.title,
+                  url: window.location.href
+                }) || navigator.clipboard?.writeText(window.location.href)}>
                   <Share2 className="h-4 w-4 mr-1" />
                   Share
                 </Button>

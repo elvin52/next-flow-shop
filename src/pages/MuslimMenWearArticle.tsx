@@ -48,7 +48,7 @@ const MuslimMenWearArticle = () => {
         <title>What Do Muslim Men Wear? Traditional Islamic Clothing Guide</title>
         <meta name="description" content="Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide." />
         <meta name="keywords" content="muslim men clothing, islamic men wear, traditional thobe, kufi hat, jalabiya, modest men fashion, islamic attire men, muslim traditional dress" />
-        <link rel="canonical" href="/blog/what-do-muslim-men-wear" />
+        <link rel="canonical" href="https://hidayyah.com/blog/what-do-muslim-men-wear" />
         <meta property="og:title" content="What Do Muslim Men Wear? Traditional Islamic Clothing Guide" />
         <meta property="og:description" content="Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide." />
         <meta property="og:image" content={`${window.location.origin}${heroImage}`} />

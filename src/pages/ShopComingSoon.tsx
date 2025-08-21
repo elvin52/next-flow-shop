@@ -11,7 +11,7 @@ const ShopComingSoon = () => {
         <title>Hidayyah Modest Fashion Store - Coming Soon</title>
         <meta name="description" content="Hidayyah's curated collection of authentic Islamic clothing and hijabs is launching soon. Discover our commitment to quality modest fashion." />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="canonical" href="/coming-soon" />
+        <link rel="canonical" href="https://hidayyah.com/coming-soon" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

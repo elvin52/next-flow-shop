@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/(cart|checkout|account|products)",
+      "source": "/(cart|checkout|account|products|shop)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -80,6 +80,16 @@
     },
     {
       "source": "/account",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/shop",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/shop/(.*)",
       "destination": "/coming-soon",
       "statusCode": 308
     }
