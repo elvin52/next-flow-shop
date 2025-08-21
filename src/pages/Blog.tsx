@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, Star, Clock, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
 import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
@@ -40,26 +41,6 @@ const Blog = () => {
       category: "Style Guide",
       featured: false,
       link: "/blog/hijab-styles-guide"
-    },
-    {
-      title: "Best Chiffon Hijabs for Daily Wear",
-      description: "Discover lightweight and breathable chiffon hijabs perfect for everyday styling and warm weather.",
-      image: modernTurbanImage,
-      readTime: "8 min read", 
-      views: "1.8K views",
-      category: "Product Review",
-      featured: false,
-      link: "/blog/chiffon-hijabs"
-    },
-    {
-      title: "Essential Hijab Accessories Guide",
-      description: "Complete guide to hijab magnets, undercaps, and pins that will transform your hijab experience.",
-      image: accessoriesImage,
-      readTime: "10 min read",
-      views: "3.1K views", 
-      category: "Accessories",
-      featured: false,
-      link: "/blog/hijab-accessories"
     }
   ];
 
@@ -119,9 +100,11 @@ const Blog = () => {
               <p className="text-lg md:text-xl text-warm-gray mb-8 max-w-2xl mx-auto leading-relaxed">
                 Discover elegant hijab styles, modest outfit inspiration, and fashion tips that celebrate both tradition and contemporary style.
               </p>
-              <Button size="lg" className="btn-sage">
-                Explore Our Latest Guides
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="btn-sage" asChild>
+                <Link to="/blog/hijab-styles-guide">
+                  Explore Our Latest Guides
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -285,22 +268,7 @@ const Blog = () => {
         {/* Newsletter CTA */}
         <section className="py-16 bg-gradient-to-r from-sage-light/20 to-gold-light/10">
           <div className="container mx-auto px-4 sm:px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl font-playfair font-bold mb-4">
-                Never Miss a Style Update
-              </h2>
-              <p className="text-warm-gray mb-8">
-                Get the latest modest fashion tips, hijab tutorials, and style guides delivered to your inbox weekly.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20"
-                />
-                <Button className="btn-sage">Subscribe</Button>
-              </div>
-            </div>
+            <NewsletterSignup />
           </div>
         </section>
 

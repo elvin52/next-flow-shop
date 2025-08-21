@@ -85,7 +85,11 @@ const Contact = () => {
                     />
                   </div>
                   
-                  <Button className="w-full">Send Message</Button>
+                  <Button className="w-full" asChild>
+                    <a href="mailto:support@hidayyah.com?subject=Contact%20Form%20Inquiry">
+                      Send Message
+                    </a>
+                  </Button>
                 </CardContent>
               </Card>
 

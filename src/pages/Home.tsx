@@ -4,6 +4,7 @@ import { Search, Truck, Shield, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { NewsletterSignup } from '@/components/NewsletterSignup';
 import CategoryCard from '@/components/CategoryCard';
 import ProductGrid from '@/components/ProductGrid';
 import { genders, typesByGender } from '@/data/islamic-taxonomy';
@@ -168,21 +169,8 @@ const Home = () => {
 
         {/* Newsletter Section */}
         <section className="py-16 bg-gradient-hero text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
-            <p className="text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Join our community and be the first to know about new Islamic clothing arrivals, exclusive offers, and seasonal collections.
-            </p>
-            <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-4">
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 bg-background text-foreground border-0"
-              />
-              <Button variant="secondary" size="lg" className="bg-accent text-accent-foreground hover:bg-accent-hover">
-                Subscribe
-              </Button>
-            </div>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <NewsletterSignup />
           </div>
         </section>
       </div>

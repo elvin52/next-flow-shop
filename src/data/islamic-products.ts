@@ -1,5 +1,16 @@
 import { Product } from '@/types/product';
 
+// Import asset images
+import abayaHero from '@/assets/abaya-article-hero.jpg';
+import classicWrapHijab from '@/assets/classic-wrap-hijab.jpg';
+import hijabAccessories from '@/assets/hijab-accessories.jpg';
+import hijabStyleGuideHero from '@/assets/hijab-style-guide-hero.jpg';
+import knotBowHijab from '@/assets/knot-bow-hijab.jpg';
+import layeredHijab from '@/assets/layered-hijab.jpg';
+import modernTurbanHijab from '@/assets/modern-turban-hijab.jpg';
+import muslimMenWearHero from '@/assets/muslim-men-wear-hero.jpg';
+import turkishHijab from '@/assets/turkish-hijab.jpg';
+
 export const islamicProducts: Product[] = [
   // Men's Thobes
   {
@@ -8,7 +19,7 @@ export const islamicProducts: Product[] = [
     description: 'Traditional Palestinian thobe with intricate embroidery. Perfect for prayers and cultural events. Comfortable cotton blend with modern fit.',
     price: 89.99,
     salePrice: 74.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [muslimMenWearHero, muslimMenWearHero],
     gender: 'men',
     category: 'thobe',
     style: 'Palestinian',
@@ -27,7 +38,7 @@ export const islamicProducts: Product[] = [
     name: 'Saudi Style White Thobe',
     description: 'Classic Saudi-style thobe in premium white fabric. Ideal for daily prayers and formal occasions. Breathable and comfortable.',
     price: 69.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [muslimMenWearHero, muslimMenWearHero],
     gender: 'men',
     category: 'thobe',
     style: 'Saudi',
@@ -47,7 +58,7 @@ export const islamicProducts: Product[] = [
     description: 'Elegant Moroccan-style kaftan with traditional patterns. Perfect for Eid celebrations and special occasions.',
     price: 125.99,
     salePrice: 99.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [muslimMenWearHero, muslimMenWearHero],
     gender: 'men',
     category: 'thobe',
     style: 'Moroccan',
@@ -68,7 +79,7 @@ export const islamicProducts: Product[] = [
     name: 'Pakistani Embroidered Kurta',
     description: 'Beautiful Pakistani kurta with traditional embroidery. Modern cut with classic design elements.',
     price: 45.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [muslimMenWearHero, muslimMenWearHero],
     gender: 'men',
     category: 'kurta',
     style: 'Pakistani',
@@ -90,7 +101,7 @@ export const islamicProducts: Product[] = [
     description: 'Flowing butterfly abaya with wide sleeves. Perfect for modest fashion and everyday wear. Comfortable and stylish.',
     price: 79.99,
     salePrice: 64.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [abayaHero, abayaHero],
     gender: 'women',
     category: 'abaya',
     style: 'Butterfly',
@@ -109,7 +120,7 @@ export const islamicProducts: Product[] = [
     name: 'Dubai Open Abaya',
     description: 'Modern Dubai-style open abaya with elegant details. Can be worn open or closed for versatile styling.',
     price: 95.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [abayaHero, abayaHero],
     gender: 'women',
     category: 'abaya',
     style: 'Open',
@@ -129,7 +140,7 @@ export const islamicProducts: Product[] = [
     description: 'Beautiful Turkish-style abaya with intricate embroidery and beading. Perfect for special occasions.',
     price: 149.99,
     salePrice: 119.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [abayaHero, turkishHijab],
     gender: 'women',
     category: 'abaya',
     style: 'Turkish',
@@ -151,7 +162,7 @@ export const islamicProducts: Product[] = [
     description: 'Ultra-soft modal hijab that drapes beautifully. Breathable and comfortable for all-day wear.',
     price: 24.99,
     salePrice: 19.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [turkishHijab, abayaHero],
     gender: 'women',
     category: 'hijab',
     style: 'Rectangle',
@@ -170,7 +181,7 @@ export const islamicProducts: Product[] = [
     name: 'Instant Khimar Hijab',
     description: 'Easy-to-wear instant khimar with built-in cap. Perfect for active lifestyle and convenience.',
     price: 34.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [classicWrapHijab, modernTurbanHijab],
     gender: 'women',
     category: 'hijab',
     style: 'Khimar',
@@ -189,7 +200,7 @@ export const islamicProducts: Product[] = [
     name: 'Square Chiffon Hijab',
     description: 'Lightweight chiffon square hijab available in multiple colors. Perfect for formal occasions.',
     price: 18.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [layeredHijab, knotBowHijab],
     gender: 'women',
     category: 'hijab',
     style: 'Square',
@@ -211,7 +222,7 @@ export const islamicProducts: Product[] = [
     description: 'Modest long-sleeve maxi dress perfect for any occasion. Comfortable fit with elegant design.',
     price: 59.99,
     salePrice: 47.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [modernTurbanHijab, hijabStyleGuideHero],
     gender: 'women',
     category: 'dress',
     style: 'Maxi',
@@ -232,7 +243,7 @@ export const islamicProducts: Product[] = [
     name: 'Traditional Cotton Kufi',
     description: 'Classic cotton kufi cap for prayer and daily wear. Available in multiple colors.',
     price: 15.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [abayaHero, modernTurbanHijab],
     gender: 'men',
     category: 'accessories',
     style: 'Kufi',
@@ -254,7 +265,7 @@ export const islamicProducts: Product[] = [
     description: 'Complete modest swimwear set with full coverage. Chlorine-resistant and quick-dry fabric.',
     price: 89.99,
     salePrice: 74.99,
-    images: ['/placeholder.svg', '/placeholder.svg'],
+    images: [hijabAccessories, muslimMenWearHero],
     gender: 'women',
     category: 'swimwear',
     style: 'Burkini',

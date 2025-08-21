@@ -38,7 +38,7 @@ export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
   const handleViewAllResults = useCallback(() => {
     onOpenChange(false);
     // Navigate to products page with search term
-    window.location.href = `/products?search=${encodeURIComponent(debouncedSearchTerm)}`;
+    window.location.href = `/women/all?search=${encodeURIComponent(debouncedSearchTerm)}`;
   }, [onOpenChange, debouncedSearchTerm]);
 
   const handleClearSearch = useCallback(() => {
@@ -107,11 +107,12 @@ export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
               
               <div className="grid gap-2 max-h-96 overflow-y-auto">
                 {searchResults.map((product) => (
-                  <Link
+                  <a
                     key={product.id}
-                    to={`/product/${product.id}`}
+                    href={`/women/all?search=${encodeURIComponent(product.name)}`}
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
                     onClick={handleProductClick}
+                    rel="nofollow"
                   >
                     <img
                       src={product.images[0]}
@@ -137,7 +138,7 @@ export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
                         )}
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
