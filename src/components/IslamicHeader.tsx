@@ -28,8 +28,14 @@ const IslamicHeader = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center space-x-6">
-          <SEOLink to="/" priority="high" className="text-xl font-bold text-primary font-playfair">
-            Hidayyah
+          <SEOLink to="/" priority="high" className="flex items-center space-x-2">
+            <img 
+              src="/hidayyah-logo.png" 
+              alt="Hidayyah - Premium Islamic Clothing and Modest Fashion Store" 
+              title="Hidayyah - Your trusted source for authentic Islamic wear"
+              className="h-8 w-auto"
+            />
+            <span className="text-xl font-bold text-primary font-playfair">Hidayyah</span>
           </SEOLink>
           
           {/* Desktop Navigation */}
