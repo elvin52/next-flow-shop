@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
+// Import images
+import heroImage from '@/assets/muslim-men-wear-hero.jpg';
+
 const MuslimMenWearArticle = () => {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
@@ -48,6 +51,7 @@ const MuslimMenWearArticle = () => {
         <link rel="canonical" href="/blog/what-do-muslim-men-wear" />
         <meta property="og:title" content="What Do Muslim Men Wear? Traditional Islamic Clothing Guide" />
         <meta property="og:description" content="Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide." />
+        <meta property="og:image" content={`${window.location.origin}${heroImage}`} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="/blog/what-do-muslim-men-wear" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -59,6 +63,25 @@ const MuslimMenWearArticle = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
+        {/* Hero Image */}
+        <section className="relative h-64 md:h-96 overflow-hidden">
+          <img 
+            src={heroImage} 
+            alt="Traditional Islamic clothing for Muslim men including thobe, kufi, and jalabiya modest fashion"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
+                What Do Muslim Men Wear?
+              </h1>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
+                Traditional Islamic clothing guide for modern men
+              </p>
+            </div>
+          </div>
+        </section>
+
         <div className="container mx-auto px-4 sm:px-6 py-8">
           {/* Breadcrumbs */}
           <StructuredBreadcrumbs items={breadcrumbItems} className="mb-8" />
@@ -71,13 +94,9 @@ const MuslimMenWearArticle = () => {
             </Button>
           </Link>
 
-          {/* Article header */}
+          {/* Article meta */}
           <header className="mb-12">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-6 leading-tight">
-                What Do Muslim Men Wear? Traditional Islamic Clothing Guide
-              </h1>
-              
               <div className="flex items-center justify-center gap-6 text-muted-foreground mb-8">
                 <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-2" />

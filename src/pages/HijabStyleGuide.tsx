@@ -3,8 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
 // Import images
+import heroImage from '@/assets/hijab-style-guide-hero.jpg';
 import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
 import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
 import layeredHijabImage from '@/assets/layered-hijab.jpg';
@@ -13,6 +16,37 @@ import turkishHijabImage from '@/assets/turkish-hijab.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 
 const HijabStyleGuide = () => {
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Hijab Style Guide' }
+  ];
+
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Complete Hijab Style Guide 2025 - Modern & Classic",
+    "author": {
+      "@type": "Organization",
+      "name": "Hidayya"
+    },
+    "publisher": {
+      "@type": "Organization", 
+      "name": "Hidayya",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${window.location.origin}/favicon.ico`
+      }
+    },
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "description": "Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": window.location.href
+    },
+    "image": `${window.location.origin}${heroImage}`
+  };
   const hijabStyles = [
     {
       id: 'classic-wrap',
@@ -201,23 +235,46 @@ const HijabStyleGuide = () => {
         <meta name="description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
         <meta name="keywords" content="hijab styles, hijab tutorial, Islamic fashion, modest fashion, hijab accessories, Muslim women clothing" />
         <link rel="canonical" href="/hijab-style-guide" />
+        <meta property="og:title" content="Complete Hijab Style Guide 2025 - Modern & Classic" />
+        <meta property="og:description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
+        <meta property="og:image" content={`${window.location.origin}${heroImage}`} />
+        <meta property="og:type" content="article" />
+        <script type="application/ld+json">
+          {JSON.stringify(articleStructuredData)}
+        </script>
       </Helmet>
 
       
       
+      {/* Hero Image */}
+      <section className="relative h-64 md:h-96 overflow-hidden">
+        <img 
+          src={heroImage} 
+          alt="Complete hijab style guide showing modern and classic Islamic modest fashion techniques"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
+              Complete Hijab Style Guide 2025
+            </h1>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
+              Master modern and classic hijab techniques
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
-        <Button variant="ghost" className="mb-4">
+        <StructuredBreadcrumbs 
+          items={breadcrumbItems} 
+          className="mb-6" 
+        />
+        <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 mb-6 transition-colors">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Modest Fashion
-        </Button>
-        <nav className="text-sm text-[hsl(var(--warm-gray))] mb-8">
-          <a href="/" className="hover:text-primary transition-colors">Home</a>
-          <span className="mx-2">/</span>
-          <a href="/fashion" className="hover:text-primary transition-colors">Modest Fashion</a>
-          <span className="mx-2">/</span>
-          <span className="text-foreground">Hijab Styles Guide</span>
-        </nav>
+          Back to Blog
+        </Link>
       </div>
 
       <article className="container mx-auto px-4 sm:px-6 pb-16">
@@ -764,10 +821,33 @@ const HijabStyleGuide = () => {
               ))}
             </Accordion>
           </section>
+
+          {/* Related Articles */}
+          <section className="mb-16">
+            <Card className="card-elegant">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-playfair font-bold mb-6 text-foreground">Related Articles</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Link to="/blog/what-is-an-abaya" className="block p-4 rounded-lg hover:bg-sage-light/10 transition-colors">
+                    <h4 className="font-semibold text-foreground mb-2">What is an Abaya? Can Non-Muslims Wear an Abaya?</h4>
+                    <p className="text-muted-foreground text-sm">Discover the cultural significance of abayas in Islamic modest fashion and respectful wearing guidelines.</p>
+                  </Link>
+                  <Link to="/blog/what-do-muslim-men-wear" className="block p-4 rounded-lg hover:bg-sage-light/10 transition-colors">
+                    <h4 className="font-semibold text-foreground mb-2">What Do Muslim Men Wear? Traditional Islamic Clothing Guide</h4>
+                    <p className="text-muted-foreground text-sm">Complete guide to traditional Islamic men's clothing including thobe, kufi, and jalabiya.</p>
+                  </Link>
+                </div>
+                <div className="mt-6 text-center">
+                  <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                    <span>Explore More Islamic Fashion Guides</span>
+                    <ArrowLeft className="h-4 w-4 ml-2 rotate-180" />
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
         </div>
       </article>
-
-      
     </div>
   );
 };

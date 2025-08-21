@@ -5,8 +5,8 @@ import { ArrowLeft, Clock, Eye, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
-// Import a placeholder image for now
-import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
+// Import images
+import heroImage from '@/assets/abaya-article-hero.jpg';
 
 const AbayaArticle = () => {
   const breadcrumbItems = [
@@ -102,17 +102,21 @@ const AbayaArticle = () => {
           </div>
         </section>
 
-        {/* Featured Image */}
-        <section className="py-8">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8">
-                <img 
-                  src={modernTurbanImage} 
-                  alt="Beautiful abaya styles and modest fashion"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+        {/* Hero Image */}
+        <section className="relative h-64 md:h-96 overflow-hidden">
+          <img 
+            src={heroImage} 
+            alt="What is an abaya - elegant Islamic modest fashion and religious wear for Muslim women"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
+                What is an Abaya?
+              </h1>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
+                Understanding Islamic modest fashion and cultural significance
+              </p>
             </div>
           </div>
         </section>
@@ -325,20 +329,20 @@ const AbayaArticle = () => {
                 </div>
 
                 {/* Related Articles */}
-                <Card className="p-6 bg-background border">
+                <Card className="p-6 bg-primary/5 border border-primary/20">
                   <h3 className="text-xl font-playfair font-bold mb-4 text-foreground">Related Articles</h3>
-                  <div className="space-y-3">
-                    <Link to="/blog/hijab-styles-guide" className="block hover:text-primary transition-colors">
-                      <div className="flex items-center justify-between">
-                        <span>The Ultimate Guide to Hijab Styles</span>
-                        <ArrowLeft className="h-4 w-4 rotate-180" />
-                      </div>
+                  <div className="space-y-4">
+                    <Link to="/blog/hijab-styles-guide" className="block p-4 rounded-lg hover:bg-sage-light/10 transition-colors">
+                      <h4 className="font-semibold text-foreground mb-2">Complete Hijab Style Guide 2025 - Modern & Classic</h4>
+                      <p className="text-muted-foreground text-sm">Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides.</p>
                     </Link>
-                    <Link to="/blog" className="block hover:text-primary transition-colors">
-                      <div className="flex items-center justify-between">
-                        <span>More Modest Fashion Articles</span>
-                        <ArrowLeft className="h-4 w-4 rotate-180" />
-                      </div>
+                    <Link to="/blog/what-do-muslim-men-wear" className="block p-4 rounded-lg hover:bg-sage-light/10 transition-colors">
+                      <h4 className="font-semibold text-foreground mb-2">What Do Muslim Men Wear? Traditional Islamic Clothing Guide</h4>
+                      <p className="text-muted-foreground text-sm">Complete guide to traditional Islamic clothing for men including thobe, kufi, and jalabiya.</p>
+                    </Link>
+                    <Link to="/blog" className="block p-4 rounded-lg hover:bg-sage-light/10 transition-colors">
+                      <h4 className="font-semibold text-foreground mb-2">More Modest Fashion Articles</h4>
+                      <p className="text-muted-foreground text-sm">Explore our complete collection of Islamic fashion guides and cultural insights.</p>
                     </Link>
                   </div>
                 </Card>
