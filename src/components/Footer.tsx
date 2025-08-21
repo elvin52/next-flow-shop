@@ -9,12 +9,12 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-gradient-cta rounded-lg flex items-center justify-center">
-                <span className="text-accent-foreground font-bold text-lg">S</span>
+                <span className="text-accent-foreground font-bold text-lg">H</span>
               </div>
-              <span className="font-bold text-xl">Shop</span>
+              <span className="font-bold text-xl">Hidayyah</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              Your one-stop destination for premium products and exceptional shopping experience.
+              Your trusted source for modest fashion inspiration, hijab styles, and Islamic clothing guides.
             </p>
           </div>
 
@@ -22,30 +22,30 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">Quick Links</h3>
             <div className="space-y-2">
-              <Link to="/products" className="block text-muted-foreground hover:text-foreground transition-fast">
-                All Products
+              <Link to="/blog" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Style Guides
               </Link>
-              <Link to="/categories" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Categories
+              <Link to="/blog/hijab-styles-guide" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Hijab Tutorials
               </Link>
-              <Link to="/cart" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Shopping Cart
+              <Link to="/coming-soon" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Shop (Coming Soon)
               </Link>
             </div>
           </div>
 
-          {/* Customer Service */}
+          {/* About */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Customer Service</h3>
+            <h3 className="font-semibold">About</h3>
             <div className="space-y-2">
+              <Link to="/about" className="block text-muted-foreground hover:text-foreground transition-fast">
+                About Hidayyah
+              </Link>
               <Link to="/contact" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Contact Us
               </Link>
-              <Link to="/shipping" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Shipping Info
-              </Link>
-              <Link to="/returns" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Returns
+              <Link to="/privacy" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Privacy Policy
               </Link>
             </div>
           </div>
@@ -54,7 +54,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">Newsletter</h3>
             <p className="text-muted-foreground text-sm">
-              Subscribe to get updates on new products and exclusive offers.
+              Get the latest modest fashion tips, hijab tutorials, and style inspiration.
             </p>
             <div className="flex space-x-2">
               <input
@@ -70,7 +70,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground text-sm">
-          <p>&copy; 2024 Shop. All rights reserved. Built with React & Tailwind CSS.</p>
+          <p>&copy; 2024 Hidayyah. All rights reserved. Inspiring modest fashion with purpose.</p>
         </div>
       </div>
     </footer>

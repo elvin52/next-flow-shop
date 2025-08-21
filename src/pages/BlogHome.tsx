@@ -59,11 +59,11 @@ const BlogHome = () => {
         <title>Hidayyah - Modest Fashion Blog & Style Guides | Islamic Clothing Inspiration</title>
         <meta name="description" content="Discover elegant hijab styles, modest outfit inspiration, and Islamic fashion guides. Expert tips on hijab techniques, fabric selection, and contemporary modest fashion trends." />
         <meta name="keywords" content="modest fashion blog, hijab styles, Islamic fashion, hijab guide, modest outfit ideas, hijab tutorials, islamic clothing, modest wear" />
-        <link rel="canonical" href="/" />
+        <link rel="canonical" href="https://hidayyah.com/" />
         <meta property="og:title" content="Hidayyah - Modest Fashion Blog & Style Guides" />
         <meta property="og:description" content="Your trusted source for hijab styles, modest fashion inspiration, and Islamic clothing guides." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="/" />
+        <meta property="og:url" content="https://hidayyah.com/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -122,6 +122,7 @@ const BlogHome = () => {
                       src={featuredArticles[0].image} 
                       alt={featuredArticles[0].title}
                       className="w-full h-full object-cover"
+                      loading="eager"
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium flex items-center">
@@ -187,6 +188,7 @@ const BlogHome = () => {
                         src={article.image} 
                         alt={article.title}
                         className="w-full h-full object-cover rounded-t-lg"
+                        loading="lazy"
                       />
                     </div>
                     

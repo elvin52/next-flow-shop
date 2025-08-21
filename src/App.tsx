@@ -8,7 +8,6 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import BlogHome from "./pages/BlogHome";
 import ShopComingSoon from "./pages/ShopComingSoon";
-import ComingSoon from "./components/ComingSoon";
 import IslamicProducts from "./pages/IslamicProducts";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
@@ -23,6 +22,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import { Navigate } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -55,29 +55,29 @@ const App = () => (
               <Route path="privacy" element={<Privacy />} />
               <Route path="terms" element={<Terms />} />
               
-              {/* Shop routes - conditionally redirect or render ComingSoon */}
+              {/* Shop routes - conditionally redirect or render */}
               {isBlogFirst ? (
                 <>
                   {/* Redirect all shop routes to coming-soon */}
-                  <Route path="men" element={<ComingSoon feature="shop" />} />
-                  <Route path="women" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category/:style" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category/:style" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category/f/:filters" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category/f/:filters" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category/f/:filters/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category/f/:filters/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="men/:category/:style/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="women/:category/:style/page/:page" element={<ComingSoon feature="shop" />} />
-                  <Route path="products" element={<ComingSoon feature="shop" />} />
-                  <Route path="product/:id" element={<ComingSoon feature="shop" />} />
-                  <Route path="cart" element={<ComingSoon feature="cart" />} />
-                  <Route path="checkout" element={<ComingSoon feature="checkout" />} />
-                  <Route path="account" element={<ComingSoon feature="account" />} />
+                  <Route path="men" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category/:style" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category/:style" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category/f/:filters" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category/f/:filters" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category/f/:filters/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category/f/:filters/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="men/:category/:style/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="women/:category/:style/page/:page" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="products" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="product/:id" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="cart" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="checkout" element={<Navigate to="/coming-soon" replace />} />
+                  <Route path="account" element={<Navigate to="/coming-soon" replace />} />
                 </>
               ) : (
                 <>
