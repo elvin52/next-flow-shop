@@ -100,11 +100,11 @@
 - [x] Update sitemap to include shop pages
 - [x] Implement 302 redirect from `/shop` to `/shop-coming-soon` in blog mode
 
-### 🔄 Phase 5: Performance Hardening (NEXT)
-- [ ] Optimize images (WebP format, proper sizing)
-- [ ] Test Core Web Vitals
-- [ ] Minimize CSS/JS if needed
-- [ ] Add image dimensions to prevent CLS
+### ✅ Phase 5: Performance Hardening (COMPLETED)
+- [x] Optimize images (WebP format, proper sizing)
+- [x] Test Core Web Vitals
+- [x] Minimize CSS/JS if needed  
+- [x] Add image dimensions to prevent CLS
 
 ### ⏳ Phase 6: Final Checks
 - [ ] Browser testing (Chrome, Firefox, Safari, Edge)

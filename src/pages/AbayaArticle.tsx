@@ -107,6 +107,9 @@ const AbayaArticle = () => {
           <img 
             src={heroImage} 
             alt="What is an abaya - elegant Islamic modest fashion and religious wear for Muslim women"
+            width={1200}
+            height={800}
+            loading="eager"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
