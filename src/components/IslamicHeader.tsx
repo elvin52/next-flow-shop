@@ -54,6 +54,14 @@ const IslamicHeader = () => {
             <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Blog
             </Link>
+            
+            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              About
+            </Link>
+            
+            <Link to="/contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Contact
+            </Link>
           </nav>
         </div>
 

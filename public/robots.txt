@@ -20,4 +20,4 @@ Disallow: /account
 Allow: /*/f/*
 
 # Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://hidayyah.com/sitemap.xml
