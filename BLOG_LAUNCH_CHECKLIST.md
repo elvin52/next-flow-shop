@@ -90,23 +90,13 @@
 - [x] Test XML sitemap functionality  
 - [x] Verify robots.txt configuration
 
-### ✅ Phase 4: Blog-First Homepage Implementation (COMPLETED)
-- [x] Create blog-focused homepage (`BlogHome.tsx`) 
-- [x] Save original shop homepage as `ShopHome.tsx`
-- [x] Implement shop coming soon page with waitlist signup
-- [x] Add conditional routing based on `VITE_BLOG_FIRST` environment variable
-- [x] Update navigation to reflect blog-first strategy
-- [x] Add waitlist signup component with Formspree integration
-- [x] Update sitemap to include shop pages
-- [x] Implement 302 redirect from `/shop` to `/shop-coming-soon` in blog mode
+### 🔄 Phase 4: Performance Hardening (NEXT)
+- [ ] Optimize images (WebP format, proper sizing)
+- [ ] Test Core Web Vitals
+- [ ] Minimize CSS/JS if needed
+- [ ] Add image dimensions to prevent CLS
 
-### ✅ Phase 5: Performance Hardening (COMPLETED)
-- [x] Optimize images (WebP format, proper sizing)
-- [x] Test Core Web Vitals
-- [x] Minimize CSS/JS if needed  
-- [x] Add image dimensions to prevent CLS
-
-### ⏳ Phase 6: Final Checks
+### ⏳ Phase 5: Final Checks
 - [ ] Browser testing (Chrome, Firefox, Safari, Edge)
 - [ ] Link checking (internal/external)
 - [ ] Set up Google Analytics 4
@@ -116,38 +106,8 @@
 
 ---
 
-## Environment Variables Setup
-
-Set these environment variables for blog-first mode:
-```
-VITE_BLOG_FIRST=true
-VITE_FORMSPREE_ID=your_formspree_form_id
-```
-
-## Homepage Migration Plan (For Future Shop Launch)
-
-When ready to switch from blog-first to shop-first:
-
-1. **Switch Environment Variables**:
-   - Set `VITE_BLOG_FIRST=false` or remove the variable
-   - Homepage automatically switches from `BlogHome` to `ShopHome`
-
-2. **URL Migration**:
-   - Homepage (`/`) becomes the shop
-   - Blog moves to `/blog` (already functional)
-   - Shop coming soon becomes deprecated
-
-3. **301 Redirects** (implement when switching):
-   - `/shop-coming-soon` → `/` (homepage)
-   - Preserve all blog URLs (no changes needed)
-
-4. **SEO Updates**:
-   - Update sitemap to prioritize shop pages
-   - Update meta descriptions for homepage
-   - Ensure internal links point to correct destinations
-
 ## NOTES
-- Domain: hidayyah.com  
-- Current articles: 3 comprehensive blog posts ready
-- Mode: Blog-first launch strategy active
-- Waitlist: Formspree integration for email collection
+- Domain: hidayyah.com
+- Current blog articles: Hijab Style Guide, What is an Abaya, What Do Muslim Men Wear
+- Blog-first mode currently enabled
+- Sitemap needs updating for blog content

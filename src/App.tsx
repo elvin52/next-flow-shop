@@ -2,12 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/Layout";
-import BlogHome from "./pages/BlogHome";
-import ShopHome from "./pages/ShopHome";
-import ShopComingSoon from "./pages/ShopComingSoon";
+import Home from "./pages/Home";
 import IslamicProducts from "./pages/IslamicProducts";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
@@ -34,15 +32,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={
-                import.meta.env.VITE_BLOG_FIRST === 'true' ? <BlogHome /> : <ShopHome />
-              } />
-              <Route path="shop" element={
-                import.meta.env.VITE_BLOG_FIRST === 'true' ? 
-                  <Navigate to="/shop-coming-soon" replace /> : 
-                  <ShopHome />
-              } />
-              <Route path="shop-coming-soon" element={<ShopComingSoon />} />
+              <Route index element={<Home />} />
               {/* Islamic wear gender-based routing with advanced SEO */}
               <Route path=":gender" element={<IslamicProducts />} />
               <Route path=":gender/:category" element={<IslamicProducts />} />

@@ -70,7 +70,7 @@ function generateMainSitemap(): SitemapUrl[] {
   });
 
   urls.push({
-    loc: `${BASE_URL}/blog/hijab-styles-guide`,
+    loc: `${BASE_URL}/blog/hijab-style-guide`,
     lastmod: today,
     changefreq: 'monthly',
     priority: PRIORITIES.stylePages
@@ -99,21 +99,6 @@ function generateMainSitemap(): SitemapUrl[] {
       changefreq: 'monthly',
       priority: '0.8'
     });
-  });
-
-  // Shop pages (always include, but content varies based on VITE_BLOG_FIRST)
-  urls.push({
-    loc: `${BASE_URL}/shop`,
-    lastmod: today,
-    changefreq: 'monthly',
-    priority: '0.8'
-  });
-
-  urls.push({
-    loc: `${BASE_URL}/shop-coming-soon`,
-    lastmod: today,
-    changefreq: 'monthly',
-    priority: '0.7'
   });
 
   // Skip product category pages if blog-first mode
@@ -254,14 +239,13 @@ async function main() {
   if (process.env.VITE_BLOG_FIRST === 'true') {
     console.log('📝 Blog-first mode: generating blog-only sitemap');
     
-    // In blog-first mode, exclude /shop (redirects) and include /shop-coming-soon
+    // In blog-first mode, include all main pages and blog URLs
     const blogOnlyUrls = mainUrls.filter(url => 
       url.loc.includes('/blog') || 
       url.loc.includes('/about') ||
       url.loc.includes('/contact') ||
       url.loc.includes('/privacy') ||
       url.loc.includes('/terms') ||
-      url.loc.includes('/shop-coming-soon') ||
       url.loc === BASE_URL || 
       url.loc === `${BASE_URL}/`
     );

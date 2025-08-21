@@ -251,9 +251,6 @@ const HijabStyleGuide = () => {
         <img 
           src={heroImage} 
           alt="Complete hijab style guide showing modern and classic Islamic modest fashion techniques"
-          width={1200}
-          height={800}
-          loading="eager"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -351,16 +348,13 @@ const HijabStyleGuide = () => {
                     <CardContent className="p-0">
                        <div className="flex flex-col">
                          {/* Image */}
-                          <div className="relative h-80">
-                            <img 
-                              src={style.image} 
-                              alt={style.title}
-                              width={600}
-                              height={320}
-                              loading="lazy"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                         <div className="relative h-80">
+                           <img 
+                             src={style.image} 
+                             alt={style.title}
+                             className="w-full h-full object-cover"
+                           />
+                         </div>
                          
                          {/* Content */}
                          <div className="p-8">
