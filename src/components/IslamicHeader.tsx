@@ -29,37 +29,41 @@ const IslamicHeader = () => {
               Home
             </Link>
             
-            {/* Gender-based navigation */}
-            {genders.map(gender => (
-              <DropdownMenu key={gender.id}>
-                <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
-                  {gender.name}
-                  {import.meta.env.VITE_BLOG_FIRST === 'true' && (
-                    <span className="text-xs text-muted-foreground">(Coming Soon)</span>
-                  )}
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link to={`/${gender.id}`}>All {gender.name}'s Wear</Link>
-                  </DropdownMenuItem>
-                  {typesByGender[gender.id].map(type => (
-                    <DropdownMenuItem key={type.id} asChild>
-                      <Link to={`/${gender.id}/${type.id}`}>{type.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ))}
-            
+            {/* In blog-first mode, hide gender navigation and show Blog prominently */}
             {import.meta.env.VITE_BLOG_FIRST === 'true' ? (
-              <Link to="/shop" className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
-                Shop
-                <span className="text-xs text-muted-foreground">(Coming Soon)</span>
-              </Link>
+              <>
+                <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Blog
+                </Link>
+                <Link to="/shop-coming-soon" className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
+                  Shop
+                  <span className="text-xs text-muted-foreground">(Coming Soon)</span>
+                </Link>
+              </>
             ) : (
-              <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                Blog
-              </Link>
+              <>
+                {/* Gender-based navigation for shop-first mode */}
+                {genders.map(gender => (
+                  <DropdownMenu key={gender.id}>
+                    <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
+                      {gender.name}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem asChild>
+                        <Link to={`/${gender.id}`}>All {gender.name}'s Wear</Link>
+                      </DropdownMenuItem>
+                      {typesByGender[gender.id].map(type => (
+                        <DropdownMenuItem key={type.id} asChild>
+                          <Link to={`/${gender.id}/${type.id}`}>{type.name}</Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ))}
+                <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Blog
+                </Link>
+              </>
             )}
             
             <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
