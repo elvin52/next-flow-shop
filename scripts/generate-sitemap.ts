@@ -70,7 +70,7 @@ function generateMainSitemap(): SitemapUrl[] {
   });
 
   urls.push({
-    loc: `${BASE_URL}/blog/hijab-style-guide`,
+    loc: `${BASE_URL}/blog/hijab-styles-guide`,
     lastmod: today,
     changefreq: 'monthly',
     priority: PRIORITIES.stylePages
@@ -254,14 +254,14 @@ async function main() {
   if (process.env.VITE_BLOG_FIRST === 'true') {
     console.log('📝 Blog-first mode: generating blog-only sitemap');
     
-    // In blog-first mode, include all main pages and blog URLs
+    // In blog-first mode, exclude /shop (redirects) and include /shop-coming-soon
     const blogOnlyUrls = mainUrls.filter(url => 
       url.loc.includes('/blog') || 
       url.loc.includes('/about') ||
       url.loc.includes('/contact') ||
       url.loc.includes('/privacy') ||
       url.loc.includes('/terms') ||
-      url.loc.includes('/shop') ||
+      url.loc.includes('/shop-coming-soon') ||
       url.loc === BASE_URL || 
       url.loc === `${BASE_URL}/`
     );
