@@ -13,7 +13,7 @@ import { sampleProducts } from '../src/data/products';
 import { FILTER_SEO_CONFIG } from '../src/data/filter-seo-config';
 import { getHighValueFilterUrls } from '../src/data/seo-keywords';
 
-const BASE_URL = process.env.BASE_URL || 'https://localhost:3000';
+const BASE_URL = process.env.BASE_URL || 'https://hidayyah.com';
 const PUBLIC_DIR = join(process.cwd(), 'public');
 
 // Priority mapping for SEO importance
@@ -81,6 +81,24 @@ function generateMainSitemap(): SitemapUrl[] {
     lastmod: today,
     changefreq: 'monthly',
     priority: PRIORITIES.stylePages
+  });
+
+  urls.push({
+    loc: `${BASE_URL}/blog/what-do-muslim-men-wear`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: PRIORITIES.stylePages
+  });
+
+  // Essential pages
+  const essentialPages = ['/about', '/contact', '/privacy', '/terms'];
+  essentialPages.forEach(page => {
+    urls.push({
+      loc: `${BASE_URL}${page}`,
+      lastmod: today,
+      changefreq: 'monthly',
+      priority: '0.8'
+    });
   });
 
   // Skip product category pages if blog-first mode
@@ -221,9 +239,13 @@ async function main() {
   if (process.env.VITE_BLOG_FIRST === 'true') {
     console.log('📝 Blog-first mode: generating blog-only sitemap');
     
-    // In blog-first mode, only include blog URLs
+    // In blog-first mode, include all main pages and blog URLs
     const blogOnlyUrls = mainUrls.filter(url => 
       url.loc.includes('/blog') || 
+      url.loc.includes('/about') ||
+      url.loc.includes('/contact') ||
+      url.loc.includes('/privacy') ||
+      url.loc.includes('/terms') ||
       url.loc === BASE_URL || 
       url.loc === `${BASE_URL}/`
     );
