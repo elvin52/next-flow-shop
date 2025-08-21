@@ -15,8 +15,8 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Hidayya - Customer Support & Inquiries</title>
-        <meta name="description" content="Get in touch with Hidayya for customer support, product inquiries, or feedback about our Islamic and modest fashion collection. We're here to help." />
+        <title>Contact Hidayyah - Customer Support & Inquiries</title>
+        <meta name="description" content="Get in touch with Hidayyah for customer support, product inquiries, or feedback about our Islamic and modest fashion collection. We're here to help." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://hidayyah.com/contact" />
       </Helmet>
@@ -158,9 +158,9 @@ const Contact = () => {
                       Follow us on social media for the latest collections and style inspiration.
                     </p>
                     <div className="space-y-2 text-muted-foreground">
-                      <p>Instagram: @hidayya_fashion</p>
-                      <p>Facebook: Hidayya Fashion</p>
-                      <p>Pinterest: Hidayya Modest Fashion</p>
+                      <p>Instagram: @hidayyah_fashion</p>
+                      <p>Facebook: Hidayyah Fashion</p>
+                      <p>Pinterest: Hidayyah Modest Fashion</p>
                     </div>
                   </CardContent>
                 </Card>

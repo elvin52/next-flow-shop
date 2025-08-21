@@ -20,7 +20,7 @@ const ComingSoon = ({ feature }: ComingSoonProps) => {
   return (
     <>
       <Helmet>
-        <title>Coming Soon - {featureNames[feature]} | Hidayya</title>
+        <title>Coming Soon - {featureNames[feature]} | Hidayyah</title>
         <meta name="description" content={`Our ${featureNames[feature].toLowerCase()} is launching soon. Explore our blog for Islamic fashion insights while you wait.`} />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={`${window.location.origin}${window.location.pathname}`} />

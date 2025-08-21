@@ -10,8 +10,8 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Hidayya - Premium Islamic & Modest Fashion</title>
-        <meta name="description" content="Learn about Hidayya's mission to provide authentic, high-quality Islamic and modest fashion for men and women. Discover our commitment to tradition, style, and community." />
+        <title>About Hidayyah - Premium Islamic & Modest Fashion</title>
+        <meta name="description" content="Learn about Hidayyah's mission to provide authentic, high-quality Islamic and modest fashion for men and women. Discover our commitment to tradition, style, and community." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://hidayyah.com/about" />
       </Helmet>
@@ -23,7 +23,7 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <header className="text-center mb-12">
               <h1 className="text-4xl font-bold text-foreground font-playfair mb-4">
-                About Hidayya
+                About Hidayyah
               </h1>
               <p className="text-xl text-muted-foreground">
                 Your trusted destination for authentic Islamic and modest fashion
@@ -34,7 +34,7 @@ const About = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Our Mission</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  At Hidayya, we believe that modest fashion should never compromise on style or quality. 
+                  At Hidayyah, we believe that modest fashion should never compromise on style or quality. 
                   Our mission is to provide authentic, beautifully crafted Islamic wear that honors tradition 
                   while embracing contemporary design. We serve Muslim men and women worldwide who seek 
                   clothing that reflects their values and enhances their confidence.
@@ -44,7 +44,7 @@ const About = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Our Story</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Founded with a deep appreciation for Islamic heritage and modest fashion, Hidayya emerged 
+                  Founded with a deep appreciation for Islamic heritage and modest fashion, Hidayyah emerged 
                   from the desire to bridge traditional craftsmanship with modern style. Our name, derived 
                   from the Arabic word meaning "guidance," reflects our commitment to helping individuals 
                   express their faith through beautiful, modest clothing.
@@ -102,7 +102,7 @@ const About = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Join Our Community</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Hidayya is more than a fashion brand – we're a community of individuals who celebrate 
+                  Hidayyah is more than a fashion brand – we're a community of individuals who celebrate 
                   modest fashion and Islamic values. Follow our style guides, connect with fellow customers, 
                   and discover new ways to express your unique style while staying true to your beliefs.
                 </p>

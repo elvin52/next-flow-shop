@@ -28,11 +28,11 @@ const HijabStyleGuide = () => {
     "headline": "Complete Hijab Style Guide 2025 - Modern & Classic",
     "author": {
       "@type": "Organization",
-      "name": "Hidayya"
+      "name": "Hidayyah"
     },
     "publisher": {
       "@type": "Organization", 
-      "name": "Hidayya",
+      "name": "Hidayyah",
       "logo": {
         "@type": "ImageObject",
         "url": `${window.location.origin}/favicon.ico`
@@ -231,7 +231,7 @@ const HijabStyleGuide = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Complete Hijab Style Guide 2025 - Modern & Classic | Hidayya</title>
+        <title>Complete Hijab Style Guide 2025 - Modern & Classic | Hidayyah</title>
         <meta name="description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
         <meta name="keywords" content="hijab styles, hijab tutorial, Islamic fashion, modest fashion, hijab accessories, Muslim women clothing" />
         <link rel="canonical" href="https://hidayyah.com/blog/hijab-styles-guide" />

@@ -10,8 +10,8 @@ const Terms = () => {
   return (
     <>
       <Helmet>
-        <title>Terms of Service - Hidayya</title>
-        <meta name="description" content="Read Hidayya's terms of service to understand your rights and responsibilities when shopping for Islamic and modest fashion on our website." />
+        <title>Terms of Service - Hidayyah</title>
+        <meta name="description" content="Read Hidayyah's terms of service to understand your rights and responsibilities when shopping for Islamic and modest fashion on our website." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://hidayyah.com/terms" />
       </Helmet>
@@ -34,7 +34,7 @@ const Terms = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Agreement to Terms</h2>
                 <p>
-                  By accessing and using Hidayya's website (hidayyah.com) and services, you agree to be bound 
+                  By accessing and using Hidayyah's website (hidayyah.com) and services, you agree to be bound 
                   by these Terms of Service. If you do not agree to these terms, please do not use our services.
                 </p>
               </section>
@@ -70,7 +70,7 @@ const Terms = () => {
                 
                 <h3 className="text-xl font-medium text-foreground mb-3">Order Acceptance</h3>
                 <p>
-                  All orders are subject to acceptance by Hidayya. We reserve the right to refuse or cancel 
+                  All orders are subject to acceptance by Hidayyah. We reserve the right to refuse or cancel 
                   orders for any reason, including product availability, pricing errors, or suspected fraud.
                 </p>
 
@@ -118,7 +118,7 @@ const Terms = () => {
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Intellectual Property</h2>
                 <p>
                   All content on our website, including text, images, designs, and trademarks, is owned by 
-                  Hidayya or our licensors. You may not use our intellectual property without written permission.
+                  Hidayyah or our licensors. You may not use our intellectual property without written permission.
                 </p>
               </section>
 
@@ -133,7 +133,7 @@ const Terms = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Limitation of Liability</h2>
                 <p>
-                  To the maximum extent permitted by law, Hidayya shall not be liable for any indirect, 
+                  To the maximum extent permitted by law, Hidayyah shall not be liable for any indirect, 
                   incidental, special, or consequential damages arising from your use of our services.
                 </p>
               </section>
@@ -165,7 +165,7 @@ const Terms = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Governing Law</h2>
                 <p>
-                  These terms are governed by the laws of the jurisdiction where Hidayya is established, 
+                  These terms are governed by the laws of the jurisdiction where Hidayyah is established, 
                   without regard to conflict of law principles.
                 </p>
               </section>
@@ -176,7 +176,7 @@ const Terms = () => {
                   For questions about these Terms of Service, please contact us:
                 </p>
                 <div className="mt-4 p-4 bg-muted rounded-lg">
-                  <p className="font-medium text-foreground">Hidayya Legal Team</p>
+                  <p className="font-medium text-foreground">Hidayyah Legal Team</p>
                   <p>Email: legal@hidayyah.com</p>
                   <p>Website: <a href="/contact" className="text-primary hover:underline">hidayyah.com/contact</a></p>
                 </div>

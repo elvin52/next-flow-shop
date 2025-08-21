@@ -28,7 +28,7 @@ const MuslimMenWearArticle = () => {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Hidayya Islamic Store",
+      "name": "Hidayyah Islamic Store",
       "logo": {
         "@type": "ImageObject",
         "url": "https://example.com/logo.png"

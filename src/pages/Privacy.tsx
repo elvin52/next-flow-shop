@@ -10,8 +10,8 @@ const Privacy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy - Hidayya</title>
-        <meta name="description" content="Read Hidayya's privacy policy to understand how we collect, use, and protect your personal information when you shop for Islamic and modest fashion." />
+        <title>Privacy Policy - Hidayyah</title>
+        <meta name="description" content="Read Hidayyah's privacy policy to understand how we collect, use, and protect your personal information when you shop for Islamic and modest fashion." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://hidayyah.com/privacy" />
       </Helmet>
@@ -34,7 +34,7 @@ const Privacy = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Introduction</h2>
                 <p>
-                  Hidayya ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
+                  Hidayyah ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
                   explains how we collect, use, disclose, and safeguard your information when you visit our 
                   website hidayyah.com and use our services.
                 </p>
@@ -153,7 +153,7 @@ const Privacy = () => {
                   If you have questions about this Privacy Policy or our data practices, please contact us at:
                 </p>
                 <div className="mt-4 p-4 bg-muted rounded-lg">
-                  <p className="font-medium text-foreground">Hidayya Privacy Team</p>
+                  <p className="font-medium text-foreground">Hidayyah Privacy Team</p>
                   <p>Email: privacy@hidayyah.com</p>
                   <p>Website: <a href="/contact" className="text-primary hover:underline">hidayyah.com/contact</a></p>
                 </div>
