@@ -118,19 +118,14 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           srcSet={generateSrcSet(src)}
           sizes={width ? `(max-width: 768px) 100vw, ${width}px` : undefined}
           className={cn(
-            "transition-opacity duration-300",
+            "transition-opacity duration-300 max-w-full",
             isLoaded ? "opacity-100" : "opacity-0",
-            width && height ? "w-full h-full object-cover" : ""
+            width && height ? "w-full h-full object-cover" : "w-full h-auto"
           )}
           onLoad={handleLoad}
           onError={handleError}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
-          // Prevent layout shift by setting explicit dimensions
-          style={{
-            width: width ? `${width}px` : undefined,
-            height: height ? `${height}px` : undefined
-          }}
         />
       )}
 
