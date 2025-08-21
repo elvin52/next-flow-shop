@@ -15,13 +15,15 @@ const IslamicHeader = () => {
   const totalItems = useCartStore((state) =>
     state.items.reduce((sum, item) => sum + item.quantity, 0)
   );
+  
+  const isBlogFirst = import.meta.env.VITE_BLOG_FIRST === 'true';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center space-x-6">
           <Link to="/" className="text-xl font-bold text-primary font-playfair">
-            Hidayya
+            Hidayyah
           </Link>
           
           <nav className="hidden md:flex items-center space-x-6">
@@ -29,31 +31,36 @@ const IslamicHeader = () => {
               Home
             </Link>
             
-            {/* Gender-based navigation */}
-            {genders.map(gender => (
-              <DropdownMenu key={gender.id}>
-                <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
-                  {gender.name}
-                  {import.meta.env.VITE_BLOG_FIRST === 'true' && (
-                    <span className="text-xs text-muted-foreground">(Coming Soon)</span>
-                  )}
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link to={`/${gender.id}`}>All {gender.name}'s Wear</Link>
-                  </DropdownMenuItem>
-                  {typesByGender[gender.id].map(type => (
-                    <DropdownMenuItem key={type.id} asChild>
-                      <Link to={`/${gender.id}/${type.id}`}>{type.name}</Link>
+            {!isBlogFirst && (
+              /* Gender-based navigation - only show when not in blog-first mode */
+              genders.map(gender => (
+                <DropdownMenu key={gender.id}>
+                  <DropdownMenuTrigger className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
+                    {gender.name}
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link to={`/${gender.id}`}>All {gender.name}'s Wear</Link>
                     </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ))}
+                    {typesByGender[gender.id].map(type => (
+                      <DropdownMenuItem key={type.id} asChild>
+                        <Link to={`/${gender.id}/${type.id}`}>{type.name}</Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ))
+            )}
             
             <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Blog
             </Link>
+            
+            {isBlogFirst && (
+              <Link to="/coming-soon" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Shop (Coming Soon)
+              </Link>
+            )}
             
             <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
@@ -66,10 +73,10 @@ const IslamicHeader = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon" title={import.meta.env.VITE_BLOG_FIRST === 'true' ? 'Coming Soon' : 'Shopping Cart'}>
+          <Link to={isBlogFirst ? "/coming-soon" : "/cart"} className="relative">
+            <Button variant="ghost" size="icon" title={isBlogFirst ? 'Coming Soon' : 'Shopping Cart'}>
               <ShoppingCart className="h-5 w-5" />
-              {totalItems > 0 && (
+              {!isBlogFirst && totalItems > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center">
                   {totalItems}
                 </Badge>
@@ -77,8 +84,8 @@ const IslamicHeader = () => {
             </Button>
           </Link>
 
-          <Link to="/account">
-            <Button variant="ghost" size="icon" title={import.meta.env.VITE_BLOG_FIRST === 'true' ? 'Coming Soon' : 'Account'}>
+          <Link to={isBlogFirst ? "/coming-soon" : "/account"}>
+            <Button variant="ghost" size="icon" title={isBlogFirst ? 'Coming Soon' : 'Account'}>
               <User className="h-5 w-5" />
             </Button>
           </Link>

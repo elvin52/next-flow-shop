@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/coming-soon",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/(men|women)/(.*)",
       "headers": [
         {
@@ -31,157 +40,48 @@
   "redirects": [
     {
       "source": "/men",
-      "has": [
-        {
-          "type": "query",
-          "key": "color"
-        }
-      ],
-      "destination": "/men?legacy=1",
-      "statusCode": 301
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
       "source": "/women",
-      "has": [
-        {
-          "type": "query",
-          "key": "color"
-        }
-      ],
-      "destination": "/women?legacy=1",
-      "statusCode": 301
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "color"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
+      "source": "/men/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "color"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
+      "source": "/women/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "fabric"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
+      "source": "/products",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "fabric"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
+      "source": "/product/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "size"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
+      "source": "/cart",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "size"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
+      "source": "/checkout",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
     {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "occasion"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
+      "source": "/account",
+      "destination": "/coming-soon",
+      "statusCode": 308
     },
-    {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "occasion"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
-    },
-    {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "brand"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
-    },
-    {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "brand"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
-    },
-    {
-      "source": "/men/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "price"
-        }
-      ],
-      "destination": "/men/:category?legacy=1",
-      "statusCode": 301
-    },
-    {
-      "source": "/women/:category",
-      "has": [
-        {
-          "type": "query",
-          "key": "price"
-        }
-      ],
-      "destination": "/women/:category?legacy=1",
-      "statusCode": 301
-    }
   ]
 }
