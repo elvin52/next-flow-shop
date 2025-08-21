@@ -51,9 +51,16 @@ const IslamicHeader = () => {
               </DropdownMenu>
             ))}
             
-            <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Blog
-            </Link>
+            {import.meta.env.VITE_BLOG_FIRST === 'true' ? (
+              <Link to="/shop" className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
+                Shop
+                <span className="text-xs text-muted-foreground">(Coming Soon)</span>
+              </Link>
+            ) : (
+              <Link to="/blog" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Blog
+              </Link>
+            )}
             
             <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About

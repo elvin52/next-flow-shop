@@ -101,6 +101,21 @@ function generateMainSitemap(): SitemapUrl[] {
     });
   });
 
+  // Shop pages (always include, but content varies based on VITE_BLOG_FIRST)
+  urls.push({
+    loc: `${BASE_URL}/shop`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.8'
+  });
+
+  urls.push({
+    loc: `${BASE_URL}/shop-coming-soon`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.7'
+  });
+
   // Skip product category pages if blog-first mode
   if (process.env.VITE_BLOG_FIRST !== 'true') {
     genders.forEach(gender => {
@@ -246,6 +261,7 @@ async function main() {
       url.loc.includes('/contact') ||
       url.loc.includes('/privacy') ||
       url.loc.includes('/terms') ||
+      url.loc.includes('/shop') ||
       url.loc === BASE_URL || 
       url.loc === `${BASE_URL}/`
     );
