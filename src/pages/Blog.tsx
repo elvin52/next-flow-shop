@@ -139,8 +139,8 @@ const Blog = () => {
 
             <Card className="card-elegant overflow-hidden max-w-6xl mx-auto">
               <CardContent className="p-0">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  <div className="relative h-80 lg:h-96">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[400px] lg:min-h-[500px]">
+                  <div className="relative h-full">
                     <img 
                       src={featuredArticles[0].image} 
                       alt={featuredArticles[0].title}
