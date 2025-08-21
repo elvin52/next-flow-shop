@@ -36,30 +36,7 @@
   </head>
 
   <body>
-    <div id="root">
-      <!-- Fallback loading state -->
-      <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
-        <div style="text-align: center; font-family: 'Playfair Display', Georgia, serif;">
-          <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: hsl(150, 25%, 35%); border-radius: 50%; opacity: 0.7; animation: pulse 2s infinite;"></div>
-          <h1 style="color: hsl(150, 25%, 35%); margin: 0; font-size: 2rem;">Hidayya</h1>
-          <p style="color: hsl(25, 10%, 45%); margin: 0.5rem 0 0;">Loading...</p>
-        </div>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <style>
-      /* Critical above-the-fold styles for instant loading */
-      body { 
-        margin: 0; 
-        font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
-        background-color: hsl(35, 20%, 97%);
-        color: hsl(25, 15%, 15%);
-      }
-      @keyframes pulse { 
-        0%, 100% { opacity: 0.7; } 
-        50% { opacity: 0.3; } 
-      }
-    </style>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { NewsletterSignup } from './NewsletterSignup';
 
 const Footer = () => {
   return (
@@ -52,20 +53,13 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Newsletter</h3>
-            <p className="text-muted-foreground text-sm">
-              Get the latest modest fashion tips, hijab tutorials, and style inspiration.
-            </p>
-            <div className="flex space-x-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-3 py-2 text-sm border border-input rounded-md bg-background"
-              />
-              <button className="px-4 py-2 bg-accent text-accent-foreground rounded-md text-sm hover:bg-accent-hover transition-fast">
-                Subscribe
-              </button>
-            </div>
+            <NewsletterSignup 
+              variant="default"
+              title="Newsletter"
+              description="Get the latest modest fashion tips, hijab tutorials, and style inspiration."
+              placeholder="Enter your email"
+              webhookUrl={localStorage.getItem('newsletter_webhook') || undefined}
+            />
           </div>
         </div>
 

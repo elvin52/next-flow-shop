@@ -26,6 +26,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const NewsletterManagement = lazy(() => import("./pages/NewsletterManagement"));
 
 const queryClient = new QueryClient();
 
@@ -96,6 +97,13 @@ const App = () => (
                 <Route path="terms" element={
                   <Suspense fallback={<PageSkeleton />}>
                     <Terms />
+                  </Suspense>
+                } />
+                
+                {/* Newsletter Management - Hidden route for admin */}
+                <Route path="admin/newsletter" element={
+                  <Suspense fallback={<PageSkeleton />}>
+                    <NewsletterManagement />
                   </Suspense>
                 } />
                 
