@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Performance optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <!-- DNS prefetch for potential third-party resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <title>Hidayya - Premium Islamic & Modest Fashion</title>
     <meta name="description" content="Discover beautiful Islamic and modest fashion including hijabs, abayas, thobes, and contemporary modest wear with style guides and tutorials." />
     <meta name="author" content="Hidayya Fashion" />
@@ -30,7 +36,30 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback loading state -->
+      <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center; font-family: 'Playfair Display', Georgia, serif;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1rem; background: hsl(150, 25%, 35%); border-radius: 50%; opacity: 0.7; animation: pulse 2s infinite;"></div>
+          <h1 style="color: hsl(150, 25%, 35%); margin: 0; font-size: 2rem;">Hidayya</h1>
+          <p style="color: hsl(25, 10%, 45%); margin: 0.5rem 0 0;">Loading...</p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <style>
+      /* Critical above-the-fold styles for instant loading */
+      body { 
+        margin: 0; 
+        font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: hsl(35, 20%, 97%);
+        color: hsl(25, 15%, 15%);
+      }
+      @keyframes pulse { 
+        0%, 100% { opacity: 0.7; } 
+        50% { opacity: 0.3; } 
+      }
+    </style>
   </body>
 </html>

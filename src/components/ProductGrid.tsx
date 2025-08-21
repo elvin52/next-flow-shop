@@ -1,5 +1,6 @@
 import { Product } from '@/types/product';
 import ProductCard from './ProductCard';
+import { memo } from 'react';
 
 interface ProductGridProps {
   products: Product[];
@@ -9,7 +10,7 @@ interface ProductGridProps {
   viewAllLink?: string;
 }
 
-const ProductGrid = ({ products, title, description, showViewAll, viewAllLink }: ProductGridProps) => {
+const ProductGrid = memo(({ products, title, description, showViewAll, viewAllLink }: ProductGridProps) => {
   if (products.length === 0) return null;
 
   return (
@@ -46,6 +47,6 @@ const ProductGrid = ({ products, title, description, showViewAll, viewAllLink }:
       </div>
     </section>
   );
-};
+});
 
 export default ProductGrid;

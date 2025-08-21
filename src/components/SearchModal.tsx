@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Search, X } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -15,31 +16,34 @@ interface SearchModalProps {
 
 export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  useEffect(() => {
-    if (searchTerm.length >= 2) {
-      const filtered = sampleProducts.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Memoized search results to prevent unnecessary recalculations
+  const searchResults = useMemo(() => {
+    if (debouncedSearchTerm.length >= 2) {
+      return sampleProducts.filter((product) =>
+        product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        product.tags.some(tag => tag.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
       ).slice(0, 6); // Limit to 6 results
-      setSearchResults(filtered);
-    } else {
-      setSearchResults([]);
     }
-  }, [searchTerm]);
+    return [];
+  }, [debouncedSearchTerm]);
 
-  const handleProductClick = () => {
+  const handleProductClick = useCallback(() => {
     onOpenChange(false);
     setSearchTerm('');
-  };
+  }, [onOpenChange]);
 
-  const handleViewAllResults = () => {
+  const handleViewAllResults = useCallback(() => {
     onOpenChange(false);
     // Navigate to products page with search term
-    window.location.href = `/products?search=${encodeURIComponent(searchTerm)}`;
-  };
+    window.location.href = `/products?search=${encodeURIComponent(debouncedSearchTerm)}`;
+  }, [onOpenChange, debouncedSearchTerm]);
+
+  const handleClearSearch = useCallback(() => {
+    setSearchTerm('');
+  }, []);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -66,7 +70,7 @@ export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
                 variant="ghost"
                 size="icon"
                 className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8"
-                onClick={() => setSearchTerm('')}
+                onClick={handleClearSearch}
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -80,9 +84,9 @@ export const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
             </div>
           )}
 
-          {searchTerm.length >= 2 && searchResults.length === 0 && (
+          {debouncedSearchTerm.length >= 2 && searchResults.length === 0 && (
             <div className="text-center text-muted-foreground py-8">
-              <p>No products found for "{searchTerm}"</p>
+              <p>No products found for "{debouncedSearchTerm}"</p>
             </div>
           )}
 

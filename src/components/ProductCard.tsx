@@ -6,16 +6,17 @@ import { Badge } from '@/components/ui/badge';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/store/cartStore';
 import { useToast } from '@/hooks/use-toast';
+import { memo, useCallback, useMemo } from 'react';
 
 interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = memo(({ product }: ProductCardProps) => {
   const addItem = useCartStore((state) => state.addItem);
   const { toast } = useToast();
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addItem(product);
@@ -23,13 +24,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
       title: 'Added to cart',
       description: `${product.name} has been added to your cart.`,
     });
-  };
+  }, [addItem, product, toast]);
 
-  const currentPrice = product.salePrice || product.price;
-  const isOnSale = !!product.salePrice;
+  const { currentPrice, isOnSale } = useMemo(() => ({
+    currentPrice: product.salePrice || product.price,
+    isOnSale: !!product.salePrice
+  }), [product.salePrice, product.price]);
 
-  // Structured data for the product
-  const productStructuredData = {
+  // Memoized structured data for the product
+  const productStructuredData = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
@@ -42,7 +45,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     },
     "offers": {
       "@type": "Offer",
-      "url": `${window.location.origin}/product/${product.id}`,
+      "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/product/${product.id}`,
       "priceCurrency": "USD",
       "price": currentPrice,
       "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
@@ -56,7 +59,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       "ratingValue": product.rating,
       "reviewCount": product.reviewCount
     }
-  };
+  }), [product, currentPrice]);
 
   return (
     <>
@@ -141,6 +144,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </Card>
     </>
   );
-};
+});
 
 export default ProductCard;
