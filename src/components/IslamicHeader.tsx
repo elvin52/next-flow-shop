@@ -30,12 +30,12 @@ const IslamicHeader = () => {
         <div className="flex items-center space-x-6">
           <SEOLink to="/" priority="high" className="flex items-center space-x-2">
             <img 
-              src="/hidayyah-logo.png" 
+              src="/hidayyah-logo-ill.png" 
               alt="Hidayyah - Premium Islamic Clothing and Modest Fashion Store" 
               title="Hidayyah - Your trusted source for authentic Islamic wear"
               className="h-8 w-auto"
             />
-            <span className="text-xl font-bold text-primary font-playfair">Hidayyah</span>
+            <span className="text-xl font-bold text-foreground font-playfair">Hidayyah</span>
           </SEOLink>
           
           {/* Desktop Navigation */}
