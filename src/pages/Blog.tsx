@@ -1,17 +1,100 @@
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star, Clock, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { FeaturedArticle } from '@/components/blog/FeaturedArticle';
-import { ArticleGrid } from '@/components/blog/ArticleGrid';
-import { BLOG_ARTICLES, BLOG_CATEGORIES, getFeaturedArticles, getRecentArticles } from '@/data/blog-articles';
+
+// Import images for featured articles
+import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
+import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
+import accessoriesImage from '@/assets/hijab-accessories.jpg';
 
 const Blog = () => {
-  // Get articles using helper functions (memoized data)
-  const featuredArticles = getFeaturedArticles();
-  const recentArticles = getRecentArticles();
-  const categories = BLOG_CATEGORIES;
+  const featuredArticles = [
+    {
+      title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
+      description: "Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide.",
+      image: modernTurbanImage,
+      readTime: "10 min read",
+      views: "856 views",
+      category: "Cultural Guide",
+      featured: true,
+      link: "/blog/what-do-muslim-men-wear"
+    },
+    {
+      title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
+      description: "Comprehensive guide about abayas, their cultural significance, and whether non-Muslims can respectfully wear this traditional Islamic garment.",
+      image: modernTurbanImage,
+      readTime: "12 min read",
+      views: "1.2K views",
+      category: "Cultural Guide",
+      featured: false,
+      link: "/blog/what-is-an-abaya"
+    },
+    {
+      title: "The Ultimate Guide to Hijab Styles",
+      description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
+      image: classicWrapImage,
+      readTime: "15 min read",
+      views: "2.4K views",
+      category: "Style Guide",
+      featured: false,
+      link: "/blog/hijab-styles-guide"
+    },
+    {
+      title: "Best Chiffon Hijabs for Daily Wear",
+      description: "Discover lightweight and breathable chiffon hijabs perfect for everyday styling and warm weather.",
+      image: modernTurbanImage,
+      readTime: "8 min read", 
+      views: "1.8K views",
+      category: "Product Review",
+      featured: false,
+      link: "/blog/chiffon-hijabs"
+    },
+    {
+      title: "Essential Hijab Accessories Guide",
+      description: "Complete guide to hijab magnets, undercaps, and pins that will transform your hijab experience.",
+      image: accessoriesImage,
+      readTime: "10 min read",
+      views: "3.1K views", 
+      category: "Accessories",
+      featured: false,
+      link: "/blog/hijab-accessories"
+    }
+  ];
+
+  const categories = [
+    {
+      name: "Hijab Styles",
+      count: "23 articles",
+      description: "From classic wraps to modern trends"
+    },
+    {
+      name: "Modest Outfits",
+      count: "18 articles", 
+      description: "Complete outfit inspiration and ideas"
+    },
+    {
+      name: "Fabric Guide",
+      count: "12 articles",
+      description: "Chiffon, silk, and premium materials"
+    },
+    {
+      name: "Accessories", 
+      count: "15 articles",
+      description: "Magnets, undercaps, and styling tools"
+    },
+    {
+      name: "Seasonal Styles",
+      count: "20 articles",
+      description: "Weather-appropriate modest fashion"
+    },
+    {
+      name: "Cultural Styles",
+      count: "14 articles", 
+      description: "Regional and traditional influences"
+    }
+  ];
 
   return (
     <>
@@ -54,9 +137,57 @@ const Blog = () => {
               <p className="text-warm-gray">Our most comprehensive style guide</p>
             </div>
 
-            {featuredArticles.length > 0 && (
-              <FeaturedArticle article={featuredArticles[0]} />
-            )}
+            <Card className="card-elegant overflow-hidden max-w-6xl mx-auto">
+              <CardContent className="p-0">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                  <div className="relative h-80 lg:h-96">
+                    <img 
+                      src={featuredArticles[0].image} 
+                      alt={featuredArticles[0].title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                        <Star className="h-3 w-3 mr-1" />
+                        Featured
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    <div className="mb-4">
+                      <span className="text-primary font-medium text-sm">{featuredArticles[0].category}</span>
+                    </div>
+                    
+                    <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-4">
+                      {featuredArticles[0].title}
+                    </h3>
+                    
+                    <p className="text-warm-gray mb-6 leading-relaxed">
+                      {featuredArticles[0].description}
+                    </p>
+                    
+                    <div className="flex items-center gap-4 text-sm text-warm-gray mb-6">
+                      <div className="flex items-center">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {featuredArticles[0].readTime}
+                      </div>
+                      <div className="flex items-center">
+                        <Eye className="h-4 w-4 mr-1" />
+                        {featuredArticles[0].views}
+                      </div>
+                    </div>
+                    
+                    <Link to={featuredArticles[0].link}>
+                      <Button className="btn-sage group">
+                        Read Complete Guide
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -90,12 +221,66 @@ const Blog = () => {
         </section>
 
         {/* Recent Articles */}
-        <ArticleGrid
-          articles={recentArticles}
-          title="Recent Articles"
-          description="Latest modest fashion content and guides"
-          columns={2}
-        />
+        <section className="py-16">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-4 islamic-border pt-6">
+                Recent Articles
+              </h2>
+              <p className="text-warm-gray">Latest modest fashion content and guides</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {featuredArticles.slice(1).map((article, index) => (
+                <Card key={index} className="card-elegant hover-lift group">
+                  <CardContent className="p-0">
+                    <div className="relative h-48">
+                      <img 
+                        src={article.image} 
+                        alt={article.title}
+                        className="w-full h-full object-cover rounded-t-lg"
+                      />
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="mb-3">
+                        <span className="text-primary font-medium text-sm">{article.category}</span>
+                      </div>
+                      
+                      <h3 className="font-playfair text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      
+                      <p className="text-warm-gray text-sm mb-4 leading-relaxed">
+                        {article.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3 text-xs text-warm-gray">
+                          <span className="flex items-center">
+                            <Clock className="h-3 w-3 mr-1" />
+                            {article.readTime}
+                          </span>
+                          <span className="flex items-center">
+                            <Eye className="h-3 w-3 mr-1" />
+                            {article.views}
+                          </span>
+                        </div>
+                        
+                        <Button variant="ghost" size="sm" className="group-hover:text-primary" asChild>
+                          <Link to={article.link}>
+                            Read More
+                            <ArrowRight className="ml-1 h-3 w-3" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Newsletter CTA */}
         <section className="py-16 bg-gradient-to-r from-sage-light/20 to-gold-light/10">
