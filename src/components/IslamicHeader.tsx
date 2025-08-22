@@ -40,8 +40,8 @@ const IslamicHeader = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <SEOLink to="/" priority="normal" className="text-sm font-medium">
-              Home
+            <SEOLink to="/blog" priority="high" className="text-sm font-medium">
+              Style Guides
             </SEOLink>
             
             {!isBlogFirst && (
@@ -65,8 +65,8 @@ const IslamicHeader = () => {
               ))
             )}
             
-            <SEOLink to="/blog" priority="high" className="text-sm font-medium">
-              Blog
+            <SEOLink to="/blog/hijab-styles-guide" priority="high" className="text-sm font-medium">
+              Hijab Tutorials
             </SEOLink>
             
             {isBlogFirst && (
@@ -98,12 +98,12 @@ const IslamicHeader = () => {
               <SheetContent side="left" className="w-64">
                 <div className="flex flex-col space-y-4 mt-8">
                   <SEOLink 
-                    to="/" 
-                    priority="normal" 
+                    to="/blog" 
+                    priority="high" 
                     className="text-lg font-medium py-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    Home
+                    Style Guides
                   </SEOLink>
                   
                   {!isBlogFirst && genders.map(gender => (
@@ -133,12 +133,12 @@ const IslamicHeader = () => {
                   ))}
                   
                   <SEOLink 
-                    to="/blog" 
+                    to="/blog/hijab-styles-guide" 
                     priority="high" 
                     className="text-lg font-medium py-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    Blog
+                    Hijab Tutorials
                   </SEOLink>
                   
                   {isBlogFirst && (

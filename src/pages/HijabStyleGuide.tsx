@@ -6,6 +6,9 @@ import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
+import { SEOLink } from '@/components/common/SEOLink';
+import { ArticleNavigation } from '@/components/common/ArticleNavigation';
+
 // Import images
 import heroImage from '@/assets/hijab-style-guide-hero.jpg';
 import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
@@ -837,6 +840,20 @@ const HijabStyleGuide = () => {
                 </div>
               </CardContent>
             </Card>
+          </section>
+
+          {/* Article Navigation */}
+          <section className="mb-16">
+            <ArticleNavigation
+              previousArticle={{
+                title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
+                link: "/blog/what-is-an-abaya"
+              }}
+              nextArticle={{
+                title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
+                link: "/blog/what-do-muslim-men-wear"
+              }}
+            />
           </section>
         </div>
       </article>

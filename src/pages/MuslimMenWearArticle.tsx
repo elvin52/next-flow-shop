@@ -4,6 +4,7 @@ import { Clock, User, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
+import { ArticleNavigation } from '@/components/common/ArticleNavigation';
 
 // Import images
 import heroImage from '@/assets/muslim-men-wear-hero.jpg';
@@ -256,6 +257,16 @@ const MuslimMenWearArticle = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Article Navigation */}
+            <div className="mt-16">
+              <ArticleNavigation
+                nextArticle={{
+                  title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
+                  link: "/blog/what-is-an-abaya"
+                }}
+              />
+            </div>
           </article>
         </div>
       </div>

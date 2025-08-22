@@ -185,20 +185,34 @@ const Blog = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {categories.map((category, index) => (
-                <Card key={index} className="card-elegant hover-lift group">
-                  <CardContent className="p-6">
-                    <h3 className="font-playfair text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="text-warm-gray text-sm mb-4">{category.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-primary font-medium text-sm">{category.count}</span>
-                      <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              {categories.map((category, index) => {
+                // Map categories to actual article links
+                const categoryLinks = {
+                  "Hijab Styles": "/blog/hijab-styles-guide",
+                  "Modest Outfits": "/blog/hijab-styles-guide",
+                  "Fabric Guide": "/blog/hijab-styles-guide", 
+                  "Accessories": "/blog/hijab-styles-guide",
+                  "Seasonal Styles": "/blog/hijab-styles-guide",
+                  "Cultural Styles": "/blog/what-do-muslim-men-wear"
+                };
+                
+                return (
+                  <Link key={index} to={categoryLinks[category.name as keyof typeof categoryLinks] || "/blog"}>
+                    <Card className="card-elegant hover-lift group cursor-pointer">
+                      <CardContent className="p-6">
+                        <h3 className="font-playfair text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                          {category.name}
+                        </h3>
+                        <p className="text-warm-gray text-sm mb-4">{category.description}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-primary font-medium text-sm">{category.count}</span>
+                          <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

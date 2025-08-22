@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Clock, Eye, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
+import { ArticleNavigation } from '@/components/common/ArticleNavigation';
 
 // Import images
 import heroImage from '@/assets/abaya-article-hero.jpg';
@@ -349,6 +350,20 @@ const AbayaArticle = () => {
                     </Link>
                   </div>
                 </Card>
+
+                {/* Article Navigation */}
+                <div className="mt-16">
+                  <ArticleNavigation
+                    nextArticle={{
+                      title: "The Ultimate Guide to Hijab Styles",
+                      link: "/blog/hijab-styles-guide"
+                    }}
+                    previousArticle={{
+                      title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
+                      link: "/blog/what-do-muslim-men-wear"
+                    }}
+                  />
+                </div>
               </article>
             </div>
           </div>

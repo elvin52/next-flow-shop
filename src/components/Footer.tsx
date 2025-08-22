@@ -19,18 +19,21 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Popular Guides */}
           <div className="space-y-4">
-            <h3 className="font-semibold">Quick Links</h3>
+            <h3 className="font-semibold">Popular Guides</h3>
             <div className="space-y-2">
-              <Link to="/blog" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Style Guides
-              </Link>
               <Link to="/blog/hijab-styles-guide" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Hijab Tutorials
+                Hijab Style Guide
               </Link>
-              <Link to="/coming-soon" className="block text-muted-foreground hover:text-foreground transition-fast">
-                Shop (Coming Soon)
+              <Link to="/blog/what-do-muslim-men-wear" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Muslim Men's Wear
+              </Link>
+              <Link to="/blog/what-is-an-abaya" className="block text-muted-foreground hover:text-foreground transition-fast">
+                Understanding Abayas
+              </Link>
+              <Link to="/blog" className="block text-muted-foreground hover:text-foreground transition-fast">
+                All Style Guides
               </Link>
             </div>
           </div>
@@ -47,6 +50,9 @@ const Footer = () => {
               </Link>
               <Link to="/privacy" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Privacy Policy
+              </Link>
+              <Link to="/coming-soon" className="block text-muted-foreground hover:text-foreground transition-fast text-xs">
+                Shop (Coming Soon)
               </Link>
             </div>
           </div>
