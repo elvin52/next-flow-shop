@@ -74,7 +74,7 @@ const HijabStyleGuide = () => {
       id: 'turkish-hijab',
       title: "Turkish Hijab",
       image: turkishHijabImage,
-      technique: "Focus on neat symmetry. You pin the Turkish hijab at sides for refined structure.",
+      technique: "Place the scarf on your head, leaving both sides equal in length, cross both ends at the front of your forehead to form an 'X' and bring them back. Tie them or hide them at the nape of your neck, adjust the folds and tuck in the ends so that it looks neat and elegant.",
       whyItWorks: "Reflects cultural heritage, pairs with modern and traditional outfits.",
       bestFor: "Formal events",
       difficulty: "Medium",
