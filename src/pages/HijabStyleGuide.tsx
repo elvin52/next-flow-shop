@@ -518,11 +518,7 @@ const HijabStyleGuide = () => {
                               <BookOpen className="h-4 w-4 mr-2 text-primary" />
                               Styling Tips
                             </h4>
-                            <p className="text-[hsl(var(--warm-gray))] leading-relaxed mb-4">{occasion.tips}</p>
-                            <Button className="bg-primary hover:bg-primary/90 text-white">
-                              <Heart className="h-4 w-4 mr-2" />
-                              Shop {occasion.occasion} Collection
-                            </Button>
+                            <p className="text-[hsl(var(--warm-gray))] leading-relaxed">{occasion.tips}</p>
                           </div>
                         </div>
                       </div>
@@ -690,16 +686,9 @@ const HijabStyleGuide = () => {
               <p className="text-[hsl(var(--warm-gray))] mb-6 max-w-lg mx-auto">
                 Start with the essentials and gradually add style enhancers to create your perfect hijab styling collection.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button className="bg-primary hover:bg-primary/90">
-                  <Heart className="h-4 w-4 mr-2" />
-                  Shop Essential Kit ($25-50)
-                </Button>
-                <Button variant="outline">
-                  <Star className="h-4 w-4 mr-2" />
-                  Browse All Accessories
-                </Button>
-              </div>
+              <p className="text-[hsl(var(--warm-gray))] text-center">
+                These accessories are available at most Islamic fashion retailers and online stores.
+              </p>
             </div>
             
             <div className="relative mt-8">
