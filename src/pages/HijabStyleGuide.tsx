@@ -249,19 +249,6 @@ const HijabStyleGuide = () => {
 
       
       
-      {/* Hero Image */}
-      <section className="relative h-64 md:h-96 overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
-              Complete Hijab Style Guide 2025
-            </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
-              Master modern and classic hijab techniques
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
