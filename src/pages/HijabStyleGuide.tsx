@@ -184,7 +184,7 @@ const HijabStyleGuide = () => {
   const occasionStyles = [
     {
       occasion: "Office & Professional",
-      styles: ["Classic Wrap", "Shayla", "Al-Amira"],
+      styles: ["Classic Wrap", "Al-Amira"],
       fabrics: ["Jersey", "Georgette", "Modal"],
       tips: "Choose neutral colors and structured styles that complement business attire.",
       shopLink: "/womens-clothing/hijab"
