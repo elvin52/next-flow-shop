@@ -324,9 +324,9 @@ const HijabStyleGuide = () => {
                   <div className="text-2xl mb-2">⭕</div>
                   <h3 className="font-semibold text-lg mb-3">Round Face</h3>
                   <div className="space-y-2 text-sm">
-                    <a href="#modern-turban" className="block text-primary hover:underline">• Modern Turban</a>
-                    <a href="#turkish-hijab" className="block text-primary hover:underline">• Turkish Hijab</a>
-                    <a href="#al-amira-hijab" className="block text-primary hover:underline">• Al-Amira Style</a>
+                    <button onClick={() => document.getElementById('modern-turban')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Modern Turban</button>
+                    <button onClick={() => document.getElementById('turkish-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Turkish Hijab</button>
+                    <button onClick={() => document.getElementById('al-amira-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Al-Amira Style</button>
                   </div>
                 </CardContent>
               </Card>
@@ -336,9 +336,9 @@ const HijabStyleGuide = () => {
                   <div className="text-2xl mb-2">🔸</div>
                   <h3 className="font-semibold text-lg mb-3">Square Face</h3>
                   <div className="space-y-2 text-sm">
-                    <a href="#modern-turban" className="block text-primary hover:underline">• Modern Turban</a>
-                    <a href="#al-amira-hijab" className="block text-primary hover:underline">• Al-Amira Style</a>
-                    <a href="#classic-wrap" className="block text-primary hover:underline">• Classic Wrap</a>
+                    <button onClick={() => document.getElementById('modern-turban')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Modern Turban</button>
+                    <button onClick={() => document.getElementById('al-amira-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Al-Amira Style</button>
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Classic Wrap</button>
                   </div>
                 </CardContent>
               </Card>
@@ -348,9 +348,9 @@ const HijabStyleGuide = () => {
                   <div className="text-2xl mb-2">💎</div>
                   <h3 className="font-semibold text-lg mb-3">Heart-Shaped</h3>
                   <div className="space-y-2 text-sm">
-                    <a href="#square-hijab" className="block text-primary hover:underline">• Square Hijab</a>
-                    <a href="#classic-wrap" className="block text-primary hover:underline">• Classic Wrap</a>
-                    <a href="#instant-hijab" className="block text-primary hover:underline">• Instant Hijab</a>
+                    <button onClick={() => document.getElementById('square-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Square Hijab</button>
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Classic Wrap</button>
+                    <button onClick={() => document.getElementById('instant-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Instant Hijab</button>
                   </div>
                 </CardContent>
               </Card>
@@ -360,9 +360,9 @@ const HijabStyleGuide = () => {
                   <div className="text-2xl mb-2">🥚</div>
                   <h3 className="font-semibold text-lg mb-3">Oval Face</h3>
                   <div className="space-y-2 text-sm">
-                    <a href="#classic-wrap" className="block text-primary hover:underline">• All Styles Work!</a>
-                    <a href="#square-hijab" className="block text-primary hover:underline">• Square Hijab</a>
-                    <a href="#instant-hijab" className="block text-primary hover:underline">• Instant Hijab</a>
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• All Styles Work!</button>
+                    <button onClick={() => document.getElementById('square-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Square Hijab</button>
+                    <button onClick={() => document.getElementById('instant-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Instant Hijab</button>
                   </div>
                 </CardContent>
               </Card>
@@ -393,7 +393,7 @@ const HijabStyleGuide = () => {
               {hijabStyles.map((style, index) => {
                 
                 return (
-                  <Card key={index} className="card-elegant overflow-hidden">
+                  <Card key={index} id={style.id} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
                        <div className="flex flex-col">
                          {/* Image */}
