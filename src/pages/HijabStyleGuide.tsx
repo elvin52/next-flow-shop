@@ -312,6 +312,67 @@ const HijabStyleGuide = () => {
             </div>
           </div>
 
+          {/* Face Shape Navigator */}
+          <section className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
+              Find Your Perfect Style by Face Shape
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">⭕</div>
+                  <h3 className="font-semibold text-lg mb-3">Round Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <a href="#modern-turban" className="block text-primary hover:underline">• Modern Turban</a>
+                    <a href="#turkish-hijab" className="block text-primary hover:underline">• Turkish Hijab</a>
+                    <a href="#al-amira-hijab" className="block text-primary hover:underline">• Al-Amira Style</a>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">🔸</div>
+                  <h3 className="font-semibold text-lg mb-3">Square Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <a href="#modern-turban" className="block text-primary hover:underline">• Modern Turban</a>
+                    <a href="#al-amira-hijab" className="block text-primary hover:underline">• Al-Amira Style</a>
+                    <a href="#classic-wrap" className="block text-primary hover:underline">• Classic Wrap</a>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">💎</div>
+                  <h3 className="font-semibold text-lg mb-3">Heart-Shaped</h3>
+                  <div className="space-y-2 text-sm">
+                    <a href="#square-hijab" className="block text-primary hover:underline">• Square Hijab</a>
+                    <a href="#classic-wrap" className="block text-primary hover:underline">• Classic Wrap</a>
+                    <a href="#instant-hijab" className="block text-primary hover:underline">• Instant Hijab</a>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">🥚</div>
+                  <h3 className="font-semibold text-lg mb-3">Oval Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <a href="#classic-wrap" className="block text-primary hover:underline">• All Styles Work!</a>
+                    <a href="#square-hijab" className="block text-primary hover:underline">• Square Hijab</a>
+                    <a href="#instant-hijab" className="block text-primary hover:underline">• Instant Hijab</a>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="text-center">
+              <p className="text-[hsl(var(--warm-gray))] mb-4">Not sure about your face shape? <strong>Oval faces</strong> can wear any style beautifully!</p>
+            </div>
+          </section>
+
           {/* What Are Hijab Styles */}
           <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6 islamic-border pt-6">
