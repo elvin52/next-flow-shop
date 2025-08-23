@@ -251,11 +251,6 @@ const HijabStyleGuide = () => {
       
       {/* Hero Image */}
       <section className="relative h-64 md:h-96 overflow-hidden">
-        <img 
-          src={heroImage} 
-          alt="Complete hijab style guide showing modern and classic Islamic modest fashion techniques"
-          className="w-full h-full object-cover"
-        />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
