@@ -8,15 +8,17 @@ import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
 import { SEOLink } from '@/components/common/SEOLink';
 import { ArticleNavigation } from '@/components/common/ArticleNavigation';
+import { ResponsiveImage } from '@/components/common/ResponsiveImage';
 
 // Import images
 import heroImage from '@/assets/hijab-style-guide-hero.jpg';
-import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
-import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
+import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
+import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
 import layeredHijabImage from '@/assets/layered-hijab.jpg';
-import knotBowImage from '@/assets/knot-bow-hijab.jpg';
+import squareHijabImage from '@/assets/square-hijab-style.jpg';
 import turkishHijabImage from '@/assets/turkish-hijab.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
+import instantHijabImage from '@/assets/instant-hijab-style.jpg';
 
 const HijabStyleGuide = () => {
   const breadcrumbItems = [
@@ -98,7 +100,7 @@ const HijabStyleGuide = () => {
     {
       id: 'instant-hijab',
       title: "Instant Hijab Style",
-      image: layeredHijabImage,
+      image: instantHijabImage,
       technique: "Simply slip the pre-sewn hijab over your head like putting on a hood. The built-in cap portion should sit snugly on your head, covering all your hair. Adjust the outer fabric layer to drape naturally around your shoulders and ensure proper coverage of your neck and chest. Some instant hijabs have adjustable ties or velcro for a custom fit - adjust these as needed for comfort and security.",
       whyItWorks: "Perfect for busy mornings, provides polished look with minimal effort.",
       bestFor: "Quick styling, beginners",
@@ -109,7 +111,7 @@ const HijabStyleGuide = () => {
     {
       id: 'square-hijab',
       title: "Square Hijab Style",
-      image: knotBowImage,
+      image: squareHijabImage,
       technique: "Take a square hijab and fold it diagonally to create a triangle. Place the triangle on your head with the point at the back and the fold across your forehead. Take one corner and wrap it around your neck to the opposite side, then take the other corner and wrap it around the other way, creating a crossover effect. Tie the ends together at the back or side of your neck, or pin them for security. Adjust the front fold and side draping for your desired look.",
       whyItWorks: "Versatile shape for multiple styling options from casual to formal.",
       bestFor: "Fashion-forward looks",
@@ -285,7 +287,7 @@ const HijabStyleGuide = () => {
               </div>
               <div className="flex items-center">
                 <Star className="h-4 w-4 mr-2" />
-                <span>Updated August 2025</span>
+                <span>Updated January 2025</span>
               </div>
               <Button variant="ghost" size="sm" onClick={() => navigator.share?.({
                 title: "Complete Hijab Style Guide 2025 - Modern & Classic",
@@ -312,6 +314,67 @@ const HijabStyleGuide = () => {
             </div>
           </div>
 
+          {/* Face Shape Navigator */}
+          <section className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
+              Find Your Perfect Style by Face Shape
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">⭕</div>
+                  <h3 className="font-semibold text-lg mb-3">Round Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <button onClick={() => document.getElementById('modern-turban')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Modern Turban</button>
+                    <button onClick={() => document.getElementById('turkish-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Turkish Hijab</button>
+                    <button onClick={() => document.getElementById('al-amira-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Al-Amira Style</button>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">🔸</div>
+                  <h3 className="font-semibold text-lg mb-3">Square Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <button onClick={() => document.getElementById('modern-turban')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Modern Turban</button>
+                    <button onClick={() => document.getElementById('al-amira-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Al-Amira Style</button>
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Classic Wrap</button>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">💎</div>
+                  <h3 className="font-semibold text-lg mb-3">Heart-Shaped</h3>
+                  <div className="space-y-2 text-sm">
+                    <button onClick={() => document.getElementById('square-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Square Hijab</button>
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Classic Wrap</button>
+                    <button onClick={() => document.getElementById('instant-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Instant Hijab</button>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="card-elegant text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-2">🥚</div>
+                  <h3 className="font-semibold text-lg mb-3">Oval Face</h3>
+                  <div className="space-y-2 text-sm">
+                    <button onClick={() => document.getElementById('classic-wrap')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• All Styles Work!</button>
+                    <button onClick={() => document.getElementById('square-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Square Hijab</button>
+                    <button onClick={() => document.getElementById('instant-hijab')?.scrollIntoView({behavior: 'smooth'})} className="block text-primary hover:underline w-full text-left">• Instant Hijab</button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="text-center">
+              <p className="text-[hsl(var(--warm-gray))] mb-4">Not sure about your face shape? <strong>Oval faces</strong> can wear any style beautifully!</p>
+            </div>
+          </section>
+
           {/* What Are Hijab Styles */}
           <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6 islamic-border pt-6">
@@ -332,17 +395,18 @@ const HijabStyleGuide = () => {
               {hijabStyles.map((style, index) => {
                 
                 return (
-                  <Card key={index} className="card-elegant overflow-hidden">
+                  <Card key={style.id} id={style.id} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
                        <div className="flex flex-col">
-                         {/* Image */}
-                         <div className="relative h-80">
-                           <img 
-                             src={style.image} 
-                             alt={style.title}
-                             className="w-full h-full object-cover"
-                           />
-                         </div>
+                          {/* Image */}
+                          <ResponsiveImage
+                            src={style.image}
+                            alt={`${style.title} - step-by-step tutorial showing how to wrap and style this elegant hijab look`}
+                            aspectRatio="4/3"
+                            className="md:aspect-[14/5]"
+                            sizes="(max-width: 768px) 100vw, 896px"
+                            priority={index === 0}
+                          />
                          
                          {/* Content */}
                          <div className="p-8">
