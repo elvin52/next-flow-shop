@@ -23,7 +23,7 @@ export const ResponsiveImage = ({
   };
 
   return (
-    <div className={`${aspectClasses[aspectRatio]} overflow-hidden ${className}`}>
+    <div className={`${aspectClasses[aspectRatio]} overflow-hidden min-h-[calc(100%+70px)] ${className}`}>
       <img
         src={src}
         alt={alt}
