@@ -64,14 +64,6 @@ const MuslimMenWearArticle = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Hero Image */}
-        <section className="relative h-64 md:h-96 overflow-hidden">
-          <img 
-            src={heroImage} 
-            alt="Traditional Islamic clothing for Muslim men including thobe, kufi, and jalabiya modest fashion"
-            className="w-full h-full object-cover"
-          />
-        </section>
 
         <div className="container mx-auto px-4 sm:px-6 py-8">
           {/* Breadcrumbs */}
