@@ -403,7 +403,7 @@ const HijabStyleGuide = () => {
                             src={style.image}
                             alt={`${style.title} - step-by-step tutorial showing how to wrap and style this elegant hijab look`}
                             aspectRatio="4/3"
-                            className="md:aspect-[14/5]"
+                            className="md:aspect-[14/5] min-h-[270px]"
                             sizes="(max-width: 768px) 100vw, 896px"
                             priority={index === 0}
                           />
