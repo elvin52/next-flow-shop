@@ -174,45 +174,67 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Categories Grid */}
+        {/* Popular Topics */}
         <section className="py-16 bg-gradient-to-b from-background to-sage-light/10">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-4 islamic-border pt-6">
-                Browse by Category
+                Popular Topics
               </h2>
-              <p className="text-warm-gray">Find exactly what you're looking for</p>
+              <p className="text-warm-gray">Explore our most read guides</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {categories.map((category, index) => {
-                // Map categories to actual article links
-                const categoryLinks = {
-                  "Hijab Styles": "/blog/hijab-styles-guide",
-                  "Modest Outfits": "/blog/hijab-styles-guide",
-                  "Fabric Guide": "/blog/hijab-styles-guide", 
-                  "Accessories": "/blog/hijab-styles-guide",
-                  "Seasonal Styles": "/blog/hijab-styles-guide",
-                  "Cultural Styles": "/blog/what-do-muslim-men-wear"
-                };
-                
-                return (
-                  <Link key={index} to={categoryLinks[category.name as keyof typeof categoryLinks] || "/blog"}>
-                    <Card className="card-elegant hover-lift group cursor-pointer">
-                      <CardContent className="p-6">
-                        <h3 className="font-playfair text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                          {category.name}
-                        </h3>
-                        <p className="text-warm-gray text-sm mb-4">{category.description}</p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-primary font-medium text-sm">{category.count}</span>
-                          <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <Link to="/blog/hijab-styles-guide">
+                <Card className="card-elegant hover-lift group cursor-pointer text-center">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl">🧕</span>
+                    </div>
+                    <h3 className="font-playfair text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                      Hijab Styling
+                    </h3>
+                    <p className="text-warm-gray text-sm mb-4">
+                      Complete guide to elegant hijab styles and techniques
+                    </p>
+                    <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all mx-auto" />
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link to="/blog/what-is-an-abaya">
+                <Card className="card-elegant hover-lift group cursor-pointer text-center">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl">👘</span>
+                    </div>
+                    <h3 className="font-playfair text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                      Traditional Wear
+                    </h3>
+                    <p className="text-warm-gray text-sm mb-4">
+                      Understanding abayas and traditional Islamic clothing
+                    </p>
+                    <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all mx-auto" />
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link to="/blog/what-do-muslim-men-wear">
+                <Card className="card-elegant hover-lift group cursor-pointer text-center">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl">🕌</span>
+                    </div>
+                    <h3 className="font-playfair text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                      Men's Fashion
+                    </h3>
+                    <p className="text-warm-gray text-sm mb-4">
+                      Traditional Islamic clothing for men worldwide
+                    </p>
+                    <ArrowRight className="h-4 w-4 text-warm-gray group-hover:text-primary group-hover:translate-x-1 transition-all mx-auto" />
+                  </CardContent>
+                </Card>
+              </Link>
             </div>
           </div>
         </section>
