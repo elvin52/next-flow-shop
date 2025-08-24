@@ -28,7 +28,8 @@ export const ResponsiveImage = ({
         src={src}
         alt={alt}
         sizes={sizes}
-        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+        className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+        style={{ objectPosition: src.includes('instant-hijab') ? 'center 20%' : 'center center' }}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
       />
