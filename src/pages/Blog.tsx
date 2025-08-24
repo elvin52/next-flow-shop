@@ -7,7 +7,7 @@ import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
 import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
-import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
+import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 
 const Blog = () => {
