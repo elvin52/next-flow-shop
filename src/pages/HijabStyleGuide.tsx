@@ -16,7 +16,7 @@ import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
 import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
 import layeredHijabImage from '@/assets/layered-hijab.jpg';
 import squareHijabImage from '@/assets/square-hijab-style.jpg';
-import turkishHijabImage from '@/assets/turkish-hijab.jpg';
+import turkishHijabImage from '@/assets/turkish-hijab-style.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 import instantHijabImage from '@/assets/instant-hijab-style.jpg';
 
