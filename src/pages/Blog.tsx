@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
-import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
-import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
-import accessoriesImage from '@/assets/hijab-accessories.jpg';
+import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
+import menWearImage from '@/assets/muslim-men-wear-hero.jpg';
+import abayaImage from '@/assets/abaya-without-person.jpg';
 
 const Blog = () => {
   const featuredArticles = [
     {
       title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
       description: "Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide.",
-      image: modernTurbanImage,
+      image: menWearImage,
       readTime: "10 min read",
       views: "856 views",
       category: "Cultural Guide",
@@ -25,7 +25,7 @@ const Blog = () => {
     {
       title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
       description: "Comprehensive guide about abayas, their cultural significance, and whether non-Muslims can respectfully wear this traditional Islamic garment.",
-      image: modernTurbanImage,
+      image: abayaImage,
       readTime: "12 min read",
       views: "1.2K views",
       category: "Cultural Guide",
