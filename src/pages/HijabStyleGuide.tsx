@@ -287,7 +287,7 @@ const HijabStyleGuide = () => {
               </div>
               <div className="flex items-center">
                 <Star className="h-4 w-4 mr-2" />
-                <span>Updated January 2025</span>
+                <span>Updated August 2025</span>
               </div>
               <Button variant="ghost" size="sm" onClick={() => navigator.share?.({
                 title: "Complete Hijab Style Guide 2025 - Modern & Classic",

@@ -9,13 +9,14 @@ import { NewsletterSignup } from '@/components/NewsletterSignup';
 import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
 import menWearImage from '@/assets/muslim-men-clothing-display.jpg';
 import abayaImage from '@/assets/abaya-without-person.jpg';
+import turkishHijabImage from '@/assets/turkish-hijab-style.jpg';
 
 const Blog = () => {
   const featuredArticles = [
     {
       title: "The Ultimate Guide to Hijab Styles",
       description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
-      image: classicWrapImage,
+      image: turkishHijabImage,
       readTime: "15 min read",
       views: "2.4K views",
       category: "Style Guide",
