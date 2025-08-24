@@ -119,14 +119,6 @@ const MuslimMenWearArticle = () => {
                 <h3 className="text-xl font-semibold mt-6 mb-3 text-foreground">
                   The Thobe: Symbol of Elegance
                 </h3>
-                
-                <p className="leading-relaxed mb-4">
-                  The thobe (also spelled thawb) stands as the most recognizable piece of traditional Islamic men's clothing. What is a thobe exactly? This ankle-length garment is a loose-fitting robe that provides complete coverage while allowing freedom of movement. Worn throughout the Middle East, North Africa, and beyond, the thobe embodies the Islamic principles of modesty and comfort.
-                </p>
-
-                <p className="leading-relaxed mb-4">
-                  Modern Muslim men appreciate the thobe for its versatility. Available in various fabrics from lightweight cotton for summer to wool blends for cooler weather, this garment adapts to different climates and occasions. The classic white thobe remains popular for Friday prayers and formal events, while colored variations suit everyday wear.
-                </p>
 
                 <div className="my-6">
                   <img 
@@ -137,18 +129,18 @@ const MuslimMenWearArticle = () => {
                     loading="lazy"
                   />
                 </div>
+                
+                <p className="leading-relaxed mb-4">
+                  The thobe (also spelled thawb) stands as the most recognizable piece of traditional Islamic men's clothing. What is a thobe exactly? This ankle-length garment is a loose-fitting robe that provides complete coverage while allowing freedom of movement. Worn throughout the Middle East, North Africa, and beyond, the thobe embodies the Islamic principles of modesty and comfort.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Modern Muslim men appreciate the thobe for its versatility. Available in various fabrics from lightweight cotton for summer to wool blends for cooler weather, this garment adapts to different climates and occasions. The classic white thobe remains popular for Friday prayers and formal events, while colored variations suit everyday wear.
+                </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3 text-foreground">
                   Traditional Headwear: The Kufi and Beyond
                 </h3>
-                
-                <p className="leading-relaxed mb-4">
-                  The kufi represents one of the most significant pieces of Islamic men's headwear. This close-fitting cap serves both practical and spiritual purposes, worn during prayers and throughout daily life. Available in various styles - from simple cotton versions to ornately embroidered designs - the kufi connects Muslim men to their religious identity.
-                </p>
-
-                <p className="leading-relaxed mb-4">
-                  Beyond the kufi, many Muslim men wear regional variations of head coverings. The ghutra and keffiyeh, popular in Gulf countries, provide protection from sun and sand while maintaining cultural identity. These traditional garments demonstrate how Islamic clothing adapts to local environments and customs.
-                </p>
 
                 <div className="my-6">
                   <img 
@@ -159,14 +151,18 @@ const MuslimMenWearArticle = () => {
                     loading="lazy"
                   />
                 </div>
+                
+                <p className="leading-relaxed mb-4">
+                  The kufi represents one of the most significant pieces of Islamic men's headwear. This close-fitting cap serves both practical and spiritual purposes, worn during prayers and throughout daily life. Available in various styles - from simple cotton versions to ornately embroidered designs - the kufi connects Muslim men to their religious identity.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Beyond the kufi, many Muslim men wear regional variations of head coverings. The ghutra and keffiyeh, popular in Gulf countries, provide protection from sun and sand while maintaining cultural identity. These traditional garments demonstrate how Islamic clothing adapts to local environments and customs.
+                </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3 text-foreground">
                   The Jalabiya: Comfort Meets Tradition
                 </h3>
-                
-                <p className="leading-relaxed mb-4">
-                  Similar to the thobe but often featuring wider sleeves and a more relaxed fit, the jalabiya offers supreme comfort for daily wear. This traditional garment, popular in Egypt and surrounding regions, exemplifies how Islamic clothing prioritizes both modesty and practicality.
-                </p>
 
                 <div className="my-6">
                   <img 
@@ -177,6 +173,10 @@ const MuslimMenWearArticle = () => {
                     loading="lazy"
                   />
                 </div>
+                
+                <p className="leading-relaxed mb-4">
+                  Similar to the thobe but often featuring wider sleeves and a more relaxed fit, the jalabiya offers supreme comfort for daily wear. This traditional garment, popular in Egypt and surrounding regions, exemplifies how Islamic clothing prioritizes both modesty and practicality.
+                </p>
 
                 <h2 className="text-2xl font-playfair font-bold mt-8 mb-4 text-foreground">
                   Regional Variations and Cultural Influence
