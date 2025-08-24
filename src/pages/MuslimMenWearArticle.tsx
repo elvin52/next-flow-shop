@@ -71,16 +71,6 @@ const MuslimMenWearArticle = () => {
             alt="Traditional Islamic clothing for Muslim men including thobe, kufi, and jalabiya modest fashion"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-center text-white">
-              <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
-                What Do Muslim Men Wear?
-              </h1>
-              <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
-                Traditional Islamic clothing guide for modern men
-              </p>
-            </div>
-          </div>
         </section>
 
         <div className="container mx-auto px-4 sm:px-6 py-8">
