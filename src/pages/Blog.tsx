@@ -7,11 +7,21 @@ import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
 import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
-import menWearImage from '@/assets/muslim-men-wear-hero.jpg';
+import menWearImage from '@/assets/muslim-men-clothing-display.jpg';
 import abayaImage from '@/assets/abaya-without-person.jpg';
 
 const Blog = () => {
   const featuredArticles = [
+    {
+      title: "The Ultimate Guide to Hijab Styles",
+      description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
+      image: classicWrapImage,
+      readTime: "15 min read",
+      views: "2.4K views",
+      category: "Style Guide",
+      featured: true,
+      link: "/blog/hijab-styles-guide"
+    },
     {
       title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
       description: "Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide.",
@@ -19,7 +29,7 @@ const Blog = () => {
       readTime: "10 min read",
       views: "856 views",
       category: "Cultural Guide",
-      featured: true,
+      featured: false,
       link: "/blog/what-do-muslim-men-wear"
     },
     {
@@ -31,16 +41,6 @@ const Blog = () => {
       category: "Cultural Guide",
       featured: false,
       link: "/blog/what-is-an-abaya"
-    },
-    {
-      title: "The Ultimate Guide to Hijab Styles",
-      description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
-      image: classicWrapImage,
-      readTime: "15 min read",
-      views: "2.4K views",
-      category: "Style Guide",
-      featured: false,
-      link: "/blog/hijab-styles-guide"
     }
   ];
 
