@@ -80,6 +80,9 @@ const MuslimMenWearArticle = () => {
           {/* Article meta */}
           <header className="mb-12">
             <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-8 text-foreground">
+                What Do Muslim Men Wear?
+              </h1>
               <div className="flex items-center justify-center gap-6 text-muted-foreground mb-8">
                 <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-2" />
