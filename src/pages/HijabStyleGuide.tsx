@@ -11,10 +11,10 @@ import { ArticleNavigation } from '@/components/common/ArticleNavigation';
 
 // Import images
 import heroImage from '@/assets/hijab-style-guide-hero.jpg';
-import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
-import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
+import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
+import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
 import layeredHijabImage from '@/assets/layered-hijab.jpg';
-import knotBowImage from '@/assets/knot-bow-hijab.jpg';
+import squareHijabImage from '@/assets/square-hijab-style.jpg';
 import turkishHijabImage from '@/assets/turkish-hijab.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 
@@ -109,7 +109,7 @@ const HijabStyleGuide = () => {
     {
       id: 'square-hijab',
       title: "Square Hijab Style",
-      image: knotBowImage,
+      image: squareHijabImage,
       technique: "Take a square hijab and fold it diagonally to create a triangle. Place the triangle on your head with the point at the back and the fold across your forehead. Take one corner and wrap it around your neck to the opposite side, then take the other corner and wrap it around the other way, creating a crossover effect. Tie the ends together at the back or side of your neck, or pin them for security. Adjust the front fold and side draping for your desired look.",
       whyItWorks: "Versatile shape for multiple styling options from casual to formal.",
       bestFor: "Fashion-forward looks",
