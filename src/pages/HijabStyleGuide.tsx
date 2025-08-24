@@ -16,9 +16,10 @@ import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
 import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
 import layeredHijabImage from '@/assets/layered-hijab.jpg';
 import squareHijabImage from '@/assets/square-hijab-style.jpg';
-import turkishHijabImage from '@/assets/turkish-hijab.jpg';
+import turkishHijabImage from '@/assets/turkish-hijab-style.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 import instantHijabImage from '@/assets/instant-hijab-style.jpg';
+import alAmiraHijabImage from '@/assets/al-amira-jpg';
 
 const HijabStyleGuide = () => {
   const breadcrumbItems = [
@@ -89,7 +90,7 @@ const HijabStyleGuide = () => {
     {
       id: 'al-amira-hijab',
       title: "Al-Amira Hijab Style",
-      image: modernTurbanImage,
+      image: alAmiraHijabImage,
       technique: "First, put on the close-fitting cap (bonnet) to cover your hair completely. Make sure it sits comfortably and securely on your head. Then, take the tube-like scarf piece and slip it over your head, positioning it so it covers the cap and drapes naturally around your shoulders. Adjust the scarf to ensure proper coverage of your neck and chest area. No pins needed as the cap provides grip.",
       whyItWorks: "Excellent coverage, stays secure all day without adjustment.",
       bestFor: "Active lifestyles, sports",
