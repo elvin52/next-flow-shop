@@ -395,7 +395,7 @@ const HijabStyleGuide = () => {
               {hijabStyles.map((style, index) => {
                 
                 return (
-                  <Card key={index} id={style.id} className="card-elegant overflow-hidden">
+                  <Card key={style.id} id={style.id} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
                        <div className="flex flex-col">
                           {/* Image */}
