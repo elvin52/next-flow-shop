@@ -7,41 +7,40 @@ import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
 import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
-import menWearImage from '@/assets/muslim-men-clothing-display.jpg';
-import abayaImage from '@/assets/abaya-without-person.jpg';
-import turkishHijabImage from '@/assets/turkish-hijab-style.jpg';
+import modernTurbanImage from '@/assets/turban-hijab-style.jpg';
+import accessoriesImage from '@/assets/hijab-accessories.jpg';
 
 const Blog = () => {
   const featuredArticles = [
     {
-      title: "The Ultimate Guide to Hijab Styles",
-      description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
-      image: turkishHijabImage,
-      readTime: "15 min read",
-      views: "2.4K views",
-      category: "Style Guide",
-      featured: true,
-      link: "/blog/hijab-styles-guide"
-    },
-    {
       title: "What Do Muslim Men Wear? Traditional Islamic Clothing Guide",
       description: "Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide.",
-      image: menWearImage,
+      image: modernTurbanImage,
       readTime: "10 min read",
       views: "856 views",
       category: "Cultural Guide",
-      featured: false,
+      featured: true,
       link: "/blog/what-do-muslim-men-wear"
     },
     {
       title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
       description: "Comprehensive guide about abayas, their cultural significance, and whether non-Muslims can respectfully wear this traditional Islamic garment.",
-      image: abayaImage,
+      image: modernTurbanImage,
       readTime: "12 min read",
       views: "1.2K views",
       category: "Cultural Guide",
       featured: false,
       link: "/blog/what-is-an-abaya"
+    },
+    {
+      title: "The Ultimate Guide to Hijab Styles",
+      description: "Comprehensive guide covering classic wraps, modern turbans, and trendsetting looks with detailed techniques for each style.",
+      image: classicWrapImage,
+      readTime: "15 min read",
+      views: "2.4K views",
+      category: "Style Guide",
+      featured: false,
+      link: "/blog/hijab-styles-guide"
     }
   ];
 
