@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
-import classicWrapImage from '@/assets/classic-wrap-hijab-style.jpg';
-import modernTurbanImage from '@/assets/modern-turban-hijab.jpg';
-import accessoriesImage from '@/assets/hijab-accessories.jpg';
+import classicWrapImage from '@/assets/classic-wrap-hijab.jpg';
+import modernTurbanImage from '@/assets/jalabiya-traditional-wear.jpg';
+import accessoriesImage from '@/assets/abaya-without-person.jpg';
 
 const Blog = () => {
   const featuredArticles = [
@@ -25,7 +25,7 @@ const Blog = () => {
     {
       title: "What is an Abaya? Can Non-Muslims Wear an Abaya?",
       description: "Comprehensive guide about abayas, their cultural significance, and whether non-Muslims can respectfully wear this traditional Islamic garment.",
-      image: modernTurbanImage,
+      image: accessoriesImage,
       readTime: "12 min read",
       views: "1.2K views",
       category: "Cultural Guide",
