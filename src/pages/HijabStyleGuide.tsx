@@ -19,7 +19,7 @@ import squareHijabImage from '@/assets/square-hijab-style.jpg';
 import turkishHijabImage from '@/assets/turkish-hijab-style.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
 import instantHijabImage from '@/assets/instant-hijab-style.jpg';
-import alAmiraHijabImage from '@/assets/al-amira-jpg';
+import alAmiraHijabImage from '@/assets/al-amira-hijab.png';
 
 const HijabStyleGuide = () => {
   const breadcrumbItems = [
