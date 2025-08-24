@@ -8,6 +8,7 @@ import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 
 import { SEOLink } from '@/components/common/SEOLink';
 import { ArticleNavigation } from '@/components/common/ArticleNavigation';
+import { ResponsiveImage } from '@/components/common/ResponsiveImage';
 
 // Import images
 import heroImage from '@/assets/hijab-style-guide-hero.jpg';
@@ -396,14 +397,15 @@ const HijabStyleGuide = () => {
                   <Card key={index} id={style.id} className="card-elegant overflow-hidden">
                     <CardContent className="p-0">
                        <div className="flex flex-col">
-                         {/* Image */}
-                         <div className="relative h-80">
-                           <img 
-                             src={style.image} 
-                             alt={style.title}
-                             className="w-full h-full object-cover"
-                           />
-                         </div>
+                          {/* Image */}
+                          <ResponsiveImage
+                            src={style.image}
+                            alt={`${style.title} - step-by-step tutorial showing how to wrap and style this elegant hijab look`}
+                            aspectRatio="4/3"
+                            className="md:aspect-[14/5]"
+                            sizes="(max-width: 768px) 100vw, 896px"
+                            priority={index === 0}
+                          />
                          
                          {/* Content */}
                          <div className="p-8">
