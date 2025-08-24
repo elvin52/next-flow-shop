@@ -18,6 +18,7 @@ import layeredHijabImage from '@/assets/layered-hijab.jpg';
 import squareHijabImage from '@/assets/square-hijab-style.jpg';
 import turkishHijabImage from '@/assets/turkish-hijab.jpg';
 import accessoriesImage from '@/assets/hijab-accessories.jpg';
+import instantHijabImage from '@/assets/instant-hijab-style.jpg';
 
 const HijabStyleGuide = () => {
   const breadcrumbItems = [
@@ -99,7 +100,7 @@ const HijabStyleGuide = () => {
     {
       id: 'instant-hijab',
       title: "Instant Hijab Style",
-      image: layeredHijabImage,
+      image: instantHijabImage,
       technique: "Simply slip the pre-sewn hijab over your head like putting on a hood. The built-in cap portion should sit snugly on your head, covering all your hair. Adjust the outer fabric layer to drape naturally around your shoulders and ensure proper coverage of your neck and chest. Some instant hijabs have adjustable ties or velcro for a custom fit - adjust these as needed for comfort and security.",
       whyItWorks: "Perfect for busy mornings, provides polished look with minimal effort.",
       bestFor: "Quick styling, beginners",
