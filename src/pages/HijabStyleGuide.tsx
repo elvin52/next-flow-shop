@@ -455,8 +455,8 @@ const HijabStyleGuide = () => {
                                   <Play className="h-4 w-4 text-primary" />
                                 </div>
                                 <div>
-                                  <h4 className="font-semibold text-lg">Video Tutorial Available</h4>
-                                  <p className="text-sm text-[hsl(var(--warm-gray))]">Step-by-step visual guide • {style.difficulty} • {style.time}</p>
+                                  <h4 className="font-semibold text-lg">Video Tutorials Coming Soon</h4>
+                                  <p className="text-sm text-[hsl(var(--warm-gray))]">Comprehensive step-by-step hijab styling video guides in production • {style.difficulty} • {style.time}</p>
                                 </div>
                               </div>
                               
