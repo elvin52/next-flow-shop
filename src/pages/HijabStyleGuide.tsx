@@ -484,13 +484,9 @@ const HijabStyleGuide = () => {
                               </div>
                               
                               <div className="mt-4 pt-4 border-t border-primary/10">
-                                <p className="text-xs text-[hsl(var(--warm-gray))] mb-3">
+                                <p className="text-xs text-[hsl(var(--warm-gray))]">
                                   💡 <strong>Pro Tip:</strong> Practice this style 2-3 times to master the technique. Start slowly and focus on each step.
                                 </p>
-                                <Button variant="outline" size="sm" className="w-full">
-                                  <Play className="h-4 w-4 mr-2" />
-                                  Watch Video Tutorial
-                                </Button>
                               </div>
                             </div>
                           </div>
