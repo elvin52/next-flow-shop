@@ -357,7 +357,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                 Hijab styles express your personality while blending tradition with modern fashion. As <SEOLink to="https://www.dukeupress.edu/muslim-fashion" isExternal={true} className="text-primary hover:underline">Reina Lewis explains in <em>Muslim Fashion: Contemporary Style Cultures</em></SEOLink>, hijab styling is both personal and cultural expression. This guide covers <strong>classic Shayla hijab</strong>, <strong>Al-Amira style</strong>, <strong>instant hijabs</strong>, and <strong>square hijab</strong> techniques to master hijab fashion in 2025.
               </p>
               <p className="text-lg text-foreground leading-relaxed mb-6">
-                As a daily hijabi, I've personally tested these styles with different fabrics and shared them with hundreds of clients. Style your <strong>jersey hijab</strong> for daily wear, <strong>silk hijab</strong> for special events, or explore <strong>hijab styles for work</strong>, <strong>sports</strong>, and <strong>weddings</strong> with our tutorials and tips.
+                As a hijabi, I've personally tested these styles with different fabrics. Style your <strong>jersey hijab</strong> for daily wear, <strong>silk hijab</strong> for special events, or explore <strong>hijab styles for work</strong>, <strong>sports</strong>, and <strong>weddings</strong> with our tutorials and tips.
               </p>
             </div>
           </div>
