@@ -317,8 +317,13 @@ Step 6: Adjust the front fold and side draping for your desired look`,
               Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends.
             </p>
             
-            
-            {/* Article meta */}
+            {/* Author Bio for E-A-T */}
+            <div className="mb-8 text-center max-w-2xl mx-auto">
+              <h3 className="font-semibold text-foreground mb-2">By Omaima El Hamri</h3>
+              <p className="text-sm text-[hsl(var(--warm-gray))] leading-relaxed">
+                Modest fashion stylist and hijabi for 12+ years. As a daily hijabi, I've personally tested these styles.
+              </p>
+            </div>
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[hsl(var(--warm-gray))]">
               <div className="flex items-center">
                 <Clock className="h-4 w-4 mr-2" />
