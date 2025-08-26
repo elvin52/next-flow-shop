@@ -57,7 +57,12 @@ const HijabStyleGuide = () => {
       id: 'classic-wrap',
       title: "Classic Wrap Hijab",
       image: classicWrapImage,
-      technique: "Place the hijab on your head with one side hanging longer than the other (about 2/3 to 1/3 ratio). Take the longer side and wrap it around your face, bringing it under your chin and up over the opposite shoulder. Pin the hijab under your chin for security, then drape the remaining fabric over your shoulder and pin at the shoulder. Adjust the fabric around your face for comfort and coverage.",
+      technique: `Step 1: Position the hijab on your head with one side hanging longer (2/3) than the other (1/3)
+Step 2: Take the longer side and wrap it around your face under your chin
+Step 3: Bring the wrapped side up over the opposite shoulder
+Step 4: Pin securely under your chin for stability
+Step 5: Drape the remaining fabric over your shoulder and pin at the shoulder
+Step 6: Adjust the fabric around your face for comfort and complete coverage`,
       whyItWorks: "Works with any fabric—silk for luxury or chiffon for summer comfort.",
       bestFor: "Daily wear, all fabrics",
       difficulty: "Easy",
@@ -68,7 +73,13 @@ const HijabStyleGuide = () => {
       id: 'modern-turban',
       title: "Modern Turban Hijab",
       image: modernTurbanImage,
-      technique: "Start with a rectangular hijab and fold it diagonally to create a triangle. Place the triangle on your head with the fold at your forehead. Take both ends and cross them under your chin, then bring them up and around your head like a turban. Twist the ends together at the top or side of your head, then tuck the remaining fabric neatly underneath. Adjust the front fold for desired coverage.",
+      technique: `Step 1: Start with a rectangular hijab and fold it diagonally to create a triangle
+Step 2: Place the triangle on your head with the fold at your forehead
+Step 3: Take both ends and cross them under your chin
+Step 4: Bring both crossed ends up and around your head like a turban
+Step 5: Twist the ends together at the top or side of your head
+Step 6: Tuck the remaining fabric neatly underneath
+Step 7: Adjust the front fold for your desired coverage`,
       whyItWorks: "Minimal style perfect for casual looks with undercap stability.",
       bestFor: "Casual outings",
       difficulty: "Medium",
@@ -79,7 +90,12 @@ const HijabStyleGuide = () => {
       id: 'turkish-hijab',
       title: "Turkish Hijab",
       image: turkishHijabImage,
-      technique: "Place the scarf on your head, leaving both sides equal in length, cross both ends at the front of your forehead to form an 'X' and bring them back. Tie them or hide them at the nape of your neck, adjust the folds and tuck in the ends so that it looks neat and elegant.",
+      technique: `Step 1: Place the scarf on your head with both sides equal in length
+Step 2: Cross both ends at the front of your forehead to form an 'X'
+Step 3: Bring both crossed ends back behind your head
+Step 4: Tie the ends together at the nape of your neck
+Step 5: Adjust the folds for a neat appearance
+Step 6: Tuck in any loose ends for an elegant finish`,
       whyItWorks: "Reflects cultural heritage, pairs with modern and traditional outfits.",
       bestFor: "Formal events",
       difficulty: "Medium",
@@ -90,7 +106,12 @@ const HijabStyleGuide = () => {
       id: 'al-amira-hijab',
       title: "Al-Amira Hijab Style",
       image: alAmiraHijabImage,
-      technique: "First, put on the close-fitting cap (bonnet) to cover your hair completely. Make sure it sits comfortably and securely on your head. Then, take the tube-like scarf piece and slip it over your head, positioning it so it covers the cap and drapes naturally around your shoulders. Adjust the scarf to ensure proper coverage of your neck and chest area. No pins needed as the cap provides grip.",
+      technique: `Step 1: Put on the close-fitting cap (bonnet) to cover your hair completely
+Step 2: Ensure the cap sits comfortably and securely on your head
+Step 3: Take the tube-like scarf piece and slip it over your head
+Step 4: Position the scarf to cover the cap completely
+Step 5: Adjust so it drapes naturally around your shoulders
+Step 6: Ensure proper coverage of neck and chest area (no pins needed!)`,
       whyItWorks: "Excellent coverage, stays secure all day without adjustment.",
       bestFor: "Active lifestyles, sports",
       difficulty: "Easy",
@@ -101,7 +122,11 @@ const HijabStyleGuide = () => {
       id: 'instant-hijab',
       title: "Instant Hijab Style",
       image: instantHijabImage,
-      technique: "Simply slip the pre-sewn hijab over your head like putting on a hood. The built-in cap portion should sit snugly on your head, covering all your hair. Adjust the outer fabric layer to drape naturally around your shoulders and ensure proper coverage of your neck and chest. Some instant hijabs have adjustable ties or velcro for a custom fit - adjust these as needed for comfort and security.",
+      technique: `Step 1: Simply slip the pre-sewn hijab over your head like putting on a hood
+Step 2: Ensure the built-in cap portion sits snugly covering all your hair
+Step 3: Adjust the outer fabric layer to drape naturally around shoulders
+Step 4: Check for proper coverage of neck and chest areas
+Step 5: If available, adjust ties or velcro for custom fit and security`,
       whyItWorks: "Perfect for busy mornings, provides polished look with minimal effort.",
       bestFor: "Quick styling, beginners",
       difficulty: "Easy",
@@ -112,7 +137,12 @@ const HijabStyleGuide = () => {
       id: 'square-hijab',
       title: "Square Hijab Style",
       image: squareHijabImage,
-      technique: "Take a square hijab and fold it diagonally to create a triangle. Place the triangle on your head with the point at the back and the fold across your forehead. Take one corner and wrap it around your neck to the opposite side, then take the other corner and wrap it around the other way, creating a crossover effect. Tie the ends together at the back or side of your neck, or pin them for security. Adjust the front fold and side draping for your desired look.",
+      technique: `Step 1: Take a square hijab and fold it diagonally to create a triangle
+Step 2: Place the triangle on your head with point at the back, fold across forehead
+Step 3: Take one corner and wrap it around your neck to the opposite side
+Step 4: Take the other corner and wrap it the other way (crossover effect)
+Step 5: Tie the ends together at the back or side of your neck (or pin for security)
+Step 6: Adjust the front fold and side draping for your desired look`,
       whyItWorks: "Versatile shape for multiple styling options from casual to formal.",
       bestFor: "Fashion-forward looks",
       difficulty: "Medium",
