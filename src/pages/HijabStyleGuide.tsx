@@ -5,7 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
-import { SidebarProvider } from '@/components/ui/sidebar';
 import { HijabGuideTableOfContents } from '@/components/HijabGuideTableOfContents';
 
 import { SEOLink } from '@/components/common/SEOLink';
@@ -278,8 +277,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
   ];
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen bg-background flex w-full">
+    <div className="min-h-screen bg-background">
       <Helmet>
         <title>Complete Hijab Style Guide 2025 - Modern & Classic | Hidayyah</title>
         <meta name="description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
@@ -294,8 +292,8 @@ Step 6: Adjust the front fold and side draping for your desired look`,
         </script>
       </Helmet>
 
-      
-      
+      {/* Sidebar for table of contents */}
+      <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
 
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
@@ -309,12 +307,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
         </Link>
       </div>
 
-        {/* Sidebar for table of contents */}
-        <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
-        
-        {/* Main content without left margin */}
-        <div className="flex-1">
-          <article className="container mx-auto px-4 sm:px-6 pb-16">
+      <article className="container mx-auto px-4 sm:px-6 pb-16">
         {/* Article header */}
         <header className="max-w-4xl mx-auto mb-12">
           <div className="text-center mb-8">
@@ -985,11 +978,9 @@ Step 6: Adjust the front fold and side draping for your desired look`,
               }}
             />
           </section>
-          </div>
-        </article>
         </div>
-      </div>
-    </SidebarProvider>
+        </article>
+    </div>
   );
 };
 
