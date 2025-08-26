@@ -218,33 +218,21 @@ Step 6: Adjust the front fold and side draping for your desired look`,
         occasion: "Office & Professional",
         styles: ["Classic Wrap", "Al-Amira"],
         fabrics: ["Jersey", "Georgette", "Modal"],
-        tips: (
-          <>
-            According to <SEOLink to="https://www.voguearabia.com" isExternal={true} className="text-primary hover:underline">Vogue Arabia</SEOLink>, neutral-toned jersey hijabs complement corporate outfits best. Choose structured styles that maintain professionalism.
-          </>
-        ),
+        tips: "According to Vogue Arabia, neutral-toned jersey hijabs complement corporate outfits best. Choose structured styles that maintain professionalism.",
         shopLink: "/womens-clothing/hijab"
       },
       {
         occasion: "Wedding & Formal Events",
         styles: ["Turkish Hijab", "Layered Trendsetter", "Square Hijab"],
         fabrics: ["Silk", "Satin", "Chiffon"],
-        tips: (
-          <>
-            <SEOLink to="https://www.hautehijab.com" isExternal={true} className="text-primary hover:underline">Haute Hijab's</SEOLink> bridal collection highlights silk as the most luxurious option. Opt for decorative pins and elegant draping for special occasions.
-          </>
-        ),
+        tips: "Haute Hijab's bridal collection highlights silk as the most luxurious option. Opt for decorative pins and elegant draping for special occasions.",
         shopLink: "/womens-clothing/islamic-wedding-clothes"
       },
       {
         occasion: "Sports & Active Wear",
         styles: ["Al-Amira", "Instant Hijab", "Modern Turban"],
         fabrics: ["Jersey", "Modal"],
-        tips: (
-          <>
-            <SEOLink to="https://www.nike.com/t/pro-hijab-womens-training-hijab-8QrJ8X" isExternal={true} className="text-primary hover:underline">Nike Pro Hijab</SEOLink> (2017) set the standard for breathable sports hijabs. Choose moisture-wicking fabrics and secure styles that won't shift during activity.
-          </>
-        ),
+        tips: "Nike Pro Hijab (2017) set the standard for breathable sports hijabs. Choose moisture-wicking fabrics and secure styles that won't shift during activity.",
         shopLink: "/womens-clothing/hijab-swimming-cap"
       },
     {
@@ -364,7 +352,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           <div className="mb-16">
             <div className="prose prose-lg max-w-none">
               <p className="text-lg text-foreground leading-relaxed mb-6">
-                Hijab styles express your personality while blending tradition with modern fashion. As <SEOLink to="https://www.dukeupress.edu/muslim-fashion" isExternal={true} className="text-primary hover:underline">Reina Lewis explains in <em>Muslim Fashion: Contemporary Style Cultures</em></SEOLink>, hijab styling is both personal and cultural expression. This guide covers <strong>classic Shayla hijab</strong>, <strong>Al-Amira style</strong>, <strong>instant hijabs</strong>, and <strong>square hijab</strong> techniques to master hijab fashion in 2025.
+                Hijab styles express your personality while blending tradition with modern fashion. As Reina Lewis explains in <em>Muslim Fashion: Contemporary Style Cultures</em>, hijab styling is both personal and cultural expression. This guide covers <strong>classic Shayla hijab</strong>, <strong>Al-Amira style</strong>, <strong>instant hijabs</strong>, and <strong>square hijab</strong> techniques to master hijab fashion in 2025.
               </p>
               <p className="text-lg text-foreground leading-relaxed mb-6">
                 As a daily hijabi, I've personally tested these styles with different fabrics and shared them with hundreds of clients. Style your <strong>jersey hijab</strong> for daily wear, <strong>silk hijab</strong> for special events, or explore <strong>hijab styles for work</strong>, <strong>sports</strong>, and <strong>weddings</strong> with our tutorials and tips.
@@ -636,7 +624,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                               <BookOpen className="h-4 w-4 mr-2 text-primary" />
                               Styling Tips
                             </h4>
-                            <div className="text-[hsl(var(--warm-gray))] leading-relaxed">{occasion.tips}</div>
+                            <p className="text-[hsl(var(--warm-gray))] leading-relaxed">{occasion.tips}</p>
                           </div>
                         </div>
                       </div>
@@ -952,36 +940,6 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                     <span>Explore More Islamic Fashion Guides</span>
                     <ArrowLeft className="h-4 w-4 ml-2 rotate-180" />
                   </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Sources & References */}
-          <section className="mb-16">
-            <Card className="border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-playfair font-bold text-primary mb-6 flex items-center">
-                  <BookOpen className="h-6 w-6 mr-3" />
-                  Sources & Further Reading
-                </h3>
-                <div className="space-y-4 text-[hsl(var(--warm-gray))]">
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Academic & Fashion References:</h4>
-                    <ul className="space-y-2 ml-4">
-                      <li>• <SEOLink to="https://www.dukeupress.edu/muslim-fashion" isExternal={true} className="text-primary hover:underline">Reina Lewis – Muslim Fashion: Contemporary Style Cultures (Duke University Press)</SEOLink></li>
-                      <li>• <SEOLink to="https://www.ruuqwear.com/blogs/articles/understanding-the-hijab-cultural-religious-and-social-perspectives" isExternal={true} className="text-primary hover:underline">Understanding the Hijab: Cultural, Religious, and Social Perspectives - Ruuq Wear</SEOLink></li>
-                      <li>• <SEOLink to="https://istanbulfashioncenter.com/blogs/news/modest-fashion-key-trends-to-watch-in-2025" isExternal={true} className="text-primary hover:underline">Modest Fashion: Key Trends to Watch in 2025 - Istanbul Fashion Center</SEOLink></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Industry Sources:</h4>
-                    <ul className="space-y-2 ml-4">
-                      <li>• <SEOLink to="https://www.voguearabia.com" isExternal={true} className="text-primary hover:underline">Vogue Arabia - Professional Hijab Styling</SEOLink></li>
-                      <li>• <SEOLink to="https://www.hautehijab.com" isExternal={true} className="text-primary hover:underline">Haute Hijab - Bridal & Formal Collections</SEOLink></li>
-                      <li>• <SEOLink to="https://www.nike.com/t/pro-hijab-womens-training-hijab-8QrJ8X" isExternal={true} className="text-primary hover:underline">Nike Pro Hijab - Sports Performance</SEOLink></li>
-                    </ul>
-                  </div>
                 </div>
               </CardContent>
             </Card>
