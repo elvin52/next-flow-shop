@@ -5,6 +5,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { HijabGuideTableOfContents } from '@/components/HijabGuideTableOfContents';
 
 import { SEOLink } from '@/components/common/SEOLink';
 import { ArticleNavigation } from '@/components/common/ArticleNavigation';
@@ -276,7 +278,8 @@ Step 6: Adjust the front fold and side draping for your desired look`,
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <SidebarProvider>
+      <div className="min-h-screen bg-background flex w-full">
       <Helmet>
         <title>Complete Hijab Style Guide 2025 - Modern & Classic | Hidayyah</title>
         <meta name="description" content="Master hijab styling with step-by-step tutorials, fabric tips, and accessory guides. From classic wraps to modern trends." />
@@ -306,7 +309,12 @@ Step 6: Adjust the front fold and side draping for your desired look`,
         </Link>
       </div>
 
-      <article className="container mx-auto px-4 sm:px-6 pb-16">
+        {/* Sidebar for table of contents */}
+        <HijabGuideTableOfContents className="hidden lg:block fixed left-0 top-0 h-screen overflow-y-auto z-10" />
+        
+        {/* Main content with left margin for sidebar */}
+        <div className="flex-1 lg:ml-64">
+          <article className="container mx-auto px-4 sm:px-6 pb-16">
         {/* Article header */}
         <header className="max-w-4xl mx-auto mb-12">
           <div className="text-center mb-8">
@@ -363,7 +371,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </div>
 
           {/* Face Shape Navigator */}
-          <section className="mb-16">
+          <section id="face-shapes" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Find Your Perfect Style by Face Shape
             </h2>
@@ -563,7 +571,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Hijab Styles for Different Occasions */}
-          <section className="mb-16">
+          <section id="occasion-styling" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Hijab Styles for Every Occasion
             </h2>
@@ -641,7 +649,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Materials and Fabrics */}
-          <section className="mb-16">
+          <section id="hijab-materials" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               How to Choose Hijab Fabrics: Complete Material Guide
             </h2>
@@ -678,7 +686,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Accessories */}
-          <section className="mb-16">
+          <section id="hijab-accessories" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Build Your Perfect Hijab Kit: Essential Shopping Guide
             </h2>
@@ -802,7 +810,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Hijab Styles for Face Shapes */}
-          <section className="mb-16">
+          <section id="hijab-face-shapes" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Hijab Styles for Oval, Round & Heart-Shaped Faces
             </h2>
@@ -850,7 +858,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Modern Trends */}
-          <section className="mb-16">
+          <section id="hijab-care" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6 islamic-border pt-6">
               2025 Hijab Fashion Trends
             </h2>
@@ -890,7 +898,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* FAQ Section */}
-          <section className="mb-16">
+          <section id="faq-section" className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Frequently Asked Questions About Hijab Styling
             </h2>
@@ -977,9 +985,11 @@ Step 6: Adjust the front fold and side draping for your desired look`,
               }}
             />
           </section>
+          </div>
+        </article>
         </div>
-      </article>
-    </div>
+      </div>
+    </SidebarProvider>
   );
 };
 
