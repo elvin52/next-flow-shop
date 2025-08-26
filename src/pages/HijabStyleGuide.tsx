@@ -799,13 +799,6 @@ Step 6: Adjust the front fold and side draping for your desired look`,
               </p>
             </div>
             
-            <div className="relative mt-8">
-              <img 
-                src={accessoriesImage} 
-                alt="Complete collection of hijab accessories including magnets, undercaps, volumizing scrunchies, decorative pins, and safety pins"
-                className="w-full h-64 object-cover rounded-lg shadow-lg"
-              />
-            </div>
           </section>
 
           {/* Hijab Styles for Face Shapes */}
