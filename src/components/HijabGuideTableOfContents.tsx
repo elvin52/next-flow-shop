@@ -43,7 +43,7 @@ export function HijabGuideTableOfContents({ className }: TableOfContentsProps) {
   };
 
   return (
-    <Sidebar className={`w-64 border-r bg-card/50 backdrop-blur-sm ${className}`}>
+    <Sidebar className={`w-64 border-r bg-card/90 backdrop-blur-md shadow-lg rounded-l-lg ${className}`}>
       <SidebarContent className="p-4">
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">

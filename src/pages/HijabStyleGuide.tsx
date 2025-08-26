@@ -310,10 +310,10 @@ Step 6: Adjust the front fold and side draping for your desired look`,
       </div>
 
         {/* Sidebar for table of contents */}
-        <HijabGuideTableOfContents className="hidden lg:block fixed left-0 top-0 h-screen overflow-y-auto z-10" />
+        <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
         
-        {/* Main content with left margin for sidebar */}
-        <div className="flex-1 lg:ml-64">
+        {/* Main content without left margin */}
+        <div className="flex-1">
           <article className="container mx-auto px-4 sm:px-6 pb-16">
         {/* Article header */}
         <header className="max-w-4xl mx-auto mb-12">
