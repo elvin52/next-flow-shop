@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
 import { HijabGuideTableOfContents } from '@/components/HijabGuideTableOfContents';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 import { SEOLink } from '@/components/common/SEOLink';
 import { ArticleNavigation } from '@/components/common/ArticleNavigation';
@@ -293,7 +294,9 @@ Step 6: Adjust the front fold and side draping for your desired look`,
       </Helmet>
 
       {/* Sidebar for table of contents */}
-      <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
+      <SidebarProvider>
+        <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
+      </SidebarProvider>
 
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
