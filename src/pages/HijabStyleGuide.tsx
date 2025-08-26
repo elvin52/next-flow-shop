@@ -91,7 +91,7 @@ Step 7: Adjust the front fold for your desired coverage`,
       title: "Turkish Hijab",
       image: turkishHijabImage,
       technique: `Step 1: Place the scarf on your head with both sides equal in length
-Step 2: Cross both ends at the front of your forehead to form an 'X'
+Step 2: Cross both ends at the front of your forehead to form an "X"
 Step 3: Bring both crossed ends back behind your head
 Step 4: Tie the ends together at the nape of your neck
 Step 5: Adjust the folds for a neat appearance
