@@ -5,7 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { ArrowLeft, Clock, Share2, BookOpen, Play, Heart, Star, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StructuredBreadcrumbs from '@/components/StructuredBreadcrumbs';
-import { HijabGuideTableOfContents } from '@/components/HijabGuideTableOfContents';
 
 import { SEOLink } from '@/components/common/SEOLink';
 import { ArticleNavigation } from '@/components/common/ArticleNavigation';
@@ -292,8 +291,8 @@ Step 6: Adjust the front fold and side draping for your desired look`,
         </script>
       </Helmet>
 
-      {/* Sidebar for table of contents */}
-      <HijabGuideTableOfContents className="hidden lg:block fixed right-4 top-24 h-[calc(100vh-8rem)] overflow-y-auto z-20" />
+      
+      
 
       {/* Breadcrumb and back navigation */}
       <div className="container mx-auto px-4 sm:px-6 pt-8">
@@ -364,7 +363,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </div>
 
           {/* Face Shape Navigator */}
-          <section id="face-shapes" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Find Your Perfect Style by Face Shape
             </h2>
@@ -564,7 +563,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Hijab Styles for Different Occasions */}
-          <section id="occasion-styling" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Hijab Styles for Every Occasion
             </h2>
@@ -642,7 +641,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Materials and Fabrics */}
-          <section id="hijab-materials" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               How to Choose Hijab Fabrics: Complete Material Guide
             </h2>
@@ -679,7 +678,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Accessories */}
-          <section id="hijab-accessories" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Build Your Perfect Hijab Kit: Essential Shopping Guide
             </h2>
@@ -803,7 +802,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Hijab Styles for Face Shapes */}
-          <section id="hijab-face-shapes" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Hijab Styles for Oval, Round & Heart-Shaped Faces
             </h2>
@@ -851,7 +850,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* Modern Trends */}
-          <section id="hijab-care" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6 islamic-border pt-6">
               2025 Hijab Fashion Trends
             </h2>
@@ -891,7 +890,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
           </section>
 
           {/* FAQ Section */}
-          <section id="faq-section" className="mb-16">
+          <section className="mb-16">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-8 islamic-border pt-6">
               Frequently Asked Questions About Hijab Styling
             </h2>
@@ -979,7 +978,7 @@ Step 6: Adjust the front fold and side draping for your desired look`,
             />
           </section>
         </div>
-        </article>
+      </article>
     </div>
   );
 };
