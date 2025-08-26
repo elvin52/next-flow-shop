@@ -473,8 +473,23 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                             </div>
                             
                             <div>
-                              <h4 className="font-semibold text-primary mb-2">Technique:</h4>
-                              <p className="text-[hsl(var(--warm-gray))]">{style.technique}</p>
+                              <h4 className="font-semibold text-primary mb-4">Step-by-Step Technique:</h4>
+                              <div className="space-y-3">
+                                {style.technique.split('\n').map((step, stepIndex) => {
+                                  const stepNumber = stepIndex + 1;
+                                  const stepText = step.replace(/^Step \d+:\s*/, '');
+                                  return (
+                                    <div key={stepIndex} className="flex items-start gap-4 p-3 rounded-lg bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all duration-200 animate-fade-in">
+                                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                        {stepNumber}
+                                      </div>
+                                      <div className="flex-1 pt-1">
+                                        <p className="text-[hsl(var(--warm-gray))] leading-relaxed">{stepText}</p>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             </div>
                             
                             <div>
