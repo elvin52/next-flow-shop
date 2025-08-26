@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { BookOpen, ChevronUp } from 'lucide-react';
+import { BookOpen, ChevronUp, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
 
 interface TableOfContentsProps {
   className?: string;
@@ -137,31 +144,75 @@ export const TableOfContents = ({ className }: TableOfContentsProps) => {
 
       {/* Mobile/Tablet - Bottom sticky navigation */}
       <div className="xl:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
-        <div className="bg-background/95 backdrop-blur-sm border border-border rounded-full px-4 py-2 shadow-lg">
-          <div className="flex items-center gap-3">
-            <BookOpen className="h-4 w-4 text-primary" />
-            <select
-              value={activeSection}
-              onChange={(e) => scrollToSection(e.target.value)}
-              className="bg-transparent text-sm font-medium text-foreground border-none outline-none cursor-pointer"
-            >
-              <option value="">Navigate to...</option>
-              {tocSections.map((section) => (
-                <optgroup key={section.id} label={section.title}>
-                  <option value={section.id}>{section.title}</option>
-                  {section.subsections.map((subsection) => (
-                    <option key={subsection.id} value={subsection.id}>
-                      • {subsection.title}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-            </select>
+        <div className="bg-background/95 backdrop-blur-sm border border-border rounded-full px-3 py-2 shadow-lg">
+          <div className="flex items-center gap-2">
+            <BookOpen className="h-4 w-4 text-primary flex-shrink-0" />
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className="h-8 px-3 text-sm font-medium justify-between min-w-[120px] hover:bg-muted/50"
+                >
+                  <span className="truncate">
+                    {activeSection ? 
+                      tocSections.find(s => s.id === activeSection)?.title ||
+                      tocSections.find(s => s.subsections.some(sub => sub.id === activeSection))?.subsections.find(sub => sub.id === activeSection)?.title ||
+                      'Navigate...'
+                      : 'Navigate...'
+                    }
+                  </span>
+                  <ChevronDown className="h-3 w-3 ml-1 flex-shrink-0" />
+                </Button>
+              </DropdownMenuTrigger>
+              
+              <DropdownMenuContent 
+                align="center" 
+                className="w-64 max-h-80 overflow-y-auto bg-background/98 backdrop-blur-sm border border-border"
+                sideOffset={8}
+              >
+                {tocSections.map((section, index) => (
+                  <div key={section.id}>
+                    <DropdownMenuItem
+                      onClick={() => scrollToSection(section.id)}
+                      className={cn(
+                        "cursor-pointer px-3 py-2 text-sm",
+                        activeSection === section.id && "bg-muted text-primary font-medium"
+                      )}
+                    >
+                      {section.title}
+                    </DropdownMenuItem>
+                    
+                    {section.subsections.length > 0 && (
+                      <div className="ml-4 border-l border-muted">
+                        {section.subsections.map((subsection) => (
+                          <DropdownMenuItem
+                            key={subsection.id}
+                            onClick={() => scrollToSection(subsection.id)}
+                            className={cn(
+                              "cursor-pointer px-3 py-1.5 text-xs text-muted-foreground",
+                              activeSection === subsection.id && "bg-muted text-primary font-medium"
+                            )}
+                          >
+                            • {subsection.title}
+                          </DropdownMenuItem>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {index < tocSections.length - 1 && <DropdownMenuSeparator />}
+                  </div>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
             <Button
               variant="ghost"
               size="sm"
               onClick={scrollToTop}
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 flex-shrink-0 hover:bg-muted/50"
+              aria-label="Scroll to top"
             >
               <ChevronUp className="h-4 w-4" />
             </Button>
