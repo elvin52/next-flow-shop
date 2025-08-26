@@ -474,17 +474,17 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                             
                             <div>
                               <h4 className="font-semibold text-primary mb-4">Step-by-Step Technique:</h4>
-                              <div className="space-y-3">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 {style.technique.split('\n').map((step, stepIndex) => {
                                   const stepNumber = stepIndex + 1;
                                   const stepText = step.replace(/^Step \d+:\s*/, '');
                                   return (
-                                    <div key={stepIndex} className="flex items-start gap-4 p-3 rounded-lg bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all duration-200 animate-fade-in">
-                                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-primary to-primary/80 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                    <div key={stepIndex} className="flex items-start gap-3 p-3 rounded-lg bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all duration-200 animate-fade-in">
+                                      <div className="flex-shrink-0 w-7 h-7 bg-gradient-to-br from-primary to-primary/80 text-white rounded-full flex items-center justify-center font-bold text-xs shadow-md">
                                         {stepNumber}
                                       </div>
-                                      <div className="flex-1 pt-1">
-                                        <p className="text-[hsl(var(--warm-gray))] leading-relaxed">{stepText}</p>
+                                      <div className="flex-1 pt-0.5">
+                                        <p className="text-[hsl(var(--warm-gray))] leading-relaxed text-sm">{stepText}</p>
                                       </div>
                                     </div>
                                   );
