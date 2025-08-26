@@ -1,15 +1,5 @@
 import { useState } from 'react';
 import { ChevronRight, Book } from 'lucide-react';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
 
 interface TableOfContentsProps {
   className?: string;
@@ -43,36 +33,31 @@ export function HijabGuideTableOfContents({ className }: TableOfContentsProps) {
   };
 
   return (
-    <Sidebar className={`w-64 border-r bg-card/90 backdrop-blur-md shadow-lg rounded-l-lg ${className}`}>
-      <SidebarContent className="p-4">
-        <SidebarGroup>
-          <SidebarGroupLabel className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">
-            <Book className="h-4 w-4" />
-            Table of Contents
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu className="space-y-1">
-              {sections.map((section) => (
-                <SidebarMenuItem key={section.id}>
-                  <SidebarMenuButton
-                    onClick={() => scrollToSection(section.id)}
-                    className={`w-full justify-start text-left py-2 px-3 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground ${
-                      activeSection === section.id 
-                        ? 'bg-primary/10 text-primary border-l-2 border-primary' 
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <ChevronRight className={`h-3 w-3 mr-2 transition-transform ${
-                      activeSection === section.id ? 'rotate-90' : ''
-                    }`} />
-                    <span className="text-xs leading-tight">{section.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+    <div className={`w-64 border border-border bg-card/90 backdrop-blur-md shadow-lg rounded-lg ${className}`}>
+      <div className="p-4">
+        <div className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">
+          <Book className="h-4 w-4" />
+          Table of Contents
+        </div>
+        <nav className="space-y-1">
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className={`w-full flex items-center text-left py-2 px-3 rounded-md transition-colors hover:bg-accent hover:text-accent-foreground ${
+                activeSection === section.id 
+                  ? 'bg-primary/10 text-primary border-l-2 border-primary' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <ChevronRight className={`h-3 w-3 mr-2 transition-transform ${
+                activeSection === section.id ? 'rotate-90' : ''
+              }`} />
+              <span className="text-xs leading-tight">{section.title}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+    </div>
   );
 }
