@@ -805,12 +805,6 @@ Step 6: Adjust the front fold and side draping for your desired look`,
                 alt="Complete collection of hijab accessories including magnets, undercaps, volumizing scrunchies, decorative pins, and safety pins"
                 className="w-full h-64 object-cover rounded-lg shadow-lg"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg flex items-end">
-                <div className="p-6 text-white">
-                  <h4 className="font-bold text-lg mb-2">Complete Accessory Collection</h4>
-                  <p className="text-sm opacity-90">Everything you need for perfect hijab styling</p>
-                </div>
-              </div>
             </div>
           </section>
 
