@@ -53,7 +53,7 @@ const AbayaArticle = () => {
     <>
       <Helmet>
         <title>What is an Abaya? Can Non-Muslims Wear an Abaya? | Islamic Wear Store</title>
-        <meta name="description" content="Discover what is an abaya, its cultural significance in Islamic modest fashion, different styles, and whether non-Muslims can wear this religious wear respectfully." />
+        <meta name="description" content="Learn what an abaya is, its cultural role in modest fashion, popular styles, and whether non-Muslims can wear one respectfully." />
         <meta name="keywords" content="what is an abaya, Islamic modest fashion, modest wear, religious wear, modern abaya, cultural appreciation, daily wear, can a non-muslim wear an abaya, modest clothing, muslim women wear, cultural identity, Saudi Arabia" />
         <link rel="canonical" href="https://hidayyah.com/blog/what-is-an-abaya" />
         <script type="application/ld+json">

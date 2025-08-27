@@ -49,7 +49,7 @@ const MuslimMenWearArticle = () => {
   return (
     <>
       <Helmet>
-        <title>What Do Muslim Men Wear? Traditional Islamic Clothing Guide</title>
+        <title>What Do Muslim Men Wear? Traditional Islamic Clothing Guide | Hidayyah</title>
         <meta name="description" content="Complete guide to traditional Islamic clothing for men including thobe, kufi, jalabiya, and other modest attire worn by Muslim men worldwide." />
         <meta name="keywords" content="muslim men clothing, islamic men wear, traditional thobe, kufi hat, jalabiya, modest men fashion, islamic attire men, muslim traditional dress" />
         <link rel="canonical" href="https://hidayyah.com/blog/what-do-muslim-men-wear" />
@@ -84,7 +84,7 @@ const MuslimMenWearArticle = () => {
           <header className="mb-12">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-8 text-foreground">
-                What Do Muslim Men Wear?
+                What Do Muslim Men Wear? Traditional Islamic Clothing Guide
               </h1>
               <div className="flex items-center justify-center gap-6 text-muted-foreground mb-8">
                 <div className="flex items-center">

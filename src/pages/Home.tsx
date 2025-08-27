@@ -21,8 +21,8 @@ const Home = () => {
     <>
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Islamic Clothing Store - Modest Wear for Men & Women | Abayas, Hijabs, Thobes</title>
-        <meta name="description" content="Shop authentic Islamic clothing including abayas, hijabs, thobes, and modest wear. Premium quality Islamic fashion for men and women with worldwide shipping." />
+        <title>Islamic Clothing Store | Modest Wear, Abayas, Hijabs & Thobes</title>
+        <meta name="description" content="Shop authentic Islamic clothing including abayas, hijabs, thobes, and modest wear. Premium quality Islamic fashion with worldwide shipping." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="/" />
         <meta property="og:title" content="Islamic Clothing Store - Premium Modest Wear" />
