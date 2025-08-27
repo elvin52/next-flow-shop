@@ -1,0 +1,97 @@
+{
+  "headers": [
+    {
+      "source": "/coming-soon",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(men|women)/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/product/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(cart|checkout|account|products|shop)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/men",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/women",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/men/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/women/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/products",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/product/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/cart",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/checkout",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/account",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/shop",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    },
+    {
+      "source": "/shop/(.*)",
+      "destination": "/coming-soon",
+      "statusCode": 308
+    }
+  ]
+}

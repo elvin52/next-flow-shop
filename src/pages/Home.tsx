@@ -19,6 +19,17 @@ const Home = () => {
 
   return (
     <>
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Islamic Clothing Store | Modest Wear, Abayas, Hijabs & Thobes</title>
+        <meta name="description" content="Shop authentic Islamic clothing including abayas, hijabs, thobes, and modest wear. Premium quality Islamic fashion with worldwide shipping." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="/" />
+        <meta property="og:title" content="Islamic Clothing Store - Premium Modest Wear" />
+        <meta property="og:description" content="Discover our collection of authentic Islamic clothing. High-quality abayas, hijabs, thobes and modest wear for the modern Muslim." />
+        <meta property="og:type" content="website" />
+        <meta name="keywords" content="Islamic clothing, modest wear, abaya, hijab, thobe, Islamic fashion, Muslim clothing, modest dress" />
+      </Helmet>
 
       <div className="min-h-screen">
         {/* Hero Section - Minimal banner for SEO focus */}

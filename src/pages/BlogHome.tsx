@@ -46,6 +46,16 @@ const BlogHome = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Hidayyah - Modest Fashion Blog & Style Guides | Islamic Clothing Inspiration</title>
+        <meta name="description" content="Discover elegant hijab styles, modest outfit inspiration, and Islamic fashion guides. Expert tips on hijab techniques, fabric selection, and contemporary modest fashion trends." />
+        <meta name="keywords" content="modest fashion blog, hijab styles, Islamic fashion, hijab guide, modest outfit ideas, hijab tutorials, islamic clothing, modest wear" />
+        <link rel="canonical" href="https://hidayyah.com/" />
+        <meta property="og:title" content="Hidayyah - Modest Fashion Blog & Style Guides" />
+        <meta property="og:description" content="Your trusted source for hijab styles, modest fashion inspiration, and Islamic clothing guides." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hidayyah.com/" />
+      </Helmet>
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
