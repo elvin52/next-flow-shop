@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 interface SEOLinkProps {
@@ -46,7 +46,7 @@ export const SEOLink = ({
 
   return (
     <Link 
-      to={to} 
+      href={to} 
       className={linkClass}
       title={title}
       onClick={onClick}

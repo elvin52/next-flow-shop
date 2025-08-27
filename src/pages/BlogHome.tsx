@@ -1,8 +1,8 @@
-import { Helmet } from 'react-helmet-async';
+'use client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, Star, Clock, Eye, BookOpen, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 
 // Import images for featured articles
@@ -46,16 +46,6 @@ const BlogHome = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Hidayyah - Modest Fashion Blog & Style Guides | Islamic Clothing Inspiration</title>
-        <meta name="description" content="Discover elegant hijab styles, modest outfit inspiration, and Islamic fashion guides. Expert tips on hijab techniques, fabric selection, and contemporary modest fashion trends." />
-        <meta name="keywords" content="modest fashion blog, hijab styles, Islamic fashion, hijab guide, modest outfit ideas, hijab tutorials, islamic clothing, modest wear" />
-        <link rel="canonical" href="https://hidayyah.com/" />
-        <meta property="og:title" content="Hidayyah - Modest Fashion Blog & Style Guides" />
-        <meta property="og:description" content="Your trusted source for hijab styles, modest fashion inspiration, and Islamic clothing guides." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hidayyah.com/" />
-      </Helmet>
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
@@ -78,14 +68,14 @@ const BlogHome = () => {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="btn-sage" asChild>
-                  <Link to="/blog">
+                  <Link href="/blog">
                     Explore Style Guides
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/coming-soon" className="group">
+                  <Link href="/coming-soon" className="group">
                     <Sparkles className="mr-2 h-4 w-4" />
                     Shop Coming Soon
                   </Link>
@@ -148,7 +138,7 @@ const BlogHome = () => {
                     </div>
                     
                     <Button className="btn-sage group" asChild>
-                      <Link to={featuredArticles[0].link}>
+                      <Link href={featuredArticles[0].link}>
                         Read Complete Guide
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
@@ -209,7 +199,7 @@ const BlogHome = () => {
                         </div>
                         
                         <Button variant="ghost" size="sm" className="group-hover:text-primary" asChild>
-                          <Link to={article.link}>
+                          <Link href={article.link}>
                             Read More
                             <ArrowRight className="ml-1 h-3 w-3" />
                           </Link>
@@ -223,7 +213,7 @@ const BlogHome = () => {
 
             <div className="text-center mt-8">
               <Button variant="outline" size="lg" asChild>
-                <Link to="/blog">
+                <Link href="/blog">
                   View All Articles
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -255,7 +245,7 @@ const BlogHome = () => {
                     We're carefully curating a collection of authentic, high-quality Islamic clothing and hijabs that honor tradition while embracing contemporary style.
                   </p>
                   <Button className="btn-sage" asChild>
-                    <Link to="/coming-soon">
+                    <Link href="/coming-soon">
                       Learn More About Our Upcoming Store
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
