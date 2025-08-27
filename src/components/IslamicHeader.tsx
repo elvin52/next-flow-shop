@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,7 +22,7 @@ const IslamicHeader = () => {
     state.items.reduce((sum, item) => sum + item.quantity, 0)
   );
   
-  const isBlogFirst = process.env.NEXT_PUBLIC_BLOG_FIRST === 'true';
+  const isBlogFirst = import.meta.env.VITE_BLOG_FIRST === 'true';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

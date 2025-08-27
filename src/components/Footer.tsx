@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { NewsletterSignup } from './NewsletterSignup';
 
 const Footer = () => {
@@ -25,16 +25,16 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">Popular Guides</h3>
             <div className="space-y-2">
-              <Link href="/blog/hijab-styles-guide" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/blog/hijab-styles-guide" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Hijab Style Guide
               </Link>
-              <Link href="/blog/what-do-muslim-men-wear" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/blog/what-do-muslim-men-wear" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Muslim Men's Wear
               </Link>
-              <Link href="/blog/what-is-an-abaya" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/blog/what-is-an-abaya" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Understanding Abayas
               </Link>
-              <Link href="/blog" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/blog" className="block text-muted-foreground hover:text-foreground transition-fast">
                 All Style Guides
               </Link>
             </div>
@@ -44,16 +44,16 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">About</h3>
             <div className="space-y-2">
-              <Link href="/about" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/about" className="block text-muted-foreground hover:text-foreground transition-fast">
                 About Hidayyah
               </Link>
-              <Link href="/contact" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/contact" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Contact Us
               </Link>
-              <Link href="/privacy" className="block text-muted-foreground hover:text-foreground transition-fast">
+              <Link to="/privacy" className="block text-muted-foreground hover:text-foreground transition-fast">
                 Privacy Policy
               </Link>
-              <Link href="/coming-soon" className="block text-muted-foreground hover:text-foreground transition-fast text-xs">
+              <Link to="/coming-soon" className="block text-muted-foreground hover:text-foreground transition-fast text-xs">
                 Shop (Coming Soon)
               </Link>
             </div>

@@ -1,6 +1,5 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Search, Truck, Shield, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -66,7 +65,7 @@ const Home = () => {
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-semibold text-foreground">{gender.name}'s Collection</h3>
                   <Link 
-                    href={`/${gender.id}`}
+                    to={`/${gender.id}`}
                     className="text-accent hover:text-accent-hover font-medium"
                   >
                     View All {gender.name}'s Items →
