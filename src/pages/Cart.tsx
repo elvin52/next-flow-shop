@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ComingSoon from '@/components/ComingSoon';
@@ -43,7 +44,13 @@ const Cart = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Helmet>
+        <title>Shopping Cart | Hidayyah Islamic Fashion</title>
+        <meta name="description" content="Review your Islamic fashion items before checkout. Secure shopping cart for hijabs, abayas, and modest wear at Hidayyah." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <Link to="/products" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-fast mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -223,6 +230,7 @@ const Cart = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

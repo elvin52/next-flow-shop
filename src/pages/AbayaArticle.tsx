@@ -115,9 +115,9 @@ const AbayaArticle = () => {
           />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <div className="text-center text-white">
-              <h1 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
+              <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-4">
                 What is an Abaya?
-              </h1>
+              </h2>
               <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
                 Understanding Islamic modest fashion and cultural significance
               </p>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, CreditCard, Shield, Lock } from 'lucide-react';
 import ComingSoon from '@/components/ComingSoon';
 import { Button } from '@/components/ui/button';
@@ -57,7 +58,13 @@ const Checkout = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Helmet>
+        <title>Checkout | Secure Islamic Fashion Shopping</title>
+        <meta name="description" content="Complete your purchase securely. Safe checkout for Islamic fashion items at Hidayyah with SSL encryption and trusted payment methods." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <Link to="/cart" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-fast mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -284,6 +291,7 @@ const Checkout = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
