@@ -9,9 +9,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-gradient-cta rounded-lg flex items-center justify-center">
-                <span className="text-accent-foreground font-bold text-lg">H</span>
-              </div>
+              <img 
+                src="/hidayyah-logo-ill.png" 
+                alt="Hidayyah Logo" 
+                className="h-8 w-8 object-contain"
+              />
               <span className="font-bold text-xl">Hidayyah</span>
             </div>
             <p className="text-muted-foreground text-sm">
