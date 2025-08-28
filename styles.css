@@ -1,0 +1,300 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for Design System */
+:root {
+  /* Colors - Light Mode */
+  --background: 60 4% 98%;
+  --foreground: 60 9% 9%;
+  --card: 60 4% 96%;
+  --card-foreground: 60 9% 9%;
+  --popover: 60 4% 98%;
+  --popover-foreground: 60 9% 9%;
+  --primary: 146 28% 35%;
+  --primary-foreground: 60 4% 98%;
+  --secondary: 60 4% 96%;
+  --secondary-foreground: 60 9% 9%;
+  --muted: 60 4% 96%;
+  --muted-foreground: 60 4% 46%;
+  --accent: 60 4% 96%;
+  --accent-foreground: 60 9% 9%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 60 4% 98%;
+  --border: 60 6% 90%;
+  --input: 60 6% 90%;
+  --ring: 146 28% 35%;
+  --radius: 0.5rem;
+  
+  /* Project Colors */
+  --sage: 146 28% 35%;
+  --sage-light: 146 28% 55%;
+  --sage-dark: 146 28% 25%;
+  --gold: 43 89% 38%;
+  --gold-light: 43 89% 58%;
+  --gold-dark: 43 89% 28%;
+  --warm-white: 60 4% 98%;
+  --warm-gray: 60 4% 46%;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--sage)), hsl(var(--sage-light)));
+  --gradient-gold: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)));
+  --gradient-sage: linear-gradient(135deg, hsl(var(--sage-light)), hsl(var(--sage)));
+  --gradient-warm: linear-gradient(135deg, hsl(var(--warm-white)), hsl(var(--sage-light)) / 0.1);
+  
+  /* Shadows */
+  --shadow-elegant: 0 10px 30px -10px hsl(var(--sage)) / 0.3;
+  --shadow-warm: 0 4px 20px -4px hsl(var(--gold)) / 0.25;
+  --shadow-soft: 0 2px 10px -2px hsl(var(--foreground)) / 0.1;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Dark Mode */
+.dark {
+  --background: 146 28% 4%;
+  --foreground: 60 4% 96%;
+  --card: 146 28% 6%;
+  --card-foreground: 60 4% 96%;
+  --popover: 146 28% 4%;
+  --popover-foreground: 60 4% 96%;
+  --primary: 146 28% 55%;
+  --primary-foreground: 146 28% 4%;
+  --secondary: 146 28% 8%;
+  --secondary-foreground: 60 4% 96%;
+  --muted: 146 28% 8%;
+  --muted-foreground: 60 4% 46%;
+  --accent: 146 28% 8%;
+  --accent-foreground: 60 4% 96%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 60 4% 96%;
+  --border: 146 28% 15%;
+  --input: 146 28% 15%;
+  --ring: 146 28% 55%;
+  
+  /* Project Colors - Dark Mode */
+  --sage: 146 28% 55%;
+  --sage-light: 146 28% 75%;
+  --sage-dark: 146 28% 35%;
+  --gold: 43 89% 58%;
+  --gold-light: 43 89% 78%;
+  --gold-dark: 43 89% 38%;
+  --warm-white: 146 28% 96%;
+  --warm-gray: 60 4% 66%;
+}
+
+/* Base Styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Lato', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom Component Classes */
+.islamic-border {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.islamic-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4rem;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.hover-lift {
+  transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elegant);
+}
+
+.card-elegant {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.card-elegant:hover {
+  box-shadow: var(--shadow-elegant);
+}
+
+.btn-sage {
+  background: var(--gradient-sage);
+  color: hsl(var(--primary-foreground));
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.btn-sage:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-warm);
+}
+
+.btn-gold {
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-warm);
+}
+
+/* Utility Classes */
+.text-warm-gray {
+  color: hsl(var(--warm-gray));
+}
+
+.text-sage {
+  color: hsl(var(--sage));
+}
+
+.text-sage-light {
+  color: hsl(var(--sage-light));
+}
+
+.text-gold {
+  color: hsl(var(--gold));
+}
+
+.bg-sage {
+  background-color: hsl(var(--sage));
+}
+
+.bg-sage-light {
+  background-color: hsl(var(--sage-light));
+}
+
+.bg-gold {
+  background-color: hsl(var(--gold));
+}
+
+.border-sage {
+  border-color: hsl(var(--sage));
+}
+
+.shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+
+.shadow-warm {
+  box-shadow: var(--shadow-warm);
+}
+
+.transition-smooth {
+  transition: var(--transition-smooth);
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive Typography */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-lato {
+  font-family: 'Lato', system-ui, sans-serif;
+}
+
+/* Line Clamping */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Scroll behavior */
+.scroll-mt-28 {
+  scroll-margin-top: 7rem;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
