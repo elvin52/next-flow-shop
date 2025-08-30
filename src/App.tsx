@@ -22,6 +22,7 @@ const HijabStyleGuide = lazy(() => import("./pages/HijabStyleGuide"));
 const Blog = lazy(() => import("./pages/Blog"));
 const AbayaArticle = lazy(() => import("./pages/AbayaArticle"));
 const MuslimMenWearArticle = lazy(() => import("./pages/MuslimMenWearArticle"));
+const HijabFabricsGuide = lazy(() => import("./pages/HijabFabricsGuide"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -75,6 +76,11 @@ const App = () => (
                 <Route path="blog/what-do-muslim-men-wear" element={
                   <Suspense fallback={<PageSkeleton />}>
                     <MuslimMenWearArticle />
+                  </Suspense>
+                } />
+                <Route path="blog/hijab-fabrics-guide" element={
+                  <Suspense fallback={<PageSkeleton />}>
+                    <HijabFabricsGuide />
                   </Suspense>
                 } />
                 
