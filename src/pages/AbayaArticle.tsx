@@ -8,6 +8,10 @@ import { ArticleNavigation } from '@/components/common/ArticleNavigation';
 
 // Import images
 import heroImage from '@/assets/abaya-article-hero.jpg';
+import traditionalAbaya from '@/assets/traditional-abaya.jpg';
+import modernAbaya from '@/assets/modern-abaya.jpg';
+import butterflyAbaya from '@/assets/butterfly-abaya.jpg';
+import kimonoStyleAbaya from '@/assets/kimono-style-abaya.jpg';
 
 const AbayaArticle = () => {
   const breadcrumbItems = [
@@ -219,18 +223,46 @@ const AbayaArticle = () => {
                   <h2 className="text-2xl font-playfair font-bold mb-4 text-foreground">Different Styles of Abayas</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <Card className="p-4">
+                      <div className="mb-4">
+                        <img 
+                          src={traditionalAbaya} 
+                          alt="Traditional black abaya with simple design and minimal embellishments - classic Islamic modest wear"
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
                       <h3 className="font-semibold mb-2 text-foreground">Traditional Abaya</h3>
                       <p className="text-sm text-muted-foreground">Simple, black, loose-fitting design with minimal embellishments</p>
                     </Card>
                     <Card className="p-4">
+                      <div className="mb-4">
+                        <img 
+                          src={modernAbaya} 
+                          alt="Modern abaya with contemporary cut, elegant embroidery and stylish design - Islamic fashion"
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
                       <h3 className="font-semibold mb-2 text-foreground">Modern Abaya</h3>
                       <p className="text-sm text-muted-foreground">Contemporary cuts with embroidery, prints, and varied colors</p>
                     </Card>
                     <Card className="p-4">
+                      <div className="mb-4">
+                        <img 
+                          src={butterflyAbaya} 
+                          alt="Butterfly abaya with wide flowing sleeves resembling butterfly wings - elegant Islamic modest fashion"
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
                       <h3 className="font-semibold mb-2 text-foreground">Butterfly Abaya</h3>
                       <p className="text-sm text-muted-foreground">Features wide, flowing sleeves that resemble butterfly wings</p>
                     </Card>
                     <Card className="p-4">
+                      <div className="mb-4">
+                        <img 
+                          src={kimonoStyleAbaya} 
+                          alt="Kimono style abaya with wide sleeves and belt inspired by Japanese design - cross-cultural Islamic fashion"
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
                       <h3 className="font-semibold mb-2 text-foreground">Kimono Style</h3>
                       <p className="text-sm text-muted-foreground">Inspired by Japanese kimono with wide sleeves and belt</p>
                     </Card>
